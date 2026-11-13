@@ -1,5 +1,3 @@
-<img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/custom_components/saint_of_the_day/brand/icon.png" alt="Saint of the day" width="96">
-
 # ha-saint-of-the-day
 
 [![Marketplace](https://img.shields.io/badge/Marketplace-Custom-41BDF5.svg)](https://www.home-assistant.io/integrations/marketplace/)
@@ -9,6 +7,8 @@
 [![Release](https://img.shields.io/github/v/release/juju35/ha-saint-of-the-day)](https://github.com/juju35/ha-saint-of-the-day/releases/latest)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/juju35/ha-saint-of-the-day/blob/main/LICENSE)
 [![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-FFDD00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/julienstep9)
+
+<p align="center"><img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/custom_components/saint_of_the_day/brand/icon.png" alt="Saint of the day" width="120"></p>
 
 Home Assistant integration for the **saint of the day**: the French name day (*fête du jour*) of today and tomorrow, with a Lovelace card included. The calendar is embedded: no account, no external API, nothing to configure.
 
