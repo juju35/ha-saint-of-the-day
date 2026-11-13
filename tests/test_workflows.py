@@ -34,8 +34,8 @@ def test_biome_version_is_the_same_everywhere():
     hook = _hook_rev("biomejs/pre-commit")
     version = hook["rev"].lstrip("v")
     assert hook["hooks"][0]["additional_dependencies"] == [f"@biomejs/biome@{version}"]
-    schema = re.search(r"schemas/([\d.]+)/schema.json", (ROOT / "biome.json").read_text()).group(1)
-    assert schema == version
+    # No versioned $schema in biome.json: Dependabot bumps the pre-commit hook only, so a pinned schema would drift.
+    assert "$schema" not in (ROOT / "biome.json").read_text()
     lint = (WORKFLOWS / "lint.yml").read_text()
     # The CI reads the versions from .pre-commit-config.yaml instead of repeating them.
     assert not re.search(r"version: \d", lint), "a tool version is hard-coded in lint.yml"
