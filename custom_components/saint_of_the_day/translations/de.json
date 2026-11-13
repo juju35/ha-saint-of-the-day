@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Heiliger des Tages",
+        "description": "Fügt den französischen Namenstag von heute und morgen hinzu, mit seiner Lovelace-Karte. Es gibt nichts einzurichten."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Heiliger des Tages ist bereits eingerichtet."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Heiliger des Tages",
+        "state_attributes": {
+          "date": {
+            "name": "Datum"
+          },
+          "names": {
+            "name": "Vornamen"
+          },
+          "upcoming": {
+            "name": "Demnächst"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Heiliger von morgen",
+        "state_attributes": {
+          "date": {
+            "name": "Datum"
+          },
+          "names": {
+            "name": "Vornamen"
+          }
+        }
+      }
+    }
+  }
+}

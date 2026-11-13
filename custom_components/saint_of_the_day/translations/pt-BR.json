@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Santo do dia",
+        "description": "Adiciona o santo do dia de hoje e de amanhã (calendário francês), com o seu cartão Lovelace. Não há nada a configurar."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Santo do dia já está configurado."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Santo do dia",
+        "state_attributes": {
+          "date": {
+            "name": "Data"
+          },
+          "names": {
+            "name": "Nomes"
+          },
+          "upcoming": {
+            "name": "Próximos dias"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Santo de amanhã",
+        "state_attributes": {
+          "date": {
+            "name": "Data"
+          },
+          "names": {
+            "name": "Nomes"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Светац дана",
+        "description": "Додаје француски имендан за данас и сутра, са својом Lovelace картицом. Нема шта да се подешава."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Светац дана је већ подешен."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Светац дана",
+        "state_attributes": {
+          "date": {
+            "name": "Датум"
+          },
+          "names": {
+            "name": "Имена"
+          },
+          "upcoming": {
+            "name": "Наредни дани"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Светац сутрашњег дана",
+        "state_attributes": {
+          "date": {
+            "name": "Датум"
+          },
+          "names": {
+            "name": "Имена"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Saint of the day",
+  "content_in_root": false,
+  "render_readme": true,
+  "zip_release": true,
+  "filename": "saint_of_the_day.zip",
+  "homeassistant": "2024.12.0"
+}

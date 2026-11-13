@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Svatý dne",
+        "description": "Přidá francouzský svátek na dnešek a zítřek spolu s kartou Lovelace. Není co nastavovat."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Svatý dne je už nastaven."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Svatý dne",
+        "state_attributes": {
+          "date": {
+            "name": "Datum"
+          },
+          "names": {
+            "name": "Jména"
+          },
+          "upcoming": {
+            "name": "Následující dny"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Svatý zítřka",
+        "state_attributes": {
+          "date": {
+            "name": "Datum"
+          },
+          "names": {
+            "name": "Jména"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Saint du jour",
+        "description": "Ajoute la fête du jour et celle de demain (calendrier français), avec sa carte Lovelace. Rien à configurer."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Saint du jour est déjà configuré."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Saint du jour",
+        "state_attributes": {
+          "date": {
+            "name": "Date"
+          },
+          "names": {
+            "name": "Prénoms"
+          },
+          "upcoming": {
+            "name": "Prochains jours"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Saint de demain",
+        "state_attributes": {
+          "date": {
+            "name": "Date"
+          },
+          "names": {
+            "name": "Prénoms"
+          }
+        }
+      }
+    }
+  }
+}

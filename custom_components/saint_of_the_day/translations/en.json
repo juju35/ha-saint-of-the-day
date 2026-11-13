@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Saint of the day",
+        "description": "Adds the French name day of today and tomorrow, with its Lovelace card. There is nothing to set up."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Saint of the day is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Saint of the day",
+        "state_attributes": {
+          "date": {
+            "name": "Date"
+          },
+          "names": {
+            "name": "First names"
+          },
+          "upcoming": {
+            "name": "Coming up"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Saint of tomorrow",
+        "state_attributes": {
+          "date": {
+            "name": "Date"
+          },
+          "names": {
+            "name": "First names"
+          }
+        }
+      }
+    }
+  }
+}

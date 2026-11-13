@@ -1,0 +1,8 @@
+{
+  "entity": {
+    "sensor": {
+      "today": { "default": "mdi:calendar-star" },
+      "tomorrow": { "default": "mdi:calendar-arrow-right" }
+    }
+  }
+}

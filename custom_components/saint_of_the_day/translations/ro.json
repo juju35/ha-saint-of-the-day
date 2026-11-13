@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Sfântul zilei",
+        "description": "Adaugă onomastica franceză de azi și de mâine, cu cardul său Lovelace. Nu este nimic de configurat."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Sfântul zilei este deja configurat."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Sfântul zilei",
+        "state_attributes": {
+          "date": {
+            "name": "Dată"
+          },
+          "names": {
+            "name": "Prenume"
+          },
+          "upcoming": {
+            "name": "Zilele următoare"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Sfântul de mâine",
+        "state_attributes": {
+          "date": {
+            "name": "Dată"
+          },
+          "names": {
+            "name": "Prenume"
+          }
+        }
+      }
+    }
+  }
+}

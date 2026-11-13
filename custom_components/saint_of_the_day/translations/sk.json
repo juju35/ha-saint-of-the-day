@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Svätý dňa",
+        "description": "Pridá francúzske meniny na dnes a zajtra spolu s kartou Lovelace. Nie je čo nastavovať."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Svätý dňa je už nastavený."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Svätý dňa",
+        "state_attributes": {
+          "date": {
+            "name": "Dátum"
+          },
+          "names": {
+            "name": "Mená"
+          },
+          "upcoming": {
+            "name": "Nasledujúce dni"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Svätý zajtrajška",
+        "state_attributes": {
+          "date": {
+            "name": "Dátum"
+          },
+          "names": {
+            "name": "Mená"
+          }
+        }
+      }
+    }
+  }
+}

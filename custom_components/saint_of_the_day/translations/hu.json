@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "A nap szentje",
+        "description": "Hozzáadja a mai és a holnapi francia névnapot a Lovelace-kártyájával együtt. Nincs mit beállítani."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "A nap szentje már be van állítva."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "A nap szentje",
+        "state_attributes": {
+          "date": {
+            "name": "Dátum"
+          },
+          "names": {
+            "name": "Utónevek"
+          },
+          "upcoming": {
+            "name": "Következő napok"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "A holnap szentje",
+        "state_attributes": {
+          "date": {
+            "name": "Dátum"
+          },
+          "names": {
+            "name": "Utónevek"
+          }
+        }
+      }
+    }
+  }
+}

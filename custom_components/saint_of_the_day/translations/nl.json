@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Heilige van de dag",
+        "description": "Voegt de Franse naamdag van vandaag en morgen toe, met de bijbehorende Lovelace-kaart. Er valt niets in te stellen."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Heilige van de dag is al ingesteld."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Heilige van de dag",
+        "state_attributes": {
+          "date": {
+            "name": "Datum"
+          },
+          "names": {
+            "name": "Voornamen"
+          },
+          "upcoming": {
+            "name": "Binnenkort"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Heilige van morgen",
+        "state_attributes": {
+          "date": {
+            "name": "Datum"
+          },
+          "names": {
+            "name": "Voornamen"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Santo del giorno",
+        "description": "Aggiunge l'onomastico francese di oggi e di domani, con la sua scheda Lovelace. Non c'è nulla da configurare."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Santo del giorno è già configurato."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Santo del giorno",
+        "state_attributes": {
+          "date": {
+            "name": "Data"
+          },
+          "names": {
+            "name": "Nomi"
+          },
+          "upcoming": {
+            "name": "Prossimi giorni"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Santo di domani",
+        "state_attributes": {
+          "date": {
+            "name": "Data"
+          },
+          "names": {
+            "name": "Nomi"
+          }
+        }
+      }
+    }
+  }
+}
