@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Dagens helgen",
+        "description": "Tilføjer dagens og morgendagens franske navnedag med tilhørende Lovelace-kort. Der er intet at indstille."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Dagens helgen er allerede konfigureret."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Dagens helgen",
+        "state_attributes": {
+          "date": {
+            "name": "Dato"
+          },
+          "names": {
+            "name": "Fornavne"
+          },
+          "upcoming": {
+            "name": "Kommende dage"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Morgendagens helgen",
+        "state_attributes": {
+          "date": {
+            "name": "Dato"
+          },
+          "names": {
+            "name": "Fornavne"
+          }
+        }
+      }
+    }
+  }
+}

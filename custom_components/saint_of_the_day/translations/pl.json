@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Święty dnia",
+        "description": "Dodaje francuskie imieniny na dziś i jutro wraz z kartą Lovelace. Nie ma nic do skonfigurowania."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Święty dnia jest już skonfigurowany."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Święty dnia",
+        "state_attributes": {
+          "date": {
+            "name": "Data"
+          },
+          "names": {
+            "name": "Imiona"
+          },
+          "upcoming": {
+            "name": "Nadchodzące dni"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Święty jutra",
+        "state_attributes": {
+          "date": {
+            "name": "Data"
+          },
+          "names": {
+            "name": "Imiona"
+          }
+        }
+      }
+    }
+  }
+}

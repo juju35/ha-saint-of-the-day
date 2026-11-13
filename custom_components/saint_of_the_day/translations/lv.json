@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Dienas svētais",
+        "description": "Pievieno šodienas un rītdienas franču vārda dienu kopā ar Lovelace karti. Nekas nav jāiestata."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Dienas svētais jau ir iestatīts."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Dienas svētais",
+        "state_attributes": {
+          "date": {
+            "name": "Datums"
+          },
+          "names": {
+            "name": "Vārdi"
+          },
+          "upcoming": {
+            "name": "Nākamās dienas"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Rītdienas svētais",
+        "state_attributes": {
+          "date": {
+            "name": "Datums"
+          },
+          "names": {
+            "name": "Vārdi"
+          }
+        }
+      }
+    }
+  }
+}

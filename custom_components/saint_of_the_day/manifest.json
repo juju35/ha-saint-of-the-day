@@ -1,0 +1,15 @@
+{
+  "domain": "saint_of_the_day",
+  "name": "Saint of the day",
+  "after_dependencies": ["lovelace"],
+  "codeowners": ["@juju35"],
+  "config_flow": true,
+  "dependencies": ["frontend", "http"],
+  "documentation": "https://github.com/juju35/ha-saint-of-the-day",
+  "integration_type": "service",
+  "iot_class": "calculated",
+  "issue_tracker": "https://github.com/juju35/ha-saint-of-the-day/issues",
+  "requirements": [],
+  "single_config_entry": true,
+  "version": "1.0.0"
+}

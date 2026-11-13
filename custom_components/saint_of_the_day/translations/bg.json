@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Светия на деня",
+        "description": "Добавя френския имен ден за днес и утре, с неговата Lovelace карта. Няма нищо за настройване."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Светия на деня вече е настроен."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Светия на деня",
+        "state_attributes": {
+          "date": {
+            "name": "Дата"
+          },
+          "names": {
+            "name": "Имена"
+          },
+          "upcoming": {
+            "name": "Следващи дни"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Светия на утрешния ден",
+        "state_attributes": {
+          "date": {
+            "name": "Дата"
+          },
+          "names": {
+            "name": "Имена"
+          }
+        }
+      }
+    }
+  }
+}

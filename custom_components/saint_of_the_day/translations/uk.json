@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Святий дня",
+        "description": "Додає французькі іменини на сьогодні й завтра разом із карткою Lovelace. Нічого налаштовувати не потрібно."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Святий дня вже налаштований."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Святий дня",
+        "state_attributes": {
+          "date": {
+            "name": "Дата"
+          },
+          "names": {
+            "name": "Імена"
+          },
+          "upcoming": {
+            "name": "Найближчі дні"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Святий завтрашнього дня",
+        "state_attributes": {
+          "date": {
+            "name": "Дата"
+          },
+          "names": {
+            "name": "Імена"
+          }
+        }
+      }
+    }
+  }
+}

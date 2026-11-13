@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Svetnik dneva",
+        "description": "Doda francoski god za danes in jutri skupaj s kartico Lovelace. Ničesar ni treba nastaviti."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Svetnik dneva je že nastavljen."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Svetnik dneva",
+        "state_attributes": {
+          "date": {
+            "name": "Datum"
+          },
+          "names": {
+            "name": "Imena"
+          },
+          "upcoming": {
+            "name": "Naslednji dnevi"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Svetnik jutrišnjega dne",
+        "state_attributes": {
+          "date": {
+            "name": "Datum"
+          },
+          "names": {
+            "name": "Imena"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Dagens helgon",
+        "description": "Lägger till dagens och morgondagens franska namnsdag med tillhörande Lovelace-kort. Det finns inget att ställa in."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Dagens helgon är redan konfigurerat."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "today": {
+        "name": "Dagens helgon",
+        "state_attributes": {
+          "date": {
+            "name": "Datum"
+          },
+          "names": {
+            "name": "Förnamn"
+          },
+          "upcoming": {
+            "name": "Kommande dagar"
+          }
+        }
+      },
+      "tomorrow": {
+        "name": "Morgondagens helgon",
+        "state_attributes": {
+          "date": {
+            "name": "Datum"
+          },
+          "names": {
+            "name": "Förnamn"
+          }
+        }
+      }
+    }
+  }
+}
