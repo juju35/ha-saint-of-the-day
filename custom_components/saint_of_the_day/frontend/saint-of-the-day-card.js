@@ -1,4 +1,4 @@
-var SAINT_CARD_VERSION = '1.0.0';
+var SAINT_CARD_VERSION = '1.1.0';
 
 // ── Header icon: tinted round icon, the accent of the project on the showcase site (the integration keeps its
 // brand/icon.png). 16 % tint like the generic icons of the other cards.
@@ -483,6 +483,72 @@ function saintWish(t, names, locale) {
   return names.length ? t.wish.replace('{names}', saintJoin(names, locale)) : '';
 }
 
+// ── Illustration ──────────────────────────────────────────────────────────────
+// The full card's header: a saint in front of a rose window. The window turns slowly (8-fold: one petal step every
+// 6 s, so a 6 s loop is seamless), light rays breathe, the saint sways and blesses, the halo glows. Every loop is a
+// divisor of 6 s. The colours are the accent and an amber light; the skin is the only fixed tone.
+var SAINT_LIGHT = '#e8a33d';
+var SAINT_SKIN = '#f2d4b8';
+
+function saintRose() {
+  var petals = '';
+  for (var i = 0; i < 8; i++) {
+    petals +=
+      `<path d="M78 38 L73 11 Q78 5 83 11 Z" transform="rotate(${i * 45} 78 38)" fill-opacity="${i % 2 ? 0.3 : 0.55}"/>` +
+      `<circle cx="78" cy="9" r="2.4" transform="rotate(${i * 45 + 22.5} 78 38)" fill="${SAINT_LIGHT}" fill-opacity=".7"/>`;
+  }
+  return (
+    '<g class="rose" fill="currentColor">' +
+    '<circle cx="78" cy="38" r="33" fill="none" stroke="currentColor" stroke-width="2.5" stroke-opacity=".5"/>' +
+    `${petals}<circle cx="78" cy="38" r="5" fill="${SAINT_LIGHT}"/></g>`
+  );
+}
+
+function saintSparkle(x, y, n) {
+  return `<path class="spark s${n}" d="M${x} ${y - 4}L${x + 1} ${y - 1}L${x + 4} ${y}L${x + 1} ${y + 1}L${x} ${y + 4}L${x - 1} ${y + 1}L${x - 4} ${y}L${x - 1} ${y - 1}Z" fill="${SAINT_LIGHT}"/>`;
+}
+
+function saintArt() {
+  return (
+    '<svg class="art" viewBox="0 0 120 96" aria-hidden="true" focusable="false">' +
+    `<polygon class="ray r1" points="72,38 84,38 66,96 30,96" fill="${SAINT_LIGHT}"/>` +
+    '<polygon class="ray r2" points="74,40 82,40 58,96 44,96" fill="currentColor"/>' +
+    saintRose() +
+    '<g class="saint">' +
+    `<circle class="halo" cx="78" cy="41" r="10" fill="${SAINT_LIGHT}" fill-opacity=".3" stroke="${SAINT_LIGHT}" stroke-width="2"/>` +
+    '<path d="M66 54 Q78 47 90 54 L97 96 L59 96 Z" fill="currentColor"/>' +
+    '<path d="M74 55 L82 55 L85 96 L71 96 Z" fill="#fff" fill-opacity=".18"/>' +
+    `<rect x="65" y="67" width="26" height="2.6" rx="1.3" fill="${SAINT_LIGHT}"/>` +
+    '<path d="M68.5 46 Q78 27 87.5 46 L89 56 Q78 51 67 56 Z" fill="currentColor"/>' +
+    '<path d="M70 46 Q78 31 86 46 L86.5 52 Q78 49 69.5 52 Z" fill="#fff" fill-opacity=".28"/>' +
+    `<circle cx="78" cy="43" r="6" fill="${SAINT_SKIN}"/>` +
+    '<path d="M74.6 43.2 q1.2 1 2.4 0 M79 43.2 q1.2 1 2.4 0" fill="none" stroke="#6b4a3a" stroke-width=".8" stroke-linecap="round"/>' +
+    `<rect x="61" y="59" width="9" height="12" rx="1.2" transform="rotate(-12 65.5 65)" fill="${SAINT_LIGHT}"/>` +
+    '<rect x="62.6" y="60.5" width="1.3" height="9" transform="rotate(-12 65.5 65)" fill="#fff" fill-opacity=".5"/>' +
+    '<g class="arm">' +
+    '<path d="M85 54 L96 63 L92.5 67.5 L83 59 Z" fill="currentColor"/>' +
+    '<path d="M85 54 L96 63 L92.5 67.5 L83 59 Z" fill="#000" fill-opacity=".15"/>' +
+    `<circle cx="95.6" cy="66.4" r="2.4" fill="${SAINT_SKIN}"/></g></g>` +
+    saintSparkle(48, 14, 1) +
+    saintSparkle(112, 60, 2) +
+    saintSparkle(56, 52, 3) +
+    '</svg>'
+  );
+}
+
+// The mini card's round icon: the saint's bust under a glowing halo.
+function saintBust() {
+  return (
+    '<svg class="bust" viewBox="0 0 40 40" aria-hidden="true" focusable="false">' +
+    `<circle class="halo" cx="20" cy="15" r="8.5" fill="${SAINT_LIGHT}" fill-opacity=".3" stroke="${SAINT_LIGHT}" stroke-width="1.8"/>` +
+    '<path d="M9 40 Q9 27 20 25 Q31 27 31 40 Z" fill="currentColor"/>' +
+    '<path d="M12.5 19 Q20 3 27.5 19 L28.5 27 Q20 23 11.5 27 Z" fill="currentColor"/>' +
+    '<path d="M13.8 19 Q20 7 26.2 19 L26.6 23.5 Q20 21 13.4 23.5 Z" fill="#fff" fill-opacity=".28"/>' +
+    `<circle cx="20" cy="17" r="5" fill="${SAINT_SKIN}"/>` +
+    '</svg>'
+  );
+}
+
 // ── saint-of-the-day-card ─────────────────────────────────────────────────────
 class SaintCard extends HTMLElement {
   static getConfigElement() {
@@ -566,7 +632,7 @@ class SaintCard extends HTMLElement {
   }
 
   _iconHtml() {
-    return '<div class="logo"><ha-icon icon="mdi:calendar-star"></ha-icon></div>';
+    return `<div class="logo">${saintBust()}</div>`;
   }
 
   _ensureShell() {
@@ -598,17 +664,22 @@ class SaintCard extends HTMLElement {
     var date = unavailable ? '' : saintFormatDate(attrs.date, locale, { weekday: 'long', day: 'numeric', month: 'long' });
     var compact = this._compact();
 
+    // Full card: the illustrated header. Compact mini card: the round icon with the bust.
+    header.classList.toggle('hero', !compact);
     header.innerHTML =
-      `<div class="title">${this._iconHtml()}<div class="titles"><div class="name">${saintEsc(title)}</div>` +
+      (compact ? '' : saintArt()) +
+      `<div class="title">${compact ? this._iconHtml() : ''}<div class="titles"><div class="name">${saintEsc(title)}</div>` +
       (date ? `<div class="sub">${saintEsc(date)}</div>` : '') +
       `</div></div>${this._detailButton(t)}`;
     header.querySelector('.detail')?.addEventListener('click', (ev) => this._toggleDetail(ev));
 
     if (!st) {
+      this._shown = null;
       body.innerHTML = `<div class="empty">${saintEsc(t.no_entity)}</div>`;
       return;
     }
     if (unavailable) {
+      this._shown = null;
       body.innerHTML = `<div class="empty">${saintEsc(t.unavailable)}</div>`;
       return;
     }
@@ -631,6 +702,10 @@ class SaintCard extends HTMLElement {
         '</ul>';
     }
     body.innerHTML = html;
+    // The feast fades in when it is new (first draw, a new day), not when the mini card folds or the language changes.
+    var shown = `${attrs.date}|${st.state}`;
+    body.classList.toggle('enter', shown !== this._shown);
+    this._shown = shown;
     body.querySelector('.feast').addEventListener('keydown', (ev) => {
       if (ev.key === 'Enter' || ev.key === ' ') {
         ev.preventDefault();
@@ -649,7 +724,34 @@ class SaintCard extends HTMLElement {
       '.header { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 10px 8px 12px; min-height: 36px; }',
       '.title { flex: 1 1 0; min-width: calc(5ch + 50px); display: flex; align-items: center; gap: 10px; }',
       `.logo { width: 40px; height: 40px; flex: none; border-radius: 50%; display: grid; place-items: center; color: ${SAINT_ACCENT}; background: color-mix(in srgb, ${SAINT_ACCENT} 16%, transparent); }`,
-      '.logo ha-icon { --mdc-icon-size: 24px; }',
+      '.logo .bust { width: 40px; height: 40px; border-radius: 50%; }',
+      // Illustrated header of the full card: the title on the left, the saint and the rose window on the right.
+      `.header.hero { position: relative; align-items: flex-end; min-height: 96px; box-sizing: border-box; padding: 12px 10px 12px 14px; margin-bottom: 12px;` +
+        ` overflow: hidden; background: color-mix(in srgb, ${SAINT_ACCENT} 12%, transparent); }`,
+      '.hero .title, .hero .detail { position: relative; z-index: 1; }',
+      '.hero .title { padding-right: 104px; }',
+      `.art { position: absolute; right: 6px; bottom: 0; width: 120px; height: 96px; color: ${SAINT_ACCENT}; }`,
+      '.art .rose { transform-origin: 78px 38px; animation: saint-turn 48s linear infinite; }',
+      '.art .ray { opacity: .16; animation: saint-ray 3s ease-in-out infinite; }',
+      '.art .r2 { opacity: .1; animation-delay: -1.5s; }',
+      '.art .saint { transform-origin: 78px 96px; animation: saint-sway 6s ease-in-out infinite; }',
+      '.art .arm { transform-origin: 85px 56px; animation: saint-bless 6s ease-in-out infinite; }',
+      '.halo { transform-origin: center; transform-box: fill-box; animation: saint-glow 3s ease-in-out infinite; }',
+      '.art .spark { opacity: 0; transform-origin: center; transform-box: fill-box; animation: saint-twinkle 3s ease-in-out infinite; }',
+      '.art .s2 { animation-delay: -1s; } .art .s3 { animation-delay: -2s; }',
+      '@keyframes saint-turn { to { transform: rotate(360deg); } }',
+      '@keyframes saint-ray { 50% { opacity: .32; } }',
+      '@keyframes saint-sway { 25% { transform: rotate(1.5deg); } 75% { transform: rotate(-1.5deg); } }',
+      // Arm down, raised to bless half way through the loop, then lowered.
+      '@keyframes saint-bless { 0%, 45%, 100% { transform: none; } 60%, 80% { transform: rotate(-75deg); } }',
+      '@keyframes saint-glow { 50% { transform: scale(1.12); fill-opacity: .5; } }',
+      '@keyframes saint-twinkle { 50% { opacity: .9; transform: scale(1.2); } }',
+      // A new feast (first draw, a new day) fades in, line after line.
+      '.enter .label, .enter .wish, .enter .section, .enter li { animation: saint-in .5s ease-out both; }',
+      '.enter .wish { animation-delay: .12s; } .enter .section { animation-delay: .2s; }',
+      ...[1, 2, 3, 4, 5, 6, 7].map((n) => `.enter li:nth-child(${n}) { animation-delay: ${(0.2 + n * 0.07).toFixed(2)}s; }`),
+      '@keyframes saint-in { from { opacity: 0; transform: translateY(6px); } }',
+      '@media (prefers-reduced-motion: reduce) { .art *, .bust *, .enter * { animation: none !important; } }',
       '.titles { flex: 1 1 0; min-width: 5ch; overflow: hidden; }',
       ':host([hide-title]) .titles > .name { display: none; }',
       '.name { font-size: 16px; font-weight: 500; line-height: 1.25; color: var(--primary-text-color); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
@@ -668,7 +770,7 @@ class SaintCard extends HTMLElement {
       '.when { flex: none; min-width: 7.5em; color: var(--secondary-text-color); font-size: 13px; }',
       '.what { min-width: 0; color: var(--primary-text-color); overflow-wrap: anywhere; }',
       // Narrow card: the logo goes, the title keeps a few letters.
-      '@container (max-width: 240px) { .logo { display: none; } .when { min-width: 0; } .upcoming li { flex-direction: column; gap: 0; } }',
+      '@container (max-width: 240px) { .logo { display: none; } .hero .title { padding-right: 76px; } .art { right: -14px; } .when { min-width: 0; } .upcoming li { flex-direction: column; gap: 0; } }',
       // Mini card: a 240 px preferred width, the detail button at the top right, and a smaller name.
       ':host([mini])::before { grid-template-columns: minmax(0, 240px); }',
       'ha-card.mini .label { font-size: 18px; }',

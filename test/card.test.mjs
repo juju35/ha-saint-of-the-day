@@ -240,3 +240,39 @@ test('a click on the feast opens the more-info dialog of the sensor', () => {
   assert.equal(card.events[0].type, 'hass-more-info');
   assert.equal(card.events[0].detail.entityId, TODAY.entity_id);
 });
+
+test('the full card has the illustrated header, the mini card the bust in its round icon', () => {
+  const card = render(SaintCard, {}, hassWith({ [TODAY.entity_id]: TODAY }));
+  const header = card.shadowRoot.children['.header'];
+  assert.equal(header.classes.hero, true);
+  assert.match(header.innerHTML, /<svg class="art"/);
+  assert.match(header.innerHTML, /class="arm"/);
+  assert.doesNotMatch(header.innerHTML, /class="logo"/);
+  const mini = render(SaintMiniCard, {}, hassWith({ [TODAY.entity_id]: TODAY }));
+  const miniHeader = mini.shadowRoot.children['.header'];
+  assert.equal(miniHeader.classes.hero, false);
+  assert.match(miniHeader.innerHTML, /<div class="logo"><svg class="bust"/);
+  // Unfolded, the mini card is the full card, illustration included.
+  mini._toggleDetail({ stopPropagation() {}, detail: 1 });
+  assert.equal(miniHeader.classes.hero, true);
+});
+
+test('a new feast fades in, a redraw of the same feast does not', () => {
+  const card = render(SaintCard, {}, hassWith({ [TODAY.entity_id]: TODAY }));
+  const body = card.shadowRoot.children['.body'];
+  assert.equal(body.classes.enter, true);
+  card.hass = hassWith({ [TODAY.entity_id]: card._lastState }, 'fr');
+  assert.equal(body.classes.enter, false);
+  card.hass = hassWith({ [TODAY.entity_id]: { ...TODAY, state: 'Ste Nathalie', attributes: { ...TODAY.attributes, date: '2026-07-27' } } });
+  assert.equal(body.classes.enter, true);
+});
+
+test('the animations stop for reduced motion, and every loop divides the 6 s of the GIFs', () => {
+  const css = SaintCard._styles();
+  assert.match(css, /prefers-reduced-motion: reduce\) \{ \.art \*, \.bust \*, \.enter \* \{ animation: none !important; \}/);
+  for (const [, seconds] of css.matchAll(/animation: saint-(?!in)[a-z]+ ([\d.]+)s/g)) {
+    const s = Number(seconds);
+    // The rose window has 8 petals: one turn of 48 s repeats every 6 s.
+    assert.ok(s === 48 || Number.isInteger(6 / s), `${s} s`);
+  }
+});

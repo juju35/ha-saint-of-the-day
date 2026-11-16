@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.0 - 2026-11-16
+
+### Features
+- Animated header on the full card: a saint in front of a rose window, who sways and raises a hand to bless under a glowing halo, while the window turns slowly and its light breathes. It replaces the round calendar icon.
+- The mini card's round icon shows the saint's bust, with a glowing halo.
+- A new feast (first display, a new day) fades in line after line.
+- The animations stop when the system asks for reduced motion.
+
+### Maintenance
+- The screenshots script also renders one GIF per animation (full card and mini card, light and dark), from frames taken with the animations paused at fixed times.
+
 ## 1.0.0 - 2026-11-13
 
 ### Features

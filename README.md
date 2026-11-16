@@ -14,14 +14,14 @@ Home Assistant integration for the **saint of the day**: the French name day (*f
 
 [![Open your Home Assistant instance and open a repository inside the Marketplace.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/marketplace_repository/?owner=juju35&repository=ha-saint-of-the-day&category=integration)
 
-<img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/card.png" alt="saint-of-the-day-card" width="380">
+<img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/card-animated.gif" alt="saint-of-the-day-card" width="380">
 
 ## Features
 
 - **Saint of the day** sensor: the calendar label as the state (`Ste Geneviève`, `Sts Anne et Joachim`, `Noël`), with the first names wished, the date and the next 7 days as attributes
 - **Saint of tomorrow** sensor, for an evening reminder
 - Updated at midnight in the Home Assistant time zone; the 366 days (29 February included) are embedded in the integration
-- `custom:saint-of-the-day-card` card, **shipped with the integration** and loaded automatically: today's feast with a name day wish, the date and the next days
+- `custom:saint-of-the-day-card` card, **shipped with the integration** and loaded automatically: today's feast with a name day wish, the date and the next days, under an animated header (a saint blessing in front of a turning rose window)
 - `custom:saint-of-the-day-mini-card` compact card: today's feast, with a button to open the full card
 - Visual editor for both cards
 - Diagnostics download
@@ -141,6 +141,22 @@ The mini card, compact:
 |---|---|
 | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card.png" alt="mini card" width="260"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-dark.png" alt="mini card dark" width="260"> |
 
+### Animations
+
+The full card's header: the saint sways and raises a hand to bless, the halo glows, the rose window turns slowly and its light breathes. A new feast (first display, a new day) fades in line after line.
+
+| Light | Dark |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/card-animated.gif" alt="card animation" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/card-animated-dark.gif" alt="card animation dark" width="400"> |
+
+The mini card: the halo of the saint glows in the round icon.
+
+| Light | Dark |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-animated.gif" alt="mini card animation" width="260"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-animated-dark.gif" alt="mini card animation dark" width="260"> |
+
+The animations stop when the system asks for reduced motion (`prefers-reduced-motion`).
+
 ## How it works
 
 The calendar of name days (the classic French calendar, one feast per day) is stored in `data/saints.json`, read once at startup. The sensors compute the day in the Home Assistant time zone and refresh at midnight; nothing is polled and nothing leaves Home Assistant. A day whose feast has no first name to wish (*Noël*, *Toussaint*, *Fête nationale*…) has an empty `names` list: the card then shows the feast without a wish.
@@ -150,7 +166,7 @@ The calendar of name days (the classic French calendar, one feast per day) is st
 ```bash
 pip install -r requirements_test.txt && pytest
 pip install playwright==1.64.1 && playwright install chromium
-python scripts/screenshots.py   # renders the card and mini card stills into screenshots/
+python scripts/screenshots.py   # renders the card and mini card stills and GIFs (needs ffmpeg) into screenshots/
 ```
 
 Python tests live in `tests/` (pytest); the card's JavaScript tests live in `test/` (`node --test test/*.test.mjs`).
