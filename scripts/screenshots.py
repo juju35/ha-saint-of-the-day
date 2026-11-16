@@ -112,7 +112,7 @@ SHOTS = [
         "theme": "light",
         "lang": "en",
         "element": "saint-of-the-day-mini-card",
-        "width": 260,
+        "width": 340,
         "config": {},
     },
     {
@@ -120,7 +120,7 @@ SHOTS = [
         "theme": "dark",
         "lang": "en",
         "element": "saint-of-the-day-mini-card",
-        "width": 260,
+        "width": 340,
         "config": {},
     },
     # The card in French, its home language: the date and the wish follow the card's language.
@@ -142,7 +142,7 @@ GIFS = [
         "theme": "light",
         "lang": "en",
         "element": "saint-of-the-day-mini-card",
-        "width": 260,
+        "width": 340,
         "config": {},
     },
     {
@@ -150,7 +150,7 @@ GIFS = [
         "theme": "dark",
         "lang": "en",
         "element": "saint-of-the-day-mini-card",
-        "width": 260,
+        "width": 340,
         "config": {},
     },
 ]

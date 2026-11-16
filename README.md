@@ -21,8 +21,8 @@ Home Assistant integration for the **saint of the day**: the French name day (*f
 - **Saint of the day** sensor: the calendar label as the state (`Ste Geneviève`, `Sts Anne et Joachim`, `Noël`), with the first names wished, the date and the next 7 days as attributes
 - **Saint of tomorrow** sensor, for an evening reminder
 - Updated at midnight in the Home Assistant time zone; the 366 days (29 February included) are embedded in the integration
-- `custom:saint-of-the-day-card` card, **shipped with the integration** and loaded automatically: today's feast with a name day wish, the date and the next days, under an animated header (a saint blessing in front of a turning rose window)
-- `custom:saint-of-the-day-mini-card` compact card: today's feast, with a button to open the full card
+- `custom:saint-of-the-day-card` card, **shipped with the integration** and loaded automatically: today's feast with a name day wish, the date and the next days, under an animated illustrated header (a saint blessing in front of a rose window)
+- `custom:saint-of-the-day-mini-card` compact card: today's feast laid on the illustrated banner, with a button to open the full card
 - Visual editor for both cards
 - Diagnostics download
 - English, French, German, Spanish, Serbian (Cyrillic and Latin), Italian, Dutch, Portuguese, Polish, Romanian, Danish, Swedish, Bulgarian, Russian, Ukrainian, Hungarian, Slovak, Czech, Slovenian, Latvian and Greek (the calendar itself stays French)
@@ -92,7 +92,7 @@ Click the feast to open the sensor's details.
 
 ### Mini card
 
-A compact card for dashboards: today's feast and the wish. The button at the top right opens the full card in place; a click outside the card folds it back.
+A compact card for dashboards: today's feast and the wish, laid on the illustrated banner. The button at the top right opens the full card in place; a click outside the card folds it back. Below 280 px wide, the scene steps aside for the texts.
 
 ```yaml
 type: custom:saint-of-the-day-mini-card
@@ -100,7 +100,7 @@ type: custom:saint-of-the-day-mini-card
 
 It takes the same options as `custom:saint-of-the-day-card` (set in the same visual editor); `upcoming_days` applies to the full view.
 
-<img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card.png" alt="saint-of-the-day-mini-card" width="260">
+<img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card.png" alt="saint-of-the-day-mini-card" width="340">
 
 ### Automation example
 
@@ -139,21 +139,21 @@ The mini card, compact:
 
 | Light | Dark |
 |---|---|
-| <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card.png" alt="mini card" width="260"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-dark.png" alt="mini card dark" width="260"> |
+| <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card.png" alt="mini card" width="340"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-dark.png" alt="mini card dark" width="340"> |
 
 ### Animations
 
-The full card's header: the saint sways and raises a hand to bless, the halo glows, the rose window turns slowly and its light breathes. A new feast (first display, a new day) fades in line after line.
+The full card's header: the saint sways and raises a hand to bless, the halo glows, the rose window turns slowly, its light breathes and the candles flicker. A new feast (first display, a new day) fades in line after line.
 
 | Light | Dark |
 |---|---|
 | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/card-animated.gif" alt="card animation" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/card-animated-dark.gif" alt="card animation dark" width="400"> |
 
-The mini card: the halo of the saint glows in the round icon.
+The mini card: the same scene on a lower banner, today's feast laid on it.
 
 | Light | Dark |
 |---|---|
-| <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-animated.gif" alt="mini card animation" width="260"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-animated-dark.gif" alt="mini card animation dark" width="260"> |
+| <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-animated.gif" alt="mini card animation" width="340"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-animated-dark.gif" alt="mini card animation dark" width="340"> |
 
 The animations stop when the system asks for reduced motion (`prefers-reduced-motion`).
 
