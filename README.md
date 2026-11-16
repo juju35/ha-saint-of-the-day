@@ -141,6 +141,12 @@ The mini card, compact:
 |---|---|
 | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card.png" alt="mini card" width="340"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-dark.png" alt="mini card dark" width="340"> |
 
+The mini card unfolded (the full card), the fold button at the top right:
+
+| Light | Dark |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-zoom.png" alt="mini card unfolded" width="340"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-zoom-dark.png" alt="mini card unfolded dark" width="340"> |
+
 ### Animations
 
 The full card's header: the saint sways and raises a hand to bless, the halo glows, the rose window turns slowly, its light breathes and the candles flicker. A new feast (first display, a new day) fades in line after line.

@@ -1,4 +1,4 @@
-var SAINT_CARD_VERSION = '1.1.1';
+var SAINT_CARD_VERSION = '1.1.2';
 
 // ── Header icon: tinted round icon, the accent of the project on the showcase site (the integration keeps its
 // brand/icon.png). 16 % tint like the generic icons of the other cards.
@@ -690,9 +690,10 @@ class SaintCard extends HTMLElement {
         ? `<div class="titles feast" role="button" tabindex="0"><div class="name">${saintEsc(st.state)}</div>` +
           `<div class="sub">${saintEsc(wish || date)}</div></div>`
         : `<div class="titles"><div class="name">${saintEsc(title)}</div>` + (date ? `<div class="sub">${saintEsc(date)}</div>` : '') + '</div>';
+    var detail = this._detailButton(t);
     header.innerHTML =
-      `<div class="banner${compact ? ' mini' : ''}${this._hass.themes?.darkMode ? ' dark' : ''}">${saintScene()}<div class="floor"></div>` +
-      `<div class="head">${this._iconHtml()}${texts}</div>${this._detailButton(t)}</div>`;
+      `<div class="banner${compact ? ' mini' : ''}${this._hass.themes?.darkMode ? ' dark' : ''}${detail ? ' with-detail' : ''}">${saintScene()}<div class="floor"></div>` +
+      `<div class="head">${this._iconHtml()}${texts}</div>${detail}</div>`;
     header.querySelector('.detail')?.addEventListener('click', (ev) => this._toggleDetail(ev));
 
     if (!st) {
@@ -753,18 +754,20 @@ class SaintCard extends HTMLElement {
       '.dark .detail { color: #ffffff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }',
       '.dark .detail:hover { background: rgba(255,255,255,.22); }',
       '.banner .scene { position: absolute; right: 0; bottom: var(--floor-h); height: calc(100% - var(--floor-h));' +
-        ' width: min(calc((var(--banner-h, 92px) - var(--floor-h)) * 2.5), var(--scene-max, 58%)); }',
+        ' width: min(calc((var(--banner-h, 92px) - var(--floor-h)) * 2.5), var(--scene-max, 50%)); }',
       '.floor { position: absolute; left: 0; right: 0; bottom: 0; height: var(--floor-h); box-shadow: inset 0 1px 0 #b19dc2;' +
         ' background: repeating-linear-gradient(90deg, #d4c4df 0 15px, #c6b2d4 15px 30px); }',
       '.head { position: absolute; z-index: 1; left: 0; top: 0; bottom: var(--floor-h); box-sizing: border-box;' +
-        ' right: min(calc((var(--banner-h, 92px) - var(--floor-h)) * 2.5), var(--scene-max, 58%));' +
+        ' right: min(calc((var(--banner-h, 92px) - var(--floor-h)) * 2.5), var(--scene-max, 50%));' +
         ' display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; min-width: 0; color: var(--wall-text); }',
       `.badge { width: 40px; height: 40px; flex: none; border-radius: 50%; display: grid; place-items: center; color: ${SAINT_ACCENT};` +
         ` background: rgba(255,255,255,.62); box-shadow: inset 0 0 0 1px color-mix(in srgb, ${SAINT_ACCENT} 18%, transparent); }`,
       '.badge ha-icon { --mdc-icon-size: 24px; }',
       '.titles { flex: 1 1 0; min-width: 0; overflow: hidden; }',
       ':host([hide-title]) .banner:not(.mini) .name { display: none; }',
-      '.name { font-size: 16px; font-weight: 500; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
+      // The title (or the mini card's feast) may take two lines, the line under it one.
+      '.name { font-size: 16px; font-weight: 500; line-height: 20px; overflow: hidden; overflow-wrap: anywhere;' +
+        ' display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }',
       '.sub { font-size: 12px; line-height: 16px; color: var(--wall-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
       ':host([hide-title]) .banner:not(.mini) .sub { font-size: 14px; color: var(--wall-text); }',
       '.banner .feast { cursor: pointer; border-radius: 6px; }',
@@ -810,16 +813,20 @@ class SaintCard extends HTMLElement {
       ...[1, 2, 3, 4, 5, 6, 7].map((n) => `.enter li:nth-child(${n}) { animation-delay: ${(0.2 + n * 0.07).toFixed(2)}s; }`),
       '@keyframes saint-in { from { opacity: 0; transform: translateY(6px); } }',
       '@media (prefers-reduced-motion: reduce) { .scene *, .enter * { animation: none !important; } }',
+      '@container (max-width: 380px) { .banner:not(.mini) { --scene-max: 42%; } }',
       // A narrow card keeps the wall and the floor for its texts: no scenery.
       '@container (max-width: 300px) { .banner:not(.mini) .scene { display: none; } .banner:not(.mini) .head { right: 0; } .when { min-width: 0; } .upcoming li { flex-direction: column; gap: 0; } }',
       // ── Mini card: a lower banner, today's feast laid on the wall, the detail button on frosted glass. ──
       ':host([mini])::before { grid-template-columns: minmax(0, 300px); }',
       '.banner.mini { --banner-h: 80px; --floor-h: 10px; --scene-max: 36%; }',
       '.banner.mini .head { padding-right: 6px; }',
-      // The feast may take two lines, the wish one.
-      '.banner.mini .name { font-size: 16px; line-height: 20px; white-space: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }',
+      '.banner.mini .name { font-size: 16px; line-height: 20px; }',
       '@container (max-width: 280px) { .banner.mini .scene { display: none; } .banner.mini .head { right: 0; padding-right: 40px; } }',
-      '.detail { all: unset; position: absolute; z-index: 2; top: 5px; right: 5px; cursor: pointer; width: 24px; height: 24px; border-radius: 50%;' +
+      // The mini card's detail button gets its own strip of wall on the right, 8 px from the edges: the scene moves
+      // aside so that the button never covers it.
+      '.with-detail .scene { right: 36px; }',
+      '.with-detail .head { margin-right: 36px; }',
+      '.detail { all: unset; position: absolute; z-index: 2; top: 8px; right: 6px; cursor: pointer; width: 24px; height: 24px; border-radius: 50%;' +
         ' display: grid; place-items: center; color: #4a3560; background: rgba(255,255,255,.55); box-shadow: inset 0 0 0 1px rgba(255,255,255,.7);' +
         ' -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); --mdc-icon-size: 16px; }',
       '.detail:hover { background: rgba(255,255,255,.75); }',

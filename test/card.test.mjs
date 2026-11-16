@@ -251,7 +251,7 @@ test('both cards have the illustrated banner with the project icon; the compact 
   assert.match(header, /<div class="name">Saint of the day<\/div><div class="sub">Sunday, July 26/);
   const mini = render(SaintMiniCard, {}, hassWith({ [TODAY.entity_id]: TODAY }));
   const miniHeader = mini.shadowRoot.children['.header'];
-  assert.match(miniHeader.innerHTML, /<div class="banner mini">/);
+  assert.match(miniHeader.innerHTML, /<div class="banner mini with-detail">/);
   assert.match(miniHeader.innerHTML, /<div class="badge"><ha-icon icon="mdi:calendar-star">/);
   assert.match(miniHeader.innerHTML, /class="titles feast" role="button" tabindex="0"><div class="name">Sts Anne et Joachim<\/div><div class="sub">Happy name day/);
   assert.equal(mini.shadowRoot.children['.body'].innerHTML, '');
@@ -260,7 +260,7 @@ test('both cards have the illustrated banner with the project icon; the compact 
   assert.match(noWish.shadowRoot.children['.header'].innerHTML, /<div class="sub">Sunday, July 26/);
   // Unfolded, the mini card is the full card.
   mini._toggleDetail({ stopPropagation() {}, detail: 1 });
-  assert.match(miniHeader.innerHTML, /<div class="banner">/);
+  assert.match(miniHeader.innerHTML, /<div class="banner with-detail">/);
   assert.match(mini.shadowRoot.children['.body'].innerHTML, /Ste Nathalie/);
 });
 
@@ -292,5 +292,16 @@ test('the banner follows the dark mode of Home Assistant, and redraws when it ch
   card.hass = hassWith(states, 'en', { themes: { darkMode: true } });
   assert.match(header.innerHTML, /<div class="banner dark">/);
   const mini = render(SaintMiniCard, {}, hassWith(states, 'en', { themes: { darkMode: true } }));
-  assert.match(mini.shadowRoot.children['.header'].innerHTML, /<div class="banner mini dark">/);
+  assert.match(mini.shadowRoot.children['.header'].innerHTML, /<div class="banner mini dark with-detail">/);
+});
+
+test('the mini card keeps a strip of wall for its detail button, the full card does not', () => {
+  const states = { [TODAY.entity_id]: TODAY };
+  const card = render(SaintCard, {}, hassWith(states));
+  assert.doesNotMatch(card.shadowRoot.children['.header'].innerHTML, /with-detail/);
+  const mini = render(SaintMiniCard, {}, hassWith(states));
+  assert.match(mini.shadowRoot.children['.header'].innerHTML, /<div class="banner mini with-detail">/);
+  mini._toggleDetail({ stopPropagation() {}, detail: 1 });
+  assert.match(mini.shadowRoot.children['.header'].innerHTML, /<div class="banner with-detail">.*arrow-collapse/s);
+  assert.match(SaintCard._styles(), /\.with-detail \.scene \{ right: 36px; \}/);
 });
