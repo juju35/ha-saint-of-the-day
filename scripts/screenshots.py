@@ -123,6 +123,28 @@ SHOTS = [
         "width": 340,
         "config": {},
     },
+    # Without the header background: the scene and its floor on the card.
+    {"file": "card-plain", "theme": "light", "lang": "en", "config": {"show_background": False}},
+    {"file": "card-plain-dark", "theme": "dark", "lang": "en", "config": {"show_background": False}},
+    # The mini card unfolded: the full card, with the fold button in its own strip of wall at the top right.
+    {
+        "file": "mini-card-zoom",
+        "theme": "light",
+        "lang": "en",
+        "element": "saint-of-the-day-mini-card",
+        "width": 340,
+        "zoom": True,
+        "config": {},
+    },
+    {
+        "file": "mini-card-zoom-dark",
+        "theme": "dark",
+        "lang": "en",
+        "element": "saint-of-the-day-mini-card",
+        "width": 340,
+        "zoom": True,
+        "config": {},
+    },
     # The card in French, its home language: the date and the wish follow the card's language.
     {"file": "card-fr", "theme": "light", "lang": "fr", "config": {"upcoming_days": 5}},
     {"file": "card-fr-dark", "theme": "dark", "lang": "fr", "config": {"upcoming_days": 5}},
@@ -203,11 +225,12 @@ def mount(context, shot):
     page.add_script_tag(content=HA_ELEMENTS)
     page.add_script_tag(content=CARD_JS)
     page.evaluate(
-        """({config, states, lang, element, dark}) => {
+        """({config, states, lang, element, dark, zoom}) => {
           const el = document.createElement(element);
           el.setConfig({type: `custom:${element}`, ...config});
           el.hass = {states, language: lang, locale: {language: lang}, themes: {darkMode: dark}};
           document.getElementById("root").appendChild(el);
+          if (zoom) el._setZoom(true);
         }""",
         {
             "config": shot["config"],
@@ -216,6 +239,7 @@ def mount(context, shot):
             "element": shot.get("element", "saint-of-the-day-card"),
             # Home Assistant tells the cards whether its theme is dark: the illustrated header follows it.
             "dark": shot["theme"] == "dark",
+            "zoom": shot.get("zoom", False),
         },
     )
     return page

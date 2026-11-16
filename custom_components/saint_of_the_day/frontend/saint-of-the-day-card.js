@@ -1,4 +1,4 @@
-var SAINT_CARD_VERSION = '1.1.1';
+var SAINT_CARD_VERSION = '1.2.0';
 
 // ── Header icon: tinted round icon, the accent of the project on the showcase site (the integration keeps its
 // brand/icon.png). 16 % tint like the generic icons of the other cards.
@@ -20,6 +20,7 @@ var SaintI18n = {
       title: 'Titre',
       show_title: 'Afficher le titre',
       show_wish: 'Afficher le message de fête',
+      show_background: 'Afficher le fond de l\'en-tête',
       upcoming_days: 'Jours suivants affichés',
       language: 'Langue',
       lang_auto: 'Automatique',
@@ -39,6 +40,7 @@ var SaintI18n = {
       title: 'Title',
       show_title: 'Show title',
       show_wish: 'Show the name day wish',
+      show_background: 'Show the header background',
       upcoming_days: 'Next days shown',
       language: 'Language',
       lang_auto: 'Auto',
@@ -58,6 +60,7 @@ var SaintI18n = {
       title: 'Titel',
       show_title: 'Titel anzeigen',
       show_wish: 'Namenstagsgruß anzeigen',
+      show_background: 'Kopfzeilenhintergrund anzeigen',
       upcoming_days: 'Angezeigte Folgetage',
       language: 'Sprache',
       lang_auto: 'Automatisch',
@@ -77,6 +80,7 @@ var SaintI18n = {
       title: 'Título',
       show_title: 'Mostrar el título',
       show_wish: 'Mostrar la felicitación',
+      show_background: 'Mostrar el fondo del encabezado',
       upcoming_days: 'Días siguientes mostrados',
       language: 'Idioma',
       lang_auto: 'Automático',
@@ -96,6 +100,7 @@ var SaintI18n = {
       title: 'Наслов',
       show_title: 'Прикажи наслов',
       show_wish: 'Прикажи честитку за имендан',
+      show_background: 'Прикажи позадину заглавља',
       upcoming_days: 'Приказани наредни дани',
       language: 'Језик',
       lang_auto: 'Аутоматски',
@@ -115,6 +120,7 @@ var SaintI18n = {
       title: 'Naslov',
       show_title: 'Prikaži naslov',
       show_wish: 'Prikaži čestitku za imendan',
+      show_background: 'Prikaži pozadinu zaglavlja',
       upcoming_days: 'Prikazani naredni dani',
       language: 'Jezik',
       lang_auto: 'Automatski',
@@ -134,6 +140,7 @@ var SaintI18n = {
       title: 'Titolo',
       show_title: 'Mostra il titolo',
       show_wish: 'Mostra gli auguri',
+      show_background: 'Mostra lo sfondo dell\'intestazione',
       upcoming_days: 'Giorni successivi mostrati',
       language: 'Lingua',
       lang_auto: 'Automatica',
@@ -153,6 +160,7 @@ var SaintI18n = {
       title: 'Titel',
       show_title: 'Titel tonen',
       show_wish: 'Naamdagwens tonen',
+      show_background: 'Achtergrond van de koptekst tonen',
       upcoming_days: 'Getoonde volgende dagen',
       language: 'Taal',
       lang_auto: 'Automatisch',
@@ -172,6 +180,7 @@ var SaintI18n = {
       title: 'Título',
       show_title: 'Mostrar o título',
       show_wish: 'Mostrar a mensagem de parabéns',
+      show_background: 'Mostrar o fundo do cabeçalho',
       upcoming_days: 'Dias seguintes apresentados',
       language: 'Idioma',
       lang_auto: 'Automático',
@@ -191,6 +200,7 @@ var SaintI18n = {
       title: 'Tytuł',
       show_title: 'Pokaż tytuł',
       show_wish: 'Pokaż życzenia imieninowe',
+      show_background: 'Pokaż tło nagłówka',
       upcoming_days: 'Wyświetlane kolejne dni',
       language: 'Język',
       lang_auto: 'Automatycznie',
@@ -210,6 +220,7 @@ var SaintI18n = {
       title: 'Titlu',
       show_title: 'Afișează titlul',
       show_wish: 'Afișează urarea de onomastică',
+      show_background: 'Afișează fundalul antetului',
       upcoming_days: 'Zile următoare afișate',
       language: 'Limbă',
       lang_auto: 'Automat',
@@ -229,6 +240,7 @@ var SaintI18n = {
       title: 'Titel',
       show_title: 'Vis titel',
       show_wish: 'Vis navnedagshilsen',
+      show_background: 'Vis baggrund i overskriften',
       upcoming_days: 'Viste kommende dage',
       language: 'Sprog',
       lang_auto: 'Automatisk',
@@ -248,6 +260,7 @@ var SaintI18n = {
       title: 'Titel',
       show_title: 'Visa titel',
       show_wish: 'Visa namnsdagshälsning',
+      show_background: 'Visa rubrikens bakgrund',
       upcoming_days: 'Visade kommande dagar',
       language: 'Språk',
       lang_auto: 'Automatiskt',
@@ -267,6 +280,7 @@ var SaintI18n = {
       title: 'Заглавие',
       show_title: 'Покажи заглавието',
       show_wish: 'Покажи поздрава за имен ден',
+      show_background: 'Покажи фона на заглавието',
       upcoming_days: 'Показани следващи дни',
       language: 'Език',
       lang_auto: 'Автоматично',
@@ -286,6 +300,7 @@ var SaintI18n = {
       title: 'Заголовок',
       show_title: 'Показывать заголовок',
       show_wish: 'Показывать поздравление с именинами',
+      show_background: 'Показывать фон заголовка',
       upcoming_days: 'Показываемые следующие дни',
       language: 'Язык',
       lang_auto: 'Автоматически',
@@ -305,6 +320,7 @@ var SaintI18n = {
       title: 'Заголовок',
       show_title: 'Показувати заголовок',
       show_wish: 'Показувати привітання з іменинами',
+      show_background: 'Показувати фон заголовка',
       upcoming_days: 'Показані наступні дні',
       language: 'Мова',
       lang_auto: 'Автоматично',
@@ -324,6 +340,7 @@ var SaintI18n = {
       title: 'Cím',
       show_title: 'Cím megjelenítése',
       show_wish: 'Névnapi köszöntés megjelenítése',
+      show_background: 'Fejléc hátterének megjelenítése',
       upcoming_days: 'Megjelenített következő napok',
       language: 'Nyelv',
       lang_auto: 'Automatikus',
@@ -343,6 +360,7 @@ var SaintI18n = {
       title: 'Názov',
       show_title: 'Zobraziť názov',
       show_wish: 'Zobraziť blahoželanie k meninám',
+      show_background: 'Zobraziť pozadie hlavičky',
       upcoming_days: 'Zobrazené nasledujúce dni',
       language: 'Jazyk',
       lang_auto: 'Automaticky',
@@ -362,6 +380,7 @@ var SaintI18n = {
       title: 'Název',
       show_title: 'Zobrazit název',
       show_wish: 'Zobrazit blahopřání k svátku',
+      show_background: 'Zobrazit pozadí záhlaví',
       upcoming_days: 'Zobrazené následující dny',
       language: 'Jazyk',
       lang_auto: 'Automaticky',
@@ -381,6 +400,7 @@ var SaintI18n = {
       title: 'Naslov',
       show_title: 'Pokaži naslov',
       show_wish: 'Pokaži voščilo za god',
+      show_background: 'Pokaži ozadje glave',
       upcoming_days: 'Prikazani naslednji dnevi',
       language: 'Jezik',
       lang_auto: 'Samodejno',
@@ -400,6 +420,7 @@ var SaintI18n = {
       title: 'Virsraksts',
       show_title: 'Rādīt virsrakstu',
       show_wish: 'Rādīt vārda dienas apsveikumu',
+      show_background: 'Rādīt galvenes fonu',
       upcoming_days: 'Rādītās nākamās dienas',
       language: 'Valoda',
       lang_auto: 'Automātiski',
@@ -419,6 +440,7 @@ var SaintI18n = {
       title: 'Τίτλος',
       show_title: 'Εμφάνιση τίτλου',
       show_wish: 'Εμφάνιση ευχών ονομαστικής εορτής',
+      show_background: 'Εμφάνιση φόντου κεφαλίδας',
       upcoming_days: 'Εμφανιζόμενες επόμενες ημέρες',
       language: 'Γλώσσα',
       lang_auto: 'Αυτόματα',
@@ -427,7 +449,7 @@ var SaintI18n = {
 };
 
 // Single source of the config defaults, shared by the card (setConfig) and the editor.
-var SAINT_DEFAULTS = { show_title: true, show_wish: true, upcoming_days: 3 };
+var SAINT_DEFAULTS = { show_title: true, show_wish: true, show_background: true, upcoming_days: 3 };
 var SAINT_MAX_UPCOMING = 7;
 
 function saintEsc(s) {
@@ -690,9 +712,10 @@ class SaintCard extends HTMLElement {
         ? `<div class="titles feast" role="button" tabindex="0"><div class="name">${saintEsc(st.state)}</div>` +
           `<div class="sub">${saintEsc(wish || date)}</div></div>`
         : `<div class="titles"><div class="name">${saintEsc(title)}</div>` + (date ? `<div class="sub">${saintEsc(date)}</div>` : '') + '</div>';
+    var detail = this._detailButton(t);
     header.innerHTML =
-      `<div class="banner${compact ? ' mini' : ''}${this._hass.themes?.darkMode ? ' dark' : ''}">${saintScene()}<div class="floor"></div>` +
-      `<div class="head">${this._iconHtml()}${texts}</div>${this._detailButton(t)}</div>`;
+      `<div class="banner${compact ? ' mini' : ''}${this._hass.themes?.darkMode ? ' dark' : ''}${this._config.show_background === false ? ' plain' : ''}${detail ? ' with-detail' : ''}">${saintScene()}<div class="floor"></div>` +
+      `<div class="head">${this._iconHtml()}${texts}</div>${detail}</div>`;
     header.querySelector('.detail')?.addEventListener('click', (ev) => this._toggleDetail(ev));
 
     if (!st) {
@@ -752,19 +775,28 @@ class SaintCard extends HTMLElement {
       '.dark .badge { background: rgba(255,255,255,.12); color: #d2a8ea; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }',
       '.dark .detail { color: #ffffff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }',
       '.dark .detail:hover { background: rgba(255,255,255,.22); }',
+      // show_background: false — no wall: the scene and the floor sit on the card, the texts and the round icon take the
+      // theme's colours, as on the cards without an illustration.
+      '.banner.plain { background: none; --wall-text: var(--primary-text-color); --wall-muted: var(--secondary-text-color); }',
+      `.plain .badge { color: ${SAINT_ACCENT}; background: color-mix(in srgb, ${SAINT_ACCENT} 16%, transparent); box-shadow: none; }`,
+      '.plain .detail, .plain .detail:hover { color: var(--secondary-text-color); background: none; -webkit-backdrop-filter: none; backdrop-filter: none;' +
+        ' box-shadow: inset 0 0 0 1px var(--divider-color, rgba(127,127,127,.3)); }',
+      '.plain .detail:hover { color: var(--primary-text-color); background: color-mix(in srgb, var(--secondary-text-color) 12%, transparent); }',
       '.banner .scene { position: absolute; right: 0; bottom: var(--floor-h); height: calc(100% - var(--floor-h));' +
-        ' width: min(calc((var(--banner-h, 92px) - var(--floor-h)) * 2.5), var(--scene-max, 58%)); }',
+        ' width: min(calc((var(--banner-h, 92px) - var(--floor-h)) * 2.5), var(--scene-max, 50%)); }',
       '.floor { position: absolute; left: 0; right: 0; bottom: 0; height: var(--floor-h); box-shadow: inset 0 1px 0 #b19dc2;' +
         ' background: repeating-linear-gradient(90deg, #d4c4df 0 15px, #c6b2d4 15px 30px); }',
       '.head { position: absolute; z-index: 1; left: 0; top: 0; bottom: var(--floor-h); box-sizing: border-box;' +
-        ' right: min(calc((var(--banner-h, 92px) - var(--floor-h)) * 2.5), var(--scene-max, 58%));' +
+        ' right: min(calc((var(--banner-h, 92px) - var(--floor-h)) * 2.5), var(--scene-max, 50%));' +
         ' display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; min-width: 0; color: var(--wall-text); }',
       `.badge { width: 40px; height: 40px; flex: none; border-radius: 50%; display: grid; place-items: center; color: ${SAINT_ACCENT};` +
         ` background: rgba(255,255,255,.62); box-shadow: inset 0 0 0 1px color-mix(in srgb, ${SAINT_ACCENT} 18%, transparent); }`,
       '.badge ha-icon { --mdc-icon-size: 24px; }',
       '.titles { flex: 1 1 0; min-width: 0; overflow: hidden; }',
       ':host([hide-title]) .banner:not(.mini) .name { display: none; }',
-      '.name { font-size: 16px; font-weight: 500; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
+      // The title (or the mini card's feast) may take two lines, the line under it one.
+      '.name { font-size: 16px; font-weight: 500; line-height: 20px; overflow: hidden; overflow-wrap: anywhere;' +
+        ' display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }',
       '.sub { font-size: 12px; line-height: 16px; color: var(--wall-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
       ':host([hide-title]) .banner:not(.mini) .sub { font-size: 14px; color: var(--wall-text); }',
       '.banner .feast { cursor: pointer; border-radius: 6px; }',
@@ -810,16 +842,20 @@ class SaintCard extends HTMLElement {
       ...[1, 2, 3, 4, 5, 6, 7].map((n) => `.enter li:nth-child(${n}) { animation-delay: ${(0.2 + n * 0.07).toFixed(2)}s; }`),
       '@keyframes saint-in { from { opacity: 0; transform: translateY(6px); } }',
       '@media (prefers-reduced-motion: reduce) { .scene *, .enter * { animation: none !important; } }',
+      '@container (max-width: 380px) { .banner:not(.mini) { --scene-max: 42%; } }',
       // A narrow card keeps the wall and the floor for its texts: no scenery.
       '@container (max-width: 300px) { .banner:not(.mini) .scene { display: none; } .banner:not(.mini) .head { right: 0; } .when { min-width: 0; } .upcoming li { flex-direction: column; gap: 0; } }',
       // ── Mini card: a lower banner, today's feast laid on the wall, the detail button on frosted glass. ──
       ':host([mini])::before { grid-template-columns: minmax(0, 300px); }',
       '.banner.mini { --banner-h: 80px; --floor-h: 10px; --scene-max: 36%; }',
       '.banner.mini .head { padding-right: 6px; }',
-      // The feast may take two lines, the wish one.
-      '.banner.mini .name { font-size: 16px; line-height: 20px; white-space: normal; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }',
+      '.banner.mini .name { font-size: 16px; line-height: 20px; }',
       '@container (max-width: 280px) { .banner.mini .scene { display: none; } .banner.mini .head { right: 0; padding-right: 40px; } }',
-      '.detail { all: unset; position: absolute; z-index: 2; top: 5px; right: 5px; cursor: pointer; width: 24px; height: 24px; border-radius: 50%;' +
+      // The mini card's detail button gets its own strip of wall on the right, 8 px from the edges: the scene moves
+      // aside so that the button never covers it.
+      '.with-detail .scene { right: 36px; }',
+      '.with-detail .head { margin-right: 36px; }',
+      '.detail { all: unset; position: absolute; z-index: 2; top: 8px; right: 6px; cursor: pointer; width: 24px; height: 24px; border-radius: 50%;' +
         ' display: grid; place-items: center; color: #4a3560; background: rgba(255,255,255,.55); box-shadow: inset 0 0 0 1px rgba(255,255,255,.7);' +
         ' -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); --mdc-icon-size: 16px; }',
       '.detail:hover { background: rgba(255,255,255,.75); }',
@@ -932,6 +968,7 @@ function saintEditorSchema(t) {
       schema: [
         { name: 'show_title', selector: { boolean: {} } },
         { name: 'show_wish', selector: { boolean: {} } },
+        { name: 'show_background', selector: { boolean: {} } },
       ],
     },
     { name: 'upcoming_days', selector: { number: { min: 0, max: SAINT_MAX_UPCOMING, mode: 'box' } } },

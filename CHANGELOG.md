@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.0 - 2026-11-17
+
+### Features
+- `show_background` option (both cards, visual editor): `false` removes the chapel wall from the illustrated header — the scene and its paved floor sit on the card, the texts and the round icon take the theme's colours.
+
+### Fixes
+- Mini card: the detail / fold button covered the scene's right column, folded and unfolded. It now has its own strip of wall at the top right, 8 px from the edges, the scene moved aside.
+- The banner's title (or the mini card's feast) may take two lines instead of being cut short, and below 380 px the full card's scene takes less room.
+
 ## 1.1.1 - 2026-11-16
 
 ### Fixes

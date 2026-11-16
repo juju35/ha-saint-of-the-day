@@ -85,6 +85,7 @@ type: custom:saint-of-the-day-card
 | `title` | `Saint of the day` | Card title |
 | `show_title` | `true` | Show the title in the header (the date stays) |
 | `show_wish` | `true` | Show the name day wish under the feast |
+| `show_background` | `true` | Show the chapel wall behind the illustrated header; `false` keeps the scene and its floor on the card's own background |
 | `upcoming_days` | `3` | Next days listed under the feast, from `0` (none) to `7` |
 | `language` | Auto | Force language: `en`, `fr`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings) |
 
@@ -129,6 +130,12 @@ actions:
 |---|---|
 | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/card.png" alt="card" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/card-dark.png" alt="card dark" width="400"> |
 
+Without the header background (`show_background: false`): the scene and its floor on the card, the texts in the theme's colours.
+
+| Light | Dark |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/card-plain.png" alt="card without background" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/card-plain-dark.png" alt="card without background dark" width="400"> |
+
 The card in French, with five next days (`upcoming_days: 5`): the date and the wish follow the card's language.
 
 | Light | Dark |
@@ -140,6 +147,12 @@ The mini card, compact:
 | Light | Dark |
 |---|---|
 | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card.png" alt="mini card" width="340"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-dark.png" alt="mini card dark" width="340"> |
+
+The mini card unfolded (the full card), the fold button at the top right:
+
+| Light | Dark |
+|---|---|
+| <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-zoom.png" alt="mini card unfolded" width="340"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/mini-card-zoom-dark.png" alt="mini card unfolded dark" width="340"> |
 
 ### Animations
 
