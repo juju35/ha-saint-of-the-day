@@ -1,4 +1,4 @@
-var SAINT_CARD_VERSION = '1.1.0';
+var SAINT_CARD_VERSION = '1.1.1';
 
 // ── Header icon: tinted round icon, the accent of the project on the showcase site (the integration keeps its
 // brand/icon.png). 16 % tint like the generic icons of the other cards.
@@ -502,7 +502,7 @@ function saintRose() {
   }
   return (
     '<g class="rose">' +
-    '<circle cx="78" cy="38" r="33" fill="#fbf7fd" stroke="#b9a4c9" stroke-width="3"/>' +
+    '<circle class="disc" cx="78" cy="38" r="33" stroke-width="3"/>' +
     `${petals}<circle cx="78" cy="38" r="5.5" fill="${SAINT_GOLD}"/></g>`
   );
 }
@@ -543,10 +543,8 @@ function saintScene() {
   return (
     '<svg class="scene" viewBox="0 0 200 80" preserveAspectRatio="xMaxYMax meet" aria-hidden="true" focusable="false">' +
     // Gothic arch of the window bay, two columns.
-    '<path d="M86 80 V34 Q120 -6 154 34 V80 Z" fill="#e6d8ef"/>' +
-    '<rect x="70" y="14" width="9" height="66" fill="#ddcce9"/><rect x="68" y="12" width="13" height="4" rx="1" fill="#cdb8dd"/>' +
-    '<rect x="161" y="14" width="9" height="66" fill="#ddcce9"/><rect x="159" y="12" width="13" height="4" rx="1" fill="#cdb8dd"/>' +
-    '<rect x="186" y="14" width="9" height="66" fill="#ddcce9"/><rect x="184" y="12" width="13" height="4" rx="1" fill="#cdb8dd"/>' +
+    '<path class="arch" d="M86 80 V34 Q120 -6 154 34 V80 Z"/>' +
+    [70, 161, 186].map((x) => `<rect class="col" x="${x}" y="14" width="9" height="66"/><rect class="cap" x="${x - 2}" y="12" width="13" height="4" rx="1"/>`).join('') +
     `<polygon class="ray r1" points="112,40 128,40 108,80 58,80" fill="${SAINT_GOLD}"/>` +
     '<polygon class="ray r2" points="116,42 124,42 96,80 76,80" fill="#ffffff"/>' +
     `<g transform="translate(61.5 8) scale(.75)">${saintRose()}</g>` +
@@ -605,11 +603,12 @@ class SaintCard extends HTMLElement {
   set hass(hass) {
     var first = !this._hass;
     var lang = this._hass ? saintLang(this._hass, this._config) : null;
+    var dark = !!this._hass?.themes?.darkMode;
     this._hass = hass;
     var entityId = this._entityId();
     var st = entityId ? hass.states[entityId] : null;
-    // Only redraw when the sensor (or the language) changed: hass updates several times a second.
-    if (first || st !== this._lastState || lang !== saintLang(hass, this._config)) {
+    // Only redraw when the sensor, the language or the dark mode changed: hass updates several times a second.
+    if (first || st !== this._lastState || lang !== saintLang(hass, this._config) || dark !== !!hass.themes?.darkMode) {
       this._lastState = st;
       this._render();
     }
@@ -692,7 +691,7 @@ class SaintCard extends HTMLElement {
           `<div class="sub">${saintEsc(wish || date)}</div></div>`
         : `<div class="titles"><div class="name">${saintEsc(title)}</div>` + (date ? `<div class="sub">${saintEsc(date)}</div>` : '') + '</div>';
     header.innerHTML =
-      `<div class="banner${compact ? ' mini' : ''}">${saintScene()}<div class="floor"></div>` +
+      `<div class="banner${compact ? ' mini' : ''}${this._hass.themes?.darkMode ? ' dark' : ''}">${saintScene()}<div class="floor"></div>` +
       `<div class="head">${this._iconHtml()}${texts}</div>${this._detailButton(t)}</div>`;
     header.querySelector('.detail')?.addEventListener('click', (ev) => this._toggleDetail(ev));
 
@@ -744,6 +743,15 @@ class SaintCard extends HTMLElement {
       // ── Illustrated header: the chapel wall, its paved floor, the scene on the right, the texts on the left. ──
       '.banner { position: relative; height: var(--banner-h, 92px); overflow: hidden; --floor-h: 12px; --wall-text: #2d1640; --wall-muted: #5e4a70;' +
         ' background: linear-gradient(90deg, #faf6fc 0%, #f3eaf8 34%, #e9dbf2 70%, #dfcbec 100%); }',
+      // Night in the chapel when Home Assistant is dark: the wall and the floor darken, the window and the candles glow.
+      '.banner.dark { --wall-text: #ffffff; --wall-muted: rgba(255,255,255,.75);' +
+        ' background: linear-gradient(90deg, #2b1f37 0%, #241a31 34%, #1e152a 70%, #181022 100%); }',
+      '.scene .arch { fill: #e6d8ef; } .scene .col { fill: #ddcce9; } .scene .cap { fill: #cdb8dd; } .scene .disc { fill: #fbf7fd; stroke: #b9a4c9; }',
+      '.dark .scene .arch { fill: #34253f; } .dark .scene .col { fill: #2f2139; } .dark .scene .cap { fill: #3d2d4a; } .dark .scene .disc { fill: #fff6e0; stroke: #5b4670; }',
+      '.dark .floor { box-shadow: inset 0 1px 0 #4b3a5c; background: repeating-linear-gradient(90deg, #3a2b48 0 15px, #30233d 15px 30px); }',
+      '.dark .badge { background: rgba(255,255,255,.12); color: #d2a8ea; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }',
+      '.dark .detail { color: #ffffff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }',
+      '.dark .detail:hover { background: rgba(255,255,255,.22); }',
       '.banner .scene { position: absolute; right: 0; bottom: var(--floor-h); height: calc(100% - var(--floor-h));' +
         ' width: min(calc((var(--banner-h, 92px) - var(--floor-h)) * 2.5), var(--scene-max, 58%)); }',
       '.floor { position: absolute; left: 0; right: 0; bottom: 0; height: var(--floor-h); box-shadow: inset 0 1px 0 #b19dc2;' +
@@ -763,6 +771,7 @@ class SaintCard extends HTMLElement {
       // ── The scene's animations ──
       '.scene .rose { transform-box: fill-box; transform-origin: center; animation: saint-turn 48s linear infinite; }',
       '.scene .ray { opacity: .2; animation: saint-ray 3s ease-in-out infinite; }',
+      '.dark .scene .r2 { fill: #ffd98a; }',
       '.scene .r2 { opacity: .35; animation-delay: -1.5s; }',
       '.scene .saint { transform-box: fill-box; transform-origin: 50% 100%; animation: saint-sway 6s ease-in-out infinite; }',
       '.scene .arm { transform-box: fill-box; transform-origin: 13% 13%; animation: saint-bless 6s ease-in-out infinite; }',
