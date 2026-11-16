@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.0 - 2026-11-16
+
+### Features
+- Illustrated header, like the other cards with a scene: a chapel wall across the card with its paved floor, the project's round icon and the texts on the left, and on the right a saint in front of a rose window — the saint sways and raises a hand to bless under a glowing halo, the window turns slowly, its light breathes and two candles flicker.
+- The compact mini card is a lower banner of the same scene, with today's feast and the wish laid on it and the detail button on frosted glass.
+- Today's feast sits on a neutral tile; a new feast (first display, a new day) fades in line after line.
+- The animations stop when the system asks for reduced motion.
+
+### Maintenance
+- The screenshots script also renders one GIF per animation (full card and mini card, light and dark), from frames taken with the animations paused at fixed times.
+
 ## 1.0.0 - 2026-11-13
 
 ### Features

@@ -240,3 +240,46 @@ test('a click on the feast opens the more-info dialog of the sensor', () => {
   assert.equal(card.events[0].type, 'hass-more-info');
   assert.equal(card.events[0].detail.entityId, TODAY.entity_id);
 });
+
+test('both cards have the illustrated banner with the project icon; the compact mini card lays the feast on it', () => {
+  const card = render(SaintCard, {}, hassWith({ [TODAY.entity_id]: TODAY }));
+  const header = card.shadowRoot.children['.header'].innerHTML;
+  assert.match(header, /<div class="banner">/);
+  assert.match(header, /<svg class="scene"/);
+  assert.match(header, /class="arm"/);
+  assert.match(header, /<div class="badge"><ha-icon icon="mdi:calendar-star">/);
+  assert.match(header, /<div class="name">Saint of the day<\/div><div class="sub">Sunday, July 26/);
+  const mini = render(SaintMiniCard, {}, hassWith({ [TODAY.entity_id]: TODAY }));
+  const miniHeader = mini.shadowRoot.children['.header'];
+  assert.match(miniHeader.innerHTML, /<div class="banner mini">/);
+  assert.match(miniHeader.innerHTML, /<div class="badge"><ha-icon icon="mdi:calendar-star">/);
+  assert.match(miniHeader.innerHTML, /class="titles feast" role="button" tabindex="0"><div class="name">Sts Anne et Joachim<\/div><div class="sub">Happy name day/);
+  assert.equal(mini.shadowRoot.children['.body'].innerHTML, '');
+  // Without the wish, the date.
+  const noWish = render(SaintMiniCard, { show_wish: false }, hassWith({ [TODAY.entity_id]: TODAY }));
+  assert.match(noWish.shadowRoot.children['.header'].innerHTML, /<div class="sub">Sunday, July 26/);
+  // Unfolded, the mini card is the full card.
+  mini._toggleDetail({ stopPropagation() {}, detail: 1 });
+  assert.match(miniHeader.innerHTML, /<div class="banner">/);
+  assert.match(mini.shadowRoot.children['.body'].innerHTML, /Ste Nathalie/);
+});
+
+test('a new feast fades in, a redraw of the same feast does not', () => {
+  const card = render(SaintCard, {}, hassWith({ [TODAY.entity_id]: TODAY }));
+  const body = card.shadowRoot.children['.body'];
+  assert.equal(body.classes.enter, true);
+  card.hass = hassWith({ [TODAY.entity_id]: card._lastState }, 'fr');
+  assert.equal(body.classes.enter, false);
+  card.hass = hassWith({ [TODAY.entity_id]: { ...TODAY, state: 'Ste Nathalie', attributes: { ...TODAY.attributes, date: '2026-07-27' } } });
+  assert.equal(body.classes.enter, true);
+});
+
+test('the animations stop for reduced motion, and every loop divides the 6 s of the GIFs', () => {
+  const css = SaintCard._styles();
+  assert.match(css, /prefers-reduced-motion: reduce\) \{ \.scene \*, \.enter \* \{ animation: none !important; \}/);
+  for (const [, seconds] of css.matchAll(/animation: saint-(?!in)[a-z]+ ([\d.]+)s/g)) {
+    const s = Number(seconds);
+    // The rose window has 8 petals: one turn of 48 s repeats every 6 s.
+    assert.ok(s === 48 || Number.isInteger(6 / s), `${s} s`);
+  }
+});

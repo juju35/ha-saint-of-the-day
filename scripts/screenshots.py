@@ -3,12 +3,15 @@
 Usage: python scripts/screenshots.py  (needs `pip install playwright pillow` and `playwright install chromium`;
 CHROMIUM_PATH=/path/to/chrome to use another browser)
 A screenshot is rewritten only when its decoded pixels change, so a re-render never commits identical images.
+The GIFs (one per animation, light and dark) need ffmpeg: every frame is a still taken with the card's animations
+paused at a fixed time, so the same sources always give the same pixels.
 The mock day is 26 July 2026 (Sts Anne et Joachim, two first names), read from the integration's calendar file.
 """
 
 import json
 import os
 import shutil
+import subprocess
 import tempfile
 from datetime import date, timedelta
 from pathlib import Path
@@ -109,7 +112,7 @@ SHOTS = [
         "theme": "light",
         "lang": "en",
         "element": "saint-of-the-day-mini-card",
-        "width": 260,
+        "width": 340,
         "config": {},
     },
     {
@@ -117,13 +120,46 @@ SHOTS = [
         "theme": "dark",
         "lang": "en",
         "element": "saint-of-the-day-mini-card",
-        "width": 260,
+        "width": 340,
         "config": {},
     },
     # The card in French, its home language: the date and the wish follow the card's language.
     {"file": "card-fr", "theme": "light", "lang": "fr", "config": {"upcoming_days": 5}},
     {"file": "card-fr-dark", "theme": "dark", "lang": "fr", "config": {"upcoming_days": 5}},
 ]
+
+# One GIF per animation. Every loop of the header lasts a divisor of 6 s (LOOP_MS), so the GIF loops seamlessly; the
+# feast's fade-in plays at its start.
+LOOP_MS = 6000
+FRAME_MS = 80
+GIFS = [
+    # The full card: the saint sways and blesses, the rose window turns, the light breathes, the feast fades in.
+    {"file": "card-animated", "theme": "light", "lang": "en", "config": {}},
+    {"file": "card-animated-dark", "theme": "dark", "lang": "en", "config": {}},
+    # The mini card: the saint's halo glows in the round icon.
+    {
+        "file": "mini-card-animated",
+        "theme": "light",
+        "lang": "en",
+        "element": "saint-of-the-day-mini-card",
+        "width": 340,
+        "config": {},
+    },
+    {
+        "file": "mini-card-animated-dark",
+        "theme": "dark",
+        "lang": "en",
+        "element": "saint-of-the-day-mini-card",
+        "width": 340,
+        "config": {},
+    },
+]
+
+# Pauses every animation of the card at `t` ms: the frames do not depend on how fast the browser runs.
+SEEK = """t => {
+  const card = document.querySelector('#root > *');
+  for (const a of card.shadowRoot.getAnimations()) { a.pause(); a.currentTime = t; }
+}"""
 
 
 def _frames(path):
@@ -183,6 +219,35 @@ def mount(context, shot):
     return page
 
 
+def clip(page, shot):
+    # The card with the 16 px page padding around it, on the theme background.
+    box = page.locator("#root").bounding_box()
+    return {"x": 0, "y": 0, "width": shot.get("width", WIDTH) + 32, "height": int(box["height"] + 0.999) + 32}
+
+
+def render_gif(context, shot, out):
+    """Seek the card's animations frame by frame, then encode the stills into a looping GIF at 1x."""
+    page = mount(context, shot)
+    page.wait_for_timeout(300)
+    area = clip(page, shot)
+    with tempfile.TemporaryDirectory() as tmp:
+        for i in range(LOOP_MS // FRAME_MS):
+            page.evaluate(SEEK, i * FRAME_MS)
+            page.screenshot(path=f"{tmp}/f{i:03d}.png", clip=area)
+        width = area["width"]
+        subprocess.run(
+            [
+                "ffmpeg", "-loglevel", "error", "-y", "-framerate", str(1000 / FRAME_MS), "-i", f"{tmp}/f%03d.png",
+                "-filter_complex",
+                f"scale={width}:-1:flags=lanczos,split[a][b];[a]palettegen=stats_mode=full[p];"
+                "[b][p]paletteuse=dither=none",
+                "-loop", "0", "-bitexact", out,
+            ],
+            check=True,
+        )  # fmt: skip
+    page.close()
+
+
 def main():
     out_dir = ROOT / "screenshots"
     out_dir.mkdir(exist_ok=True)
@@ -198,23 +263,18 @@ def main():
         for shot in SHOTS:
             page = mount(context, shot)
             page.wait_for_timeout(300)
-            # The card with the 16 px page padding around it, on the theme background.
-            box = page.locator("#root").bounding_box()
             with tempfile.TemporaryDirectory() as tmp:
                 fresh = Path(tmp) / f"{shot['file']}.png"
-                page.screenshot(
-                    path=str(fresh),
-                    clip={
-                        "x": 0,
-                        "y": 0,
-                        "width": shot.get("width", WIDTH) + 32,
-                        "height": int(box["height"] + 0.999) + 32,
-                    },
-                    animations="disabled",
-                )
+                page.screenshot(path=str(fresh), clip=clip(page, shot), animations="disabled")
                 changed = replace_if_changed(fresh, out_dir / f"{shot['file']}.png")
             print(f"screenshots/{shot['file']}.png" + ("" if changed else " (unchanged)"))
             page.close()
+        for shot in GIFS:
+            with tempfile.TemporaryDirectory() as tmp:
+                fresh = Path(tmp) / f"{shot['file']}.gif"
+                render_gif(context, shot, str(fresh))
+                changed = replace_if_changed(fresh, out_dir / f"{shot['file']}.gif")
+            print(f"screenshots/{shot['file']}.gif" + ("" if changed else " (unchanged)"))
         browser.close()
 
 
