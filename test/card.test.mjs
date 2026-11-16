@@ -305,3 +305,18 @@ test('the mini card keeps a strip of wall for its detail button, the full card d
   assert.match(mini.shadowRoot.children['.header'].innerHTML, /<div class="banner with-detail">.*arrow-collapse/s);
   assert.match(SaintCard._styles(), /\.with-detail \.scene \{ right: 36px; \}/);
 });
+
+test('show_background false removes the wall of the banner, on both cards, and is offered in the editor', () => {
+  const states = { [TODAY.entity_id]: TODAY };
+  const card = render(SaintCard, {}, hassWith(states));
+  assert.doesNotMatch(card.shadowRoot.children['.header'].innerHTML, /plain/);
+  const plain = render(SaintCard, { show_background: false }, hassWith(states));
+  assert.match(plain.shadowRoot.children['.header'].innerHTML, /<div class="banner plain">/);
+  const mini = render(SaintMiniCard, { show_background: false }, hassWith(states, 'en', { themes: { darkMode: true } }));
+  assert.match(mini.shadowRoot.children['.header'].innerHTML, /<div class="banner mini dark plain with-detail">/);
+  assert.equal(SAINT_DEFAULTS.show_background, true);
+  const css = SaintCard._styles();
+  assert.match(css, /\.banner\.plain \{ background: none;/);
+  // The plain rules come after the dark ones, so that they win in a dark theme.
+  assert.ok(css.indexOf('.banner.plain {') > css.indexOf('.banner.dark {'));
+});

@@ -123,6 +123,9 @@ SHOTS = [
         "width": 340,
         "config": {},
     },
+    # Without the header background: the scene and its floor on the card.
+    {"file": "card-plain", "theme": "light", "lang": "en", "config": {"show_background": False}},
+    {"file": "card-plain-dark", "theme": "dark", "lang": "en", "config": {"show_background": False}},
     # The mini card unfolded: the full card, with the fold button in its own strip of wall at the top right.
     {
         "file": "mini-card-zoom",
