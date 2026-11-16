@@ -203,10 +203,10 @@ def mount(context, shot):
     page.add_script_tag(content=HA_ELEMENTS)
     page.add_script_tag(content=CARD_JS)
     page.evaluate(
-        """({config, states, lang, element}) => {
+        """({config, states, lang, element, dark}) => {
           const el = document.createElement(element);
           el.setConfig({type: `custom:${element}`, ...config});
-          el.hass = {states, language: lang, locale: {language: lang}};
+          el.hass = {states, language: lang, locale: {language: lang}, themes: {darkMode: dark}};
           document.getElementById("root").appendChild(el);
         }""",
         {
@@ -214,6 +214,8 @@ def mount(context, shot):
             "states": STATES,
             "lang": shot["lang"],
             "element": shot.get("element", "saint-of-the-day-card"),
+            # Home Assistant tells the cards whether its theme is dark: the illustrated header follows it.
+            "dark": shot["theme"] == "dark",
         },
     )
     return page

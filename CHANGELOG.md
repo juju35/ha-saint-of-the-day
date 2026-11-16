@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.1 - 2026-11-16
+
+### Fixes
+- The illustrated header follows Home Assistant's dark mode: night falls in the chapel — the wall and the floor darken, the texts turn light, the round icon and the detail button take a smoked glass, the rose window and the candles glow.
+
 ## 1.1.0 - 2026-11-16
 
 ### Features

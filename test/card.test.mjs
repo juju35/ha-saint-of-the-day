@@ -283,3 +283,14 @@ test('the animations stop for reduced motion, and every loop divides the 6 s of 
     assert.ok(s === 48 || Number.isInteger(6 / s), `${s} s`);
   }
 });
+
+test('the banner follows the dark mode of Home Assistant, and redraws when it changes', () => {
+  const states = { [TODAY.entity_id]: TODAY };
+  const card = render(SaintCard, {}, hassWith(states));
+  const header = card.shadowRoot.children['.header'];
+  assert.match(header.innerHTML, /<div class="banner">/);
+  card.hass = hassWith(states, 'en', { themes: { darkMode: true } });
+  assert.match(header.innerHTML, /<div class="banner dark">/);
+  const mini = render(SaintMiniCard, {}, hassWith(states, 'en', { themes: { darkMode: true } }));
+  assert.match(mini.shadowRoot.children['.header'].innerHTML, /<div class="banner mini dark">/);
+});
