@@ -914,9 +914,10 @@ class SaintCard extends HTMLElement {
       // Without a feast to show, the scene rests: greyed, the animations stopped.
       '.st-off .scene, .st-alert .scene { filter: grayscale(.85); opacity: .6; }',
       '.st-off .scene *, .st-alert .scene * { animation: none !important; }',
-      '.floor { position: absolute; left: 0; right: 0; bottom: 0; height: var(--floor-h); box-shadow: inset 0 2px 0 #ddd6ca;' +
-        ' background: repeating-linear-gradient(90deg, #c9c1b3 0 26px, #b1a896 26px 28px); }',
-      '.night .floor { box-shadow: inset 0 2px 0 #4a453d; background: repeating-linear-gradient(90deg, #3e3a33 0 26px, #2f2c27 26px 28px); }',
+      // The chapel's lavender paving, by day and by night.
+      '.floor { position: absolute; left: 0; right: 0; bottom: 0; height: var(--floor-h); box-shadow: inset 0 1px 0 #b19dc2;' +
+        ' background: repeating-linear-gradient(90deg, #d4c4df 0 15px, #c6b2d4 15px 30px); }',
+      '.night .floor { box-shadow: inset 0 1px 0 #4b3a5c; background: repeating-linear-gradient(90deg, #3a2b48 0 15px, #30233d 15px 30px); }',
       '.night .badge { background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }',
       '.night .detail { color: #ffffff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }',
       '.night .detail:hover { background: rgba(255,255,255,.22); }',

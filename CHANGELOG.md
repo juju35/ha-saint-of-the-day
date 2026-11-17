@@ -3,7 +3,7 @@
 ## 1.3.0 - 2026-11-17
 
 ### Features
-- The illustrated header takes the look shared by the other cards with a scene: 90 px high on the full and the mini card, the title on a sky, the saint in front of the rose window on the right (same scene and animations), and a 10 px strip of paving stones edge to edge at the bottom.
+- The illustrated header takes the look shared by the other cards with a scene: 90 px high on the full and the mini card, the title on a sky, the saint in front of the rose window on the right (same scene and animations), and a 10 px strip of the chapel's lavender paving stones edge to edge at the bottom.
 - Day and night: the sky turns to night when the sun is below the horizon (else with a dark theme); `illustration_theme: day | night` forces it (both cards, visual editor).
 - The round calendar icon shows the status: accent when today's feast is known, grey when the sensor is unavailable, red when no sensor is found; without a feast the scene rests, greyed and still.
 - `illustration: false` keeps a classic header, without the scene (both cards, visual editor).

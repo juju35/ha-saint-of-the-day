@@ -322,8 +322,8 @@ test('the banner is 90 px on both cards with a 10 px strip of paving stones, day
   const css = SaintCard._styles();
   assert.match(css, /\.banner \{ position: relative; height: var\(--banner-h, 90px\);[^}]*--floor-h: 10px;/);
   assert.doesNotMatch(css, /\.banner\.mini[^{]*\{[^}]*--banner-h/);
-  assert.match(css, /\.floor \{[^}]*#c9c1b3 0 26px, #b1a896 26px 28px/);
-  assert.match(css, /\.night \.floor \{[^}]*#3e3a33 0 26px, #2f2c27 26px 28px/);
+  assert.match(css, /\.floor \{[^}]*#d4c4df 0 15px, #c6b2d4 15px 30px/);
+  assert.match(css, /\.night \.floor \{[^}]*#3a2b48 0 15px, #30233d 15px 30px/);
 });
 
 test('illustration false keeps a classic header, on both cards, and the editor offers both new options', () => {
