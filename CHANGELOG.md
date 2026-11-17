@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.3.0 - 2026-11-17
+
+### Features
+- The illustrated header takes the look shared by the other cards with a scene: 90 px high on the full and the mini card, the title on a sky, the saint in front of the rose window on the right (same scene and animations), and a 10 px strip of the chapel's lavender paving stones edge to edge at the bottom.
+- Day and night: the sky turns to night when the sun is below the horizon or with a dark theme (even while the sun is up); `illustration_theme: day | night` forces it (both cards, visual editor).
+- The round calendar icon shows the status: accent when today's feast is known, grey when the sensor is unavailable, red when no sensor is found; without a feast the scene rests, greyed and still.
+- `illustration: false` keeps a classic header, without the scene (both cards, visual editor).
+- A status pill right after the title (or the feast on the compact mini card), in the round icon's colour: *Today*, *Unavailable* or *Not found* (beside the title only while the whole title and the pill's whole label fit on that row, measured in the real fonts so in every language; otherwise on its own line under a one-line subtitle, only its dot when even that would not fit above the floor strip and below 200 px), on both cards, with or without the illustration. The mini card's detail button is the small frosted round button in the banner's top right corner.
+
 ## 1.2.0 - 2026-11-17
 
 ### Features
