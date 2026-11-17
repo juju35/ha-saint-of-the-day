@@ -85,7 +85,9 @@ type: custom:saint-of-the-day-card
 | `title` | `Saint of the day` | Card title |
 | `show_title` | `true` | Show the title in the header (the date stays) |
 | `show_wish` | `true` | Show the name day wish under the feast |
-| `show_background` | `true` | Show the chapel wall behind the illustrated header; `false` keeps the scene and its floor on the card's own background |
+| `show_background` | `true` | Show the sky behind the illustrated header; `false` keeps the scene and its paving on the card's own background |
+| `illustration` | `true` | Animated illustrated header; `false` keeps a classic header (round icon and texts) |
+| `illustration_theme` | `auto` | `auto` (night when the sun is below the horizon, else with a dark theme), `day` or `night` |
 | `upcoming_days` | `3` | Next days listed under the feast, from `0` (none) to `7` |
 | `language` | Auto | Force language: `en`, `fr`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings) |
 
@@ -130,7 +132,7 @@ actions:
 |---|---|
 | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/card.png" alt="card" width="400"> | <img src="https://raw.githubusercontent.com/juju35/ha-saint-of-the-day/main/screenshots/card-dark.png" alt="card dark" width="400"> |
 
-Without the header background (`show_background: false`): the scene and its floor on the card, the texts in the theme's colours.
+Without the header background (`show_background: false`): the scene and its paving on the card, the texts in the theme's colours.
 
 | Light | Dark |
 |---|---|

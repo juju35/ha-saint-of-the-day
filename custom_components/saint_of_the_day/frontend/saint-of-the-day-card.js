@@ -1,4 +1,4 @@
-var SAINT_CARD_VERSION = '1.2.0';
+var SAINT_CARD_VERSION = '1.3.0';
 
 // ── Header icon: tinted round icon, the accent of the project on the showcase site (the integration keeps its
 // brand/icon.png). 16 % tint like the generic icons of the other cards.
@@ -24,6 +24,11 @@ var SaintI18n = {
       upcoming_days: 'Jours suivants affichés',
       language: 'Langue',
       lang_auto: 'Automatique',
+      illustration: 'Illustration animée',
+      illustration_theme: 'Thème de l’illustration',
+      theme_auto: 'Automatique (soleil)',
+      theme_day: 'Jour',
+      theme_night: 'Nuit',
     },
   },
   en: {
@@ -44,6 +49,11 @@ var SaintI18n = {
       upcoming_days: 'Next days shown',
       language: 'Language',
       lang_auto: 'Auto',
+      illustration: 'Animated illustration',
+      illustration_theme: 'Illustration theme',
+      theme_auto: 'Automatic (sun)',
+      theme_day: 'Day',
+      theme_night: 'Night',
     },
   },
   de: {
@@ -64,6 +74,11 @@ var SaintI18n = {
       upcoming_days: 'Angezeigte Folgetage',
       language: 'Sprache',
       lang_auto: 'Automatisch',
+      illustration: 'Animierte Illustration',
+      illustration_theme: 'Thema der Illustration',
+      theme_auto: 'Automatisch (Sonne)',
+      theme_day: 'Tag',
+      theme_night: 'Nacht',
     },
   },
   es: {
@@ -84,6 +99,11 @@ var SaintI18n = {
       upcoming_days: 'Días siguientes mostrados',
       language: 'Idioma',
       lang_auto: 'Automático',
+      illustration: 'Ilustración animada',
+      illustration_theme: 'Tema de la ilustración',
+      theme_auto: 'Automático (sol)',
+      theme_day: 'Día',
+      theme_night: 'Noche',
     },
   },
   sr: {
@@ -104,6 +124,11 @@ var SaintI18n = {
       upcoming_days: 'Приказани наредни дани',
       language: 'Језик',
       lang_auto: 'Аутоматски',
+      illustration: 'Анимирана илустрација',
+      illustration_theme: 'Тема илустрације',
+      theme_auto: 'Аутоматски (сунце)',
+      theme_day: 'Дан',
+      theme_night: 'Ноћ',
     },
   },
   'sr-Latn': {
@@ -124,6 +149,11 @@ var SaintI18n = {
       upcoming_days: 'Prikazani naredni dani',
       language: 'Jezik',
       lang_auto: 'Automatski',
+      illustration: 'Animirana ilustracija',
+      illustration_theme: 'Tema ilustracije',
+      theme_auto: 'Automatski (sunce)',
+      theme_day: 'Dan',
+      theme_night: 'Noć',
     },
   },
   it: {
@@ -144,6 +174,11 @@ var SaintI18n = {
       upcoming_days: 'Giorni successivi mostrati',
       language: 'Lingua',
       lang_auto: 'Automatica',
+      illustration: 'Illustrazione animata',
+      illustration_theme: 'Tema dell’illustrazione',
+      theme_auto: 'Automatico (sole)',
+      theme_day: 'Giorno',
+      theme_night: 'Notte',
     },
   },
   nl: {
@@ -164,6 +199,11 @@ var SaintI18n = {
       upcoming_days: 'Getoonde volgende dagen',
       language: 'Taal',
       lang_auto: 'Automatisch',
+      illustration: 'Geanimeerde illustratie',
+      illustration_theme: 'Thema van de illustratie',
+      theme_auto: 'Automatisch (zon)',
+      theme_day: 'Dag',
+      theme_night: 'Nacht',
     },
   },
   pt: {
@@ -184,6 +224,11 @@ var SaintI18n = {
       upcoming_days: 'Dias seguintes apresentados',
       language: 'Idioma',
       lang_auto: 'Automático',
+      illustration: 'Ilustração animada',
+      illustration_theme: 'Tema da ilustração',
+      theme_auto: 'Automático (sol)',
+      theme_day: 'Dia',
+      theme_night: 'Noite',
     },
   },
   pl: {
@@ -204,6 +249,11 @@ var SaintI18n = {
       upcoming_days: 'Wyświetlane kolejne dni',
       language: 'Język',
       lang_auto: 'Automatycznie',
+      illustration: 'Animowana ilustracja',
+      illustration_theme: 'Motyw ilustracji',
+      theme_auto: 'Automatycznie (słońce)',
+      theme_day: 'Dzień',
+      theme_night: 'Noc',
     },
   },
   ro: {
@@ -224,6 +274,11 @@ var SaintI18n = {
       upcoming_days: 'Zile următoare afișate',
       language: 'Limbă',
       lang_auto: 'Automat',
+      illustration: 'Ilustrație animată',
+      illustration_theme: 'Tema ilustrației',
+      theme_auto: 'Automat (soare)',
+      theme_day: 'Zi',
+      theme_night: 'Noapte',
     },
   },
   da: {
@@ -244,6 +299,11 @@ var SaintI18n = {
       upcoming_days: 'Viste kommende dage',
       language: 'Sprog',
       lang_auto: 'Automatisk',
+      illustration: 'Animeret illustration',
+      illustration_theme: 'Illustrationens tema',
+      theme_auto: 'Automatisk (sol)',
+      theme_day: 'Dag',
+      theme_night: 'Nat',
     },
   },
   sv: {
@@ -264,6 +324,11 @@ var SaintI18n = {
       upcoming_days: 'Visade kommande dagar',
       language: 'Språk',
       lang_auto: 'Automatiskt',
+      illustration: 'Animerad illustration',
+      illustration_theme: 'Illustrationens tema',
+      theme_auto: 'Automatiskt (sol)',
+      theme_day: 'Dag',
+      theme_night: 'Natt',
     },
   },
   bg: {
@@ -284,6 +349,11 @@ var SaintI18n = {
       upcoming_days: 'Показани следващи дни',
       language: 'Език',
       lang_auto: 'Автоматично',
+      illustration: 'Анимирана илюстрация',
+      illustration_theme: 'Тема на илюстрацията',
+      theme_auto: 'Автоматично (слънце)',
+      theme_day: 'Ден',
+      theme_night: 'Нощ',
     },
   },
   ru: {
@@ -304,6 +374,11 @@ var SaintI18n = {
       upcoming_days: 'Показываемые следующие дни',
       language: 'Язык',
       lang_auto: 'Автоматически',
+      illustration: 'Анимированная иллюстрация',
+      illustration_theme: 'Тема иллюстрации',
+      theme_auto: 'Автоматически (солнце)',
+      theme_day: 'День',
+      theme_night: 'Ночь',
     },
   },
   uk: {
@@ -324,6 +399,11 @@ var SaintI18n = {
       upcoming_days: 'Показані наступні дні',
       language: 'Мова',
       lang_auto: 'Автоматично',
+      illustration: 'Анімована ілюстрація',
+      illustration_theme: 'Тема ілюстрації',
+      theme_auto: 'Автоматично (сонце)',
+      theme_day: 'День',
+      theme_night: 'Ніч',
     },
   },
   hu: {
@@ -344,6 +424,11 @@ var SaintI18n = {
       upcoming_days: 'Megjelenített következő napok',
       language: 'Nyelv',
       lang_auto: 'Automatikus',
+      illustration: 'Animált illusztráció',
+      illustration_theme: 'Az illusztráció témája',
+      theme_auto: 'Automatikus (nap)',
+      theme_day: 'Nappal',
+      theme_night: 'Éjszaka',
     },
   },
   sk: {
@@ -364,6 +449,11 @@ var SaintI18n = {
       upcoming_days: 'Zobrazené nasledujúce dni',
       language: 'Jazyk',
       lang_auto: 'Automaticky',
+      illustration: 'Animovaná ilustrácia',
+      illustration_theme: 'Téma ilustrácie',
+      theme_auto: 'Automaticky (slnko)',
+      theme_day: 'Deň',
+      theme_night: 'Noc',
     },
   },
   cs: {
@@ -384,6 +474,11 @@ var SaintI18n = {
       upcoming_days: 'Zobrazené následující dny',
       language: 'Jazyk',
       lang_auto: 'Automaticky',
+      illustration: 'Animovaná ilustrace',
+      illustration_theme: 'Motiv ilustrace',
+      theme_auto: 'Automaticky (slunce)',
+      theme_day: 'Den',
+      theme_night: 'Noc',
     },
   },
   sl: {
@@ -404,6 +499,11 @@ var SaintI18n = {
       upcoming_days: 'Prikazani naslednji dnevi',
       language: 'Jezik',
       lang_auto: 'Samodejno',
+      illustration: 'Animirana ilustracija',
+      illustration_theme: 'Tema ilustracije',
+      theme_auto: 'Samodejno (sonce)',
+      theme_day: 'Dan',
+      theme_night: 'Noč',
     },
   },
   lv: {
@@ -424,6 +524,11 @@ var SaintI18n = {
       upcoming_days: 'Rādītās nākamās dienas',
       language: 'Valoda',
       lang_auto: 'Automātiski',
+      illustration: 'Animēta ilustrācija',
+      illustration_theme: 'Ilustrācijas motīvs',
+      theme_auto: 'Automātiski (saule)',
+      theme_day: 'Diena',
+      theme_night: 'Nakts',
     },
   },
   el: {
@@ -444,12 +549,17 @@ var SaintI18n = {
       upcoming_days: 'Εμφανιζόμενες επόμενες ημέρες',
       language: 'Γλώσσα',
       lang_auto: 'Αυτόματα',
+      illustration: 'Κινούμενη εικονογράφηση',
+      illustration_theme: 'Θέμα εικονογράφησης',
+      theme_auto: 'Αυτόματα (ήλιος)',
+      theme_day: 'Ημέρα',
+      theme_night: 'Νύχτα',
     },
   },
 };
 
 // Single source of the config defaults, shared by the card (setConfig) and the editor.
-var SAINT_DEFAULTS = { show_title: true, show_wish: true, show_background: true, upcoming_days: 3 };
+var SAINT_DEFAULTS = { show_title: true, show_wish: true, show_background: true, illustration: true, illustration_theme: 'auto', upcoming_days: 3 };
 var SAINT_MAX_UPCOMING = 7;
 
 function saintEsc(s) {
@@ -505,10 +615,27 @@ function saintWish(t, names, locale) {
   return names.length ? t.wish.replace('{names}', saintJoin(names, locale)) : '';
 }
 
+// Night picture: forced by illustration_theme, else the sun below the horizon, else Home Assistant's dark mode.
+function saintIsNight(hass, config) {
+  var theme = config?.illustration_theme;
+  if (theme === 'night') return true;
+  if (theme === 'day') return false;
+  var sun = hass?.states?.['sun.sun'];
+  if (sun && sun.state !== 'unavailable' && sun.state !== 'unknown') return sun.state === 'below_horizon';
+  return !!hass?.themes?.darkMode;
+}
+
+// The header's status, shown by the colour of the round icon and by the scene: `ok` (today's feast is known),
+// `off` (the sensor is unavailable: grey, the scene rests) or `alert` (no sensor found: red, the scene rests).
+function saintStatus(st) {
+  if (!st) return 'alert';
+  return st.state === 'unavailable' || st.state === 'unknown' ? 'off' : 'ok';
+}
+
 // ── Illustration ──────────────────────────────────────────────────────────────
-// The illustrated header, as on the other cards with a scene (flight and train boards): a chapel in light stone
-// across the card, its paved floor along the bottom, the scene on the right and the project's round icon with the
-// texts on the left. Its palette is its own, the same in light and dark themes. In the scene, a saint stands in front
+// The illustrated header, as on the other cards with a scene (flight and train boards): a sky across the card, a strip
+// of paving stones along the bottom, the scene on the right and the round icon with the texts on the left. The sky
+// follows day and night; the chapel keeps its light stone. In the scene, a saint stands in front
 // of a rose window: the saint sways and blesses under a glowing halo, the window turns slowly (8-fold: one petal step
 // every 6 s), its light breathes, two candles flicker. Every loop is a divisor of 6 s, so a 6 s GIF loops seamlessly.
 var SAINT_GOLD = '#e8a33d';
@@ -625,12 +752,12 @@ class SaintCard extends HTMLElement {
   set hass(hass) {
     var first = !this._hass;
     var lang = this._hass ? saintLang(this._hass, this._config) : null;
-    var dark = !!this._hass?.themes?.darkMode;
+    var night = this._hass ? saintIsNight(this._hass, this._config) : null;
     this._hass = hass;
     var entityId = this._entityId();
     var st = entityId ? hass.states[entityId] : null;
-    // Only redraw when the sensor, the language or the dark mode changed: hass updates several times a second.
-    if (first || st !== this._lastState || lang !== saintLang(hass, this._config) || dark !== !!hass.themes?.darkMode) {
+    // Only redraw when the sensor, the language or day / night changed: hass updates several times a second.
+    if (first || st !== this._lastState || lang !== saintLang(hass, this._config) || night !== saintIsNight(hass, this._config)) {
       this._lastState = st;
       this._render();
     }
@@ -663,9 +790,9 @@ class SaintCard extends HTMLElement {
     return '';
   }
 
-  // The project's round icon (the showcase site's icon and accent), on frosted glass over the illustration.
+  // The round calendar icon, on frosted glass over the illustration; its colour is the header's status.
   _iconHtml() {
-    return '<div class="badge"><ha-icon icon="mdi:calendar-star"></ha-icon></div>';
+    return '<div class="badge"><ha-icon icon="mdi:calendar"></ha-icon></div>';
   }
 
   _ensureShell() {
@@ -713,8 +840,16 @@ class SaintCard extends HTMLElement {
           `<div class="sub">${saintEsc(wish || date)}</div></div>`
         : `<div class="titles"><div class="name">${saintEsc(title)}</div>` + (date ? `<div class="sub">${saintEsc(date)}</div>` : '') + '</div>';
     var detail = this._detailButton(t);
+    // illustration: false keeps a classic header (the round icon and the texts, no scene, no floor).
+    var illustrated = this._config.illustration !== false;
+    var cls =
+      (compact ? ' mini' : '') +
+      (illustrated && saintIsNight(this._hass, this._config) ? ' night' : '') +
+      (illustrated ? (this._config.show_background === false ? ' plain' : '') : ' classic') +
+      (detail ? ' with-detail' : '') +
+      ` st-${saintStatus(st)}`;
     header.innerHTML =
-      `<div class="banner${compact ? ' mini' : ''}${this._hass.themes?.darkMode ? ' dark' : ''}${this._config.show_background === false ? ' plain' : ''}${detail ? ' with-detail' : ''}">${saintScene()}<div class="floor"></div>` +
+      `<div class="banner${cls}">${illustrated ? `${saintScene()}<div class="floor"></div>` : ''}` +
       `<div class="head">${this._iconHtml()}${texts}</div>${detail}</div>`;
     header.querySelector('.detail')?.addEventListener('click', (ev) => this._toggleDetail(ev));
 
@@ -763,47 +898,56 @@ class SaintCard extends HTMLElement {
       // width in auto-sized containers and still shrinks in a `1fr 1fr` grid.
       ':host::before { content: ""; display: grid; grid-template-columns: minmax(0, 320px); height: 0; }',
       'ha-card { overflow: hidden; container-type: inline-size; }',
-      // ── Illustrated header: the chapel wall, its paved floor, the scene on the right, the texts on the left. ──
-      '.banner { position: relative; height: var(--banner-h, 92px); overflow: hidden; --floor-h: 12px; --wall-text: #2d1640; --wall-muted: #5e4a70;' +
-        ' background: linear-gradient(90deg, #faf6fc 0%, #f3eaf8 34%, #e9dbf2 70%, #dfcbec 100%); }',
-      // Night in the chapel when Home Assistant is dark: the wall and the floor darken, the window and the candles glow.
-      '.banner.dark { --wall-text: #ffffff; --wall-muted: rgba(255,255,255,.75);' +
-        ' background: linear-gradient(90deg, #2b1f37 0%, #241a31 34%, #1e152a 70%, #181022 100%); }',
+      // ── Illustrated header (90 px, as on the other cards with a scene): a sky across the card, the saint in front of
+      // the rose window on the right, a 10 px strip of paving stones edge to edge, the round icon and the texts on the left.
+      '.banner { position: relative; height: var(--banner-h, 90px); overflow: hidden; --floor-h: 10px; --wall-text: #0d2a45; --wall-muted: #3b5b78;' +
+        ' --st: #2f80ed; background: linear-gradient(90deg, #f1f8ff 0%, #e2f1fd 34%, #b9def8 70%, #9fd0f3 100%); }',
+      // Night (the sun below the horizon, else a dark theme, or illustration_theme: night): a night sky, the paving
+      // darkens, the texts turn light, the window and the candles glow.
+      '.banner.night { --wall-text: #ffffff; --wall-muted: rgba(255,255,255,.78); --st: #8fbaff;' +
+        ' background: linear-gradient(90deg, #1b2f52 0%, #15284a 36%, #0f1f3d 72%, #0a1830 100%); }',
+      // The round icon's colour is the status: feast known (accent), sensor unavailable (grey), no sensor (red).
+      '.st-off { --st: #8a939c; } .night.st-off { --st: #9aa3ad; }',
+      '.st-alert { --st: #e53935; } .night.st-alert { --st: #ff6b6b; }',
       '.scene .arch { fill: #e6d8ef; } .scene .col { fill: #ddcce9; } .scene .cap { fill: #cdb8dd; } .scene .disc { fill: #fbf7fd; stroke: #b9a4c9; }',
-      '.dark .scene .arch { fill: #34253f; } .dark .scene .col { fill: #2f2139; } .dark .scene .cap { fill: #3d2d4a; } .dark .scene .disc { fill: #fff6e0; stroke: #5b4670; }',
-      '.dark .floor { box-shadow: inset 0 1px 0 #4b3a5c; background: repeating-linear-gradient(90deg, #3a2b48 0 15px, #30233d 15px 30px); }',
-      '.dark .badge { background: rgba(255,255,255,.12); color: #d2a8ea; box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }',
-      '.dark .detail { color: #ffffff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }',
-      '.dark .detail:hover { background: rgba(255,255,255,.22); }',
-      // show_background: false — no wall: the scene and the floor sit on the card, the texts and the round icon take the
-      // theme's colours, as on the cards without an illustration.
-      '.banner.plain { background: none; --wall-text: var(--primary-text-color); --wall-muted: var(--secondary-text-color); }',
-      `.plain .badge { color: ${SAINT_ACCENT}; background: color-mix(in srgb, ${SAINT_ACCENT} 16%, transparent); box-shadow: none; }`,
-      '.plain .detail, .plain .detail:hover { color: var(--secondary-text-color); background: none; -webkit-backdrop-filter: none; backdrop-filter: none;' +
-        ' box-shadow: inset 0 0 0 1px var(--divider-color, rgba(127,127,127,.3)); }',
-      '.plain .detail:hover { color: var(--primary-text-color); background: color-mix(in srgb, var(--secondary-text-color) 12%, transparent); }',
+      '.night .scene .disc { fill: #fff6e0; }',
+      // Without a feast to show, the scene rests: greyed, the animations stopped.
+      '.st-off .scene, .st-alert .scene { filter: grayscale(.85); opacity: .6; }',
+      '.st-off .scene *, .st-alert .scene * { animation: none !important; }',
+      '.floor { position: absolute; left: 0; right: 0; bottom: 0; height: var(--floor-h); box-shadow: inset 0 2px 0 #ddd6ca;' +
+        ' background: repeating-linear-gradient(90deg, #c9c1b3 0 26px, #b1a896 26px 28px); }',
+      '.night .floor { box-shadow: inset 0 2px 0 #4a453d; background: repeating-linear-gradient(90deg, #3e3a33 0 26px, #2f2c27 26px 28px); }',
+      '.night .badge { background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.14); }',
+      '.night .detail { color: #ffffff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }',
+      '.night .detail:hover { background: rgba(255,255,255,.22); }',
+      // show_background: false — no sky: the scene and the paving sit on the card, the texts and the round icon take the
+      // theme's colours, as on the cards without an illustration. illustration: false — the classic header, no scene.
+      '.banner.plain, .banner.classic { background: none; --wall-text: var(--primary-text-color); --wall-muted: var(--secondary-text-color); }',
+      '.plain .badge, .classic .badge { background: color-mix(in srgb, var(--st) 16%, transparent); box-shadow: none; }',
+      '.banner.classic { --banner-h: 64px; --floor-h: 0px; --scene-max: 0px; }',
+      '.plain .detail, .plain .detail:hover, .classic .detail, .classic .detail:hover { color: var(--secondary-text-color); background: none;' +
+        ' -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: inset 0 0 0 1px var(--divider-color, rgba(127,127,127,.3)); }',
+      '.plain .detail:hover, .classic .detail:hover { color: var(--primary-text-color); background: color-mix(in srgb, var(--secondary-text-color) 12%, transparent); }',
       '.banner .scene { position: absolute; right: 0; bottom: var(--floor-h); height: calc(100% - var(--floor-h));' +
-        ' width: min(calc((var(--banner-h, 92px) - var(--floor-h)) * 2.5), var(--scene-max, 50%)); }',
-      '.floor { position: absolute; left: 0; right: 0; bottom: 0; height: var(--floor-h); box-shadow: inset 0 1px 0 #b19dc2;' +
-        ' background: repeating-linear-gradient(90deg, #d4c4df 0 15px, #c6b2d4 15px 30px); }',
+        ' width: min(calc((var(--banner-h, 90px) - var(--floor-h)) * 2.5), var(--scene-max, 62%)); }',
       '.head { position: absolute; z-index: 1; left: 0; top: 0; bottom: var(--floor-h); box-sizing: border-box;' +
-        ' right: min(calc((var(--banner-h, 92px) - var(--floor-h)) * 2.5), var(--scene-max, 50%));' +
+        ' right: min(calc((var(--banner-h, 90px) - var(--floor-h)) * 2.5), var(--scene-max, 62%));' +
         ' display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; min-width: 0; color: var(--wall-text); }',
-      `.badge { width: 40px; height: 40px; flex: none; border-radius: 50%; display: grid; place-items: center; color: ${SAINT_ACCENT};` +
-        ` background: rgba(255,255,255,.62); box-shadow: inset 0 0 0 1px color-mix(in srgb, ${SAINT_ACCENT} 18%, transparent); }`,
+      '.badge { width: 40px; height: 40px; flex: none; border-radius: 50%; display: grid; place-items: center; color: var(--st);' +
+        ' background: rgba(255,255,255,.62); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--st) 18%, transparent); }',
       '.badge ha-icon { --mdc-icon-size: 24px; }',
       '.titles { flex: 1 1 0; min-width: 0; overflow: hidden; }',
       ':host([hide-title]) .banner:not(.mini) .name { display: none; }',
       // The title (or the mini card's feast) may take two lines, the line under it one.
       '.name { font-size: 16px; font-weight: 500; line-height: 20px; overflow: hidden; overflow-wrap: anywhere;' +
         ' display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }',
-      '.sub { font-size: 12px; line-height: 16px; color: var(--wall-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
+      '.sub { font-size: 13px; line-height: 16px; color: var(--wall-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
       ':host([hide-title]) .banner:not(.mini) .sub { font-size: 14px; color: var(--wall-text); }',
       '.banner .feast { cursor: pointer; border-radius: 6px; }',
       // ── The scene's animations ──
       '.scene .rose { transform-box: fill-box; transform-origin: center; animation: saint-turn 48s linear infinite; }',
       '.scene .ray { opacity: .2; animation: saint-ray 3s ease-in-out infinite; }',
-      '.dark .scene .r2 { fill: #ffd98a; }',
+      '.night .scene .r2 { fill: #ffd98a; }',
       '.scene .r2 { opacity: .35; animation-delay: -1.5s; }',
       '.scene .saint { transform-box: fill-box; transform-origin: 50% 100%; animation: saint-sway 6s ease-in-out infinite; }',
       '.scene .arm { transform-box: fill-box; transform-origin: 13% 13%; animation: saint-bless 6s ease-in-out infinite; }',
@@ -842,13 +986,14 @@ class SaintCard extends HTMLElement {
       ...[1, 2, 3, 4, 5, 6, 7].map((n) => `.enter li:nth-child(${n}) { animation-delay: ${(0.2 + n * 0.07).toFixed(2)}s; }`),
       '@keyframes saint-in { from { opacity: 0; transform: translateY(6px); } }',
       '@media (prefers-reduced-motion: reduce) { .scene *, .enter * { animation: none !important; } }',
-      '@container (max-width: 380px) { .banner:not(.mini) { --scene-max: 42%; } }',
+      '@container (max-width: 380px) { .banner:not(.mini):not(.classic) { --scene-max: 50%; } }',
       // A narrow card keeps the wall and the floor for its texts: no scenery.
       '@container (max-width: 300px) { .banner:not(.mini) .scene { display: none; } .banner:not(.mini) .head { right: 0; } .when { min-width: 0; } .upcoming li { flex-direction: column; gap: 0; } }',
-      // ── Mini card: a lower banner, today's feast laid on the wall, the detail button on frosted glass. ──
+      // ── Mini card: the same 90 px banner, today's feast laid on the sky, the detail button on frosted glass. ──
       ':host([mini])::before { grid-template-columns: minmax(0, 300px); }',
-      '.banner.mini { --banner-h: 80px; --floor-h: 10px; --scene-max: 36%; }',
-      '.banner.mini .head { padding-right: 6px; }',
+      '.banner.mini:not(.classic) { --scene-max: 44%; }',
+      // The feast's texts may run over the scene's light rays (its left part), never over the saint and the window.
+      '.banner.mini:not(.classic) .head { padding-right: 6px; right: calc(min(200px, var(--scene-max)) * .6); }',
       '.banner.mini .name { font-size: 16px; line-height: 20px; }',
       '@container (max-width: 280px) { .banner.mini .scene { display: none; } .banner.mini .head { right: 0; padding-right: 40px; } }',
       // The mini card's detail button gets its own strip of wall on the right, 8 px from the edges: the scene moves
@@ -969,7 +1114,12 @@ function saintEditorSchema(t) {
         { name: 'show_title', selector: { boolean: {} } },
         { name: 'show_wish', selector: { boolean: {} } },
         { name: 'show_background', selector: { boolean: {} } },
+        { name: 'illustration', selector: { boolean: {} } },
       ],
+    },
+    {
+      name: 'illustration_theme',
+      selector: { select: { mode: 'dropdown', options: ['auto', 'day', 'night'].map((v) => ({ value: v, label: t[`theme_${v}`] })) } },
     },
     { name: 'upcoming_days', selector: { number: { min: 0, max: SAINT_MAX_UPCOMING, mode: 'box' } } },
     {
