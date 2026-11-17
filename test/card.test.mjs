@@ -287,7 +287,7 @@ test('the animations stop for reduced motion, and every loop divides the 6 s of 
   }
 });
 
-test('night with the sun below the horizon or the dark mode, unless illustration_theme forces it, and redraws when it changes', () => {
+test('night with the dark mode alone, unless illustration_theme forces it, and redraws when it changes', () => {
   const states = { [TODAY.entity_id]: TODAY };
   const card = render(SaintCard, {}, hassWith(states));
   const header = card.shadowRoot.children['.header'];
@@ -299,8 +299,9 @@ test('night with the sun below the horizon or the dark mode, unless illustration
   assert.match(header.innerHTML, /<div class="banner night st-ok">/);
   card.hass = hassWith({ ...states, 'sun.sun': { state: 'above_horizon' } }, 'en', { themes: { darkMode: false } });
   assert.match(header.innerHTML, /<div class="banner st-ok">/);
+  // The theme alone decides: a light theme keeps the day picture after sunset.
   card.hass = hassWith({ ...states, 'sun.sun': { state: 'below_horizon' } });
-  assert.match(header.innerHTML, /<div class="banner night st-ok">/);
+  assert.match(header.innerHTML, /<div class="banner st-ok">/);
   const day = render(SaintCard, { illustration_theme: 'day' }, hassWith({ ...states, 'sun.sun': { state: 'below_horizon' } }, 'en', { themes: { darkMode: true } }));
   assert.match(day.shadowRoot.children['.header'].innerHTML, /<div class="banner st-ok">/);
   const night = render(SaintCard, { illustration_theme: 'night' }, hassWith(states));

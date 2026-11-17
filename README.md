@@ -87,7 +87,7 @@ type: custom:saint-of-the-day-card
 | `show_wish` | `true` | Show the name day wish under the feast |
 | `show_background` | `true` | Show the sky behind the illustrated header; `false` keeps the scene and its paving on the card's own background |
 | `illustration` | `true` | Animated illustrated header; `false` keeps a classic header (round icon and texts) |
-| `illustration_theme` | `auto` | `auto` (night when the sun is below the horizon or with a dark theme, even while the sun is up), `day` or `night` |
+| `illustration_theme` | `auto` | `auto` (follows the Home Assistant theme: night with a dark theme, day with a light theme), `day` or `night` |
 | `upcoming_days` | `3` | Next days listed under the feast, from `0` (none) to `7` |
 | `language` | Auto | Force language: `en`, `fr`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings) |
 
