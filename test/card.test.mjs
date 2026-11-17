@@ -250,12 +250,13 @@ test('both cards have the illustrated banner with the project icon; the compact 
   assert.match(header, /<div class="floor"><\/div>/);
   assert.match(header, /class="arm"/);
   assert.match(header, /<div class="badge"><ha-icon icon="mdi:calendar">/);
-  assert.match(header, /<div class="name">Saint of the day<\/div><div class="sub">Sunday, July 26/);
+  // The status pill right after the title, the date under them.
+  assert.match(header, /<div class="trow"><div class="name">Saint of the day<\/div><span class="pill" title="Today" aria-label="Today"><span class="dot"><\/span><span class="pt">Today<\/span><\/span><\/div><div class="sub">Sunday, July 26/);
   const mini = render(SaintMiniCard, {}, hassWith({ [TODAY.entity_id]: TODAY }));
   const miniHeader = mini.shadowRoot.children['.header'];
   assert.match(miniHeader.innerHTML, /<div class="banner mini with-detail st-ok">/);
   assert.match(miniHeader.innerHTML, /<div class="badge"><ha-icon icon="mdi:calendar">/);
-  assert.match(miniHeader.innerHTML, /class="titles feast" role="button" tabindex="0"><div class="name">Sts Anne et Joachim<\/div><div class="sub">Happy name day/);
+  assert.match(miniHeader.innerHTML, /class="titles feast" role="button" tabindex="0"><div class="trow"><div class="name">Sts Anne et Joachim<\/div><span class="pill" title="Today" aria-label="Today"><span class="dot"><\/span><span class="pt">Today<\/span><\/span><\/div><div class="sub">Happy name day/);
   assert.equal(mini.shadowRoot.children['.body'].innerHTML, '');
   // Without the wish, the date.
   const noWish = render(SaintMiniCard, { show_wish: false }, hassWith({ [TODAY.entity_id]: TODAY }));
@@ -311,7 +312,11 @@ test('the round icon and the scene show the status: feast known, sensor unavaila
   assert.match(off.shadowRoot.children['.header'].innerHTML, /<div class="banner st-off">/);
   const alert = render(SaintCard, { entity: 'sensor.missing' }, hassWith({}));
   assert.match(alert.shadowRoot.children['.header'].innerHTML, /<div class="banner st-alert">/);
+  // The status pill says it too, in the round icon's colour.
+  assert.match(off.shadowRoot.children['.header'].innerHTML, /<span class="pt">Unavailable<\/span>/);
+  assert.match(alert.shadowRoot.children['.header'].innerHTML, /<span class="pt">Not found<\/span>/);
   const css = SaintCard._styles();
+  assert.match(css, /\.pill \{[^}]*background: color-mix\(in srgb, var\(--st\) 18%, rgba\(255,255,255,\.78\)\)/);
   assert.match(css, /\.badge \{[^}]*color: var\(--st\)/);
   assert.match(css, /\.st-off \{ --st: /);
   assert.match(css, /\.st-alert \{ --st: /);

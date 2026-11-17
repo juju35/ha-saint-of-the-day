@@ -15,6 +15,9 @@ var SaintI18n = {
     unavailable: 'Le saint du jour est indisponible pour le moment.',
     show_full: 'Afficher la carte complète',
     show_compact: 'Revenir à la vue compacte',
+    status_today: 'Aujourd\'hui',
+    status_unavailable: 'Indisponible',
+    status_not_found: 'Introuvable',
     editor: {
       entity: 'Capteur Saint du jour',
       title: 'Titre',
@@ -40,6 +43,9 @@ var SaintI18n = {
     unavailable: 'The saint of the day is unavailable for now.',
     show_full: 'Show the full card',
     show_compact: 'Back to the compact view',
+    status_today: 'Today',
+    status_unavailable: 'Unavailable',
+    status_not_found: 'Not found',
     editor: {
       entity: 'Saint of the day sensor',
       title: 'Title',
@@ -65,6 +71,9 @@ var SaintI18n = {
     unavailable: 'Der Heilige des Tages ist derzeit nicht verfügbar.',
     show_full: 'Vollständige Karte anzeigen',
     show_compact: 'Zurück zur kompakten Ansicht',
+    status_today: 'Heute',
+    status_unavailable: 'Nicht verfügbar',
+    status_not_found: 'Nicht gefunden',
     editor: {
       entity: 'Sensor „Heiliger des Tages“',
       title: 'Titel',
@@ -90,6 +99,9 @@ var SaintI18n = {
     unavailable: 'El santo del día no está disponible por ahora.',
     show_full: 'Mostrar la tarjeta completa',
     show_compact: 'Volver a la vista compacta',
+    status_today: 'Hoy',
+    status_unavailable: 'No disponible',
+    status_not_found: 'No encontrado',
     editor: {
       entity: 'Sensor de Santo del día',
       title: 'Título',
@@ -115,6 +127,9 @@ var SaintI18n = {
     unavailable: 'Светац дана тренутно није доступан.',
     show_full: 'Прикажи целу картицу',
     show_compact: 'Назад на сажети приказ',
+    status_today: 'Данас',
+    status_unavailable: 'Недоступно',
+    status_not_found: 'Није пронађен',
     editor: {
       entity: 'Сензор „Светац дана“',
       title: 'Наслов',
@@ -140,6 +155,9 @@ var SaintI18n = {
     unavailable: 'Svetac dana trenutno nije dostupan.',
     show_full: 'Prikaži celu karticu',
     show_compact: 'Nazad na sažeti prikaz',
+    status_today: 'Danas',
+    status_unavailable: 'Nedostupno',
+    status_not_found: 'Nije pronađen',
     editor: {
       entity: 'Senzor „Svetac dana“',
       title: 'Naslov',
@@ -165,6 +183,9 @@ var SaintI18n = {
     unavailable: 'Il santo del giorno non è disponibile per ora.',
     show_full: 'Mostra la scheda completa',
     show_compact: 'Torna alla vista compatta',
+    status_today: 'Oggi',
+    status_unavailable: 'Non disponibile',
+    status_not_found: 'Non trovato',
     editor: {
       entity: 'Sensore Santo del giorno',
       title: 'Titolo',
@@ -190,6 +211,9 @@ var SaintI18n = {
     unavailable: 'De heilige van de dag is momenteel niet beschikbaar.',
     show_full: 'Volledige kaart tonen',
     show_compact: 'Terug naar de compacte weergave',
+    status_today: 'Vandaag',
+    status_unavailable: 'Niet beschikbaar',
+    status_not_found: 'Niet gevonden',
     editor: {
       entity: 'Sensor Heilige van de dag',
       title: 'Titel',
@@ -215,6 +239,9 @@ var SaintI18n = {
     unavailable: 'O santo do dia não está disponível de momento.',
     show_full: 'Mostrar o cartão completo',
     show_compact: 'Voltar à vista compacta',
+    status_today: 'Hoje',
+    status_unavailable: 'Indisponível',
+    status_not_found: 'Não encontrado',
     editor: {
       entity: 'Sensor Santo do dia',
       title: 'Título',
@@ -240,6 +267,9 @@ var SaintI18n = {
     unavailable: 'Święty dnia jest obecnie niedostępny.',
     show_full: 'Pokaż pełną kartę',
     show_compact: 'Wróć do widoku kompaktowego',
+    status_today: 'Dziś',
+    status_unavailable: 'Niedostępny',
+    status_not_found: 'Nie znaleziono',
     editor: {
       entity: 'Czujnik Święty dnia',
       title: 'Tytuł',
@@ -265,6 +295,9 @@ var SaintI18n = {
     unavailable: 'Sfântul zilei nu este disponibil momentan.',
     show_full: 'Afișează cardul complet',
     show_compact: 'Înapoi la vizualizarea compactă',
+    status_today: 'Astăzi',
+    status_unavailable: 'Indisponibil',
+    status_not_found: 'Negăsit',
     editor: {
       entity: 'Senzor Sfântul zilei',
       title: 'Titlu',
@@ -290,6 +323,9 @@ var SaintI18n = {
     unavailable: 'Dagens helgen er ikke tilgængelig lige nu.',
     show_full: 'Vis hele kortet',
     show_compact: 'Tilbage til kompakt visning',
+    status_today: 'I dag',
+    status_unavailable: 'Utilgængelig',
+    status_not_found: 'Ikke fundet',
     editor: {
       entity: 'Sensoren Dagens helgen',
       title: 'Titel',
@@ -315,6 +351,9 @@ var SaintI18n = {
     unavailable: 'Dagens helgon är inte tillgängligt just nu.',
     show_full: 'Visa hela kortet',
     show_compact: 'Tillbaka till kompakt vy',
+    status_today: 'I dag',
+    status_unavailable: 'Ej tillgänglig',
+    status_not_found: 'Hittades inte',
     editor: {
       entity: 'Sensorn Dagens helgon',
       title: 'Titel',
@@ -340,6 +379,9 @@ var SaintI18n = {
     unavailable: 'Светията на деня в момента не е наличен.',
     show_full: 'Покажи цялата карта',
     show_compact: 'Обратно към компактния изглед',
+    status_today: 'Днес',
+    status_unavailable: 'Недостъпно',
+    status_not_found: 'Не е намерен',
     editor: {
       entity: 'Сензор „Светия на деня“',
       title: 'Заглавие',
@@ -365,6 +407,9 @@ var SaintI18n = {
     unavailable: 'Святой дня сейчас недоступен.',
     show_full: 'Показать полную карточку',
     show_compact: 'Вернуться к компактному виду',
+    status_today: 'Сегодня',
+    status_unavailable: 'Недоступно',
+    status_not_found: 'Не найден',
     editor: {
       entity: 'Датчик «Святой дня»',
       title: 'Заголовок',
@@ -390,6 +435,9 @@ var SaintI18n = {
     unavailable: 'Святий дня зараз недоступний.',
     show_full: 'Показати повну картку',
     show_compact: 'Повернутися до компактного вигляду',
+    status_today: 'Сьогодні',
+    status_unavailable: 'Недоступно',
+    status_not_found: 'Не знайдено',
     editor: {
       entity: 'Датчик «Святий дня»',
       title: 'Заголовок',
@@ -415,6 +463,9 @@ var SaintI18n = {
     unavailable: 'A nap szentje jelenleg nem érhető el.',
     show_full: 'Teljes kártya megjelenítése',
     show_compact: 'Vissza a kompakt nézethez',
+    status_today: 'Ma',
+    status_unavailable: 'Nem elérhető',
+    status_not_found: 'Nem található',
     editor: {
       entity: 'A nap szentje érzékelő',
       title: 'Cím',
@@ -440,6 +491,9 @@ var SaintI18n = {
     unavailable: 'Svätý dňa momentálne nie je dostupný.',
     show_full: 'Zobraziť celú kartu',
     show_compact: 'Späť na kompaktné zobrazenie',
+    status_today: 'Dnes',
+    status_unavailable: 'Nedostupné',
+    status_not_found: 'Nenájdené',
     editor: {
       entity: 'Senzor Svätý dňa',
       title: 'Názov',
@@ -465,6 +519,9 @@ var SaintI18n = {
     unavailable: 'Svatý dne momentálně není dostupný.',
     show_full: 'Zobrazit celou kartu',
     show_compact: 'Zpět na kompaktní zobrazení',
+    status_today: 'Dnes',
+    status_unavailable: 'Nedostupné',
+    status_not_found: 'Nenalezeno',
     editor: {
       entity: 'Senzor Svatý dne',
       title: 'Název',
@@ -490,6 +547,9 @@ var SaintI18n = {
     unavailable: 'Svetnik dneva trenutno ni na voljo.',
     show_full: 'Pokaži celotno kartico',
     show_compact: 'Nazaj na strnjen pogled',
+    status_today: 'Danes',
+    status_unavailable: 'Ni na voljo',
+    status_not_found: 'Ni najden',
     editor: {
       entity: 'Senzor Svetnik dneva',
       title: 'Naslov',
@@ -515,6 +575,9 @@ var SaintI18n = {
     unavailable: 'Dienas svētais pašlaik nav pieejams.',
     show_full: 'Rādīt pilno karti',
     show_compact: 'Atpakaļ uz kompakto skatu',
+    status_today: 'Šodien',
+    status_unavailable: 'Nav pieejams',
+    status_not_found: 'Nav atrasts',
     editor: {
       entity: 'Sensors “Dienas svētais”',
       title: 'Virsraksts',
@@ -540,6 +603,9 @@ var SaintI18n = {
     unavailable: 'Ο άγιος της ημέρας δεν είναι διαθέσιμος προς το παρόν.',
     show_full: 'Εμφάνιση πλήρους κάρτας',
     show_compact: 'Επιστροφή στη συμπαγή προβολή',
+    status_today: 'Σήμερα',
+    status_unavailable: 'Μη διαθέσιμο',
+    status_not_found: 'Δεν βρέθηκε',
     editor: {
       entity: 'Αισθητήρας «Άγιος της ημέρας»',
       title: 'Τίτλος',
@@ -834,11 +900,20 @@ class SaintCard extends HTMLElement {
     var wish = unavailable || !this._config.show_wish ? '' : saintWish(t, names, locale);
     // The illustrated banner. Full card: the title and the date. Compact mini card: the banner is the whole card,
     // today's feast laid on it with the wish (else the date).
+    // The status pill right after the title (or the feast): today's feast, sensor unavailable or not found, in the
+    // colour of the round icon.
+    var status = saintStatus(st);
+    var pillText = status === 'ok' ? t.status_today : status === 'off' ? t.status_unavailable : t.status_not_found;
+    var pill =
+      `<span class="pill" title="${saintEsc(pillText)}" aria-label="${saintEsc(pillText)}">` +
+      `<span class="dot"></span><span class="pt">${saintEsc(pillText)}</span></span>`;
     var texts =
       compact && !unavailable
-        ? `<div class="titles feast" role="button" tabindex="0"><div class="name">${saintEsc(st.state)}</div>` +
+        ? `<div class="titles feast" role="button" tabindex="0"><div class="trow"><div class="name">${saintEsc(st.state)}</div>${pill}</div>` +
           `<div class="sub">${saintEsc(wish || date)}</div></div>`
-        : `<div class="titles"><div class="name">${saintEsc(title)}</div>` + (date ? `<div class="sub">${saintEsc(date)}</div>` : '') + '</div>';
+        : `<div class="titles"><div class="trow"><div class="name">${saintEsc(title)}</div>${pill}</div>` +
+          (date ? `<div class="sub">${saintEsc(date)}</div>` : '') +
+          '</div>';
     var detail = this._detailButton(t);
     // illustration: false keeps a classic header (the round icon and the texts, no scene, no floor).
     var illustrated = this._config.illustration !== false;
@@ -847,7 +922,7 @@ class SaintCard extends HTMLElement {
       (illustrated && saintIsNight(this._hass, this._config) ? ' night' : '') +
       (illustrated ? (this._config.show_background === false ? ' plain' : '') : ' classic') +
       (detail ? ' with-detail' : '') +
-      ` st-${saintStatus(st)}`;
+      ` st-${status}`;
     header.innerHTML =
       `<div class="banner${cls}">${illustrated ? `${saintScene()}<div class="floor"></div>` : ''}` +
       `<div class="head">${this._iconHtml()}${texts}</div>${detail}</div>`;
@@ -897,7 +972,7 @@ class SaintCard extends HTMLElement {
       // A 0 px high line gives the host a preferred width without a minimum, as in the other cards: the card keeps a
       // width in auto-sized containers and still shrinks in a `1fr 1fr` grid.
       ':host::before { content: ""; display: grid; grid-template-columns: minmax(0, 320px); height: 0; }',
-      'ha-card { overflow: hidden; container-type: inline-size; }',
+      'ha-card { overflow: hidden; container: saint / inline-size; }',
       // ── Illustrated header (90 px, as on the other cards with a scene): a sky across the card, the saint in front of
       // the rose window on the right, a 10 px strip of paving stones edge to edge, the round icon and the texts on the left.
       '.banner { position: relative; height: var(--banner-h, 90px); overflow: hidden; --floor-h: 10px; --wall-text: #0d2a45; --wall-muted: #3b5b78;' +
@@ -934,10 +1009,33 @@ class SaintCard extends HTMLElement {
       '.head { position: absolute; z-index: 1; left: 0; top: 0; bottom: var(--floor-h); box-sizing: border-box;' +
         ' right: min(calc((var(--banner-h, 90px) - var(--floor-h)) * 2.5), var(--scene-max, 62%));' +
         ' display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; min-width: 0; color: var(--wall-text); }',
+      // The full card's texts may run over the scene's light rays too (its left third), never over the saint.
+      '@container (min-width: 301px) { .banner:not(.mini):not(.classic) .head { right: calc(min(calc((var(--banner-h, 90px) - var(--floor-h)) * 2.5), var(--scene-max, 62%)) * .66); } }',
       '.badge { width: 40px; height: 40px; flex: none; border-radius: 50%; display: grid; place-items: center; color: var(--st);' +
         ' background: rgba(255,255,255,.62); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--st) 18%, transparent); }',
       '.badge ha-icon { --mdc-icon-size: 24px; }',
-      '.titles { flex: 1 1 0; min-width: 0; overflow: hidden; }',
+      '.titles { flex: 1 1 0; min-width: 0; overflow: hidden; display: flex; flex-wrap: wrap; align-items: center; column-gap: 8px;' +
+        ' container: saint-titles / inline-size; }',
+      '.titles > * { flex: 1 0 100%; min-width: 0; }',
+      // The title (or the mini card's feast), then its status pill 8 px after it, centred on it: the title ellipsises
+      // first (down to about 4 characters, 48 px), the pill keeps its whole label.
+      '.trow { display: flex; align-items: center; gap: 8px; min-width: 0; }',
+      '.trow .name { flex: 0 1 auto; min-width: 48px; display: block; white-space: nowrap; text-overflow: ellipsis; }',
+      '.pill { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 4px; max-width: 100%; min-width: 0; box-sizing: border-box; padding: 1px 8px;' +
+        ' border-radius: 12px; font-size: 11px; font-weight: 500; line-height: 16px; white-space: nowrap; overflow: hidden;' +
+        ' background: color-mix(in srgb, var(--st) 18%, rgba(255,255,255,.78)); color: color-mix(in srgb, var(--st) 45%, #0d2a45); }',
+      '.night .pill { background: color-mix(in srgb, var(--st) 30%, rgba(8,18,38,.55)); color: color-mix(in srgb, var(--st) 35%, #ffffff); }',
+      '.plain .pill, .classic .pill { background: color-mix(in srgb, var(--st) 15%, transparent);' +
+        ' color: color-mix(in srgb, var(--st) 50%, var(--primary-text-color)); }',
+      '.pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--st); flex: none; }',
+      '.pill .pt { min-width: 0; overflow: hidden; text-overflow: ellipsis; }',
+      // Not enough room beside the title (a narrow card, or the feast laid on the compact mini card): the title takes its
+      // whole line, the pill goes under the subtitle.
+      '@container saint-titles (max-width: 160px) { .trow { display: contents; } .trow .name { flex: 1 0 100%; }' +
+        ' .titles > .sub { order: 1; } .titles .pill { order: 2; margin-top: 2px; } }',
+      // Under 200 px only the pill's dot shows, back on the title line (its text stays its tooltip and accessible name).
+      '@container saint (max-width: 200px) { .trow { display: flex; } .trow .name { flex: 0 1 auto; } .titles .pill { order: 0; margin: 0; padding: 5px; }' +
+        ' .pill .pt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } }',
       ':host([hide-title]) .banner:not(.mini) .name { display: none; }',
       // The title (or the mini card's feast) may take two lines, the line under it one.
       '.name { font-size: 16px; font-weight: 500; line-height: 20px; overflow: hidden; overflow-wrap: anywhere;' +
@@ -996,13 +1094,13 @@ class SaintCard extends HTMLElement {
       // The feast's texts may run over the scene's light rays (its left part), never over the saint and the window.
       '.banner.mini:not(.classic) .head { padding-right: 6px; right: calc(min(200px, var(--scene-max)) * .6); }',
       '.banner.mini .name { font-size: 16px; line-height: 20px; }',
-      '@container (max-width: 280px) { .banner.mini .scene { display: none; } .banner.mini .head { right: 0; padding-right: 40px; } }',
-      // The mini card's detail button gets its own strip of wall on the right, 8 px from the edges: the scene moves
+      '@container (max-width: 280px) { .banner.mini .scene { display: none; } .banner.mini:not(.classic) .head { right: 0; } .banner.mini .head { padding-right: 40px; } .banner.mini.with-detail .head { padding-right: 6px; } }',
+      // The mini card's detail button gets its own strip of wall on the right, 5 px from the edges: the scene moves
       // aside so that the button never covers it.
       '.with-detail .scene { right: 36px; }',
       '.with-detail .head { margin-right: 36px; }',
-      '.detail { all: unset; position: absolute; z-index: 2; top: 8px; right: 6px; cursor: pointer; width: 24px; height: 24px; border-radius: 50%;' +
-        ' display: grid; place-items: center; color: #4a3560; background: rgba(255,255,255,.55); box-shadow: inset 0 0 0 1px rgba(255,255,255,.7);' +
+      '.detail { all: unset; position: absolute; z-index: 2; top: 5px; right: 5px; cursor: pointer; width: 24px; height: 24px; border-radius: 50%;' +
+        ' display: grid; place-items: center; color: #33506b; background: rgba(255,255,255,.55); box-shadow: inset 0 0 0 1px rgba(255,255,255,.7);' +
         ' -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); --mdc-icon-size: 16px; }',
       '.detail:hover { background: rgba(255,255,255,.75); }',
       '.detail:focus-visible { outline: 2px solid var(--primary-color); outline-offset: 1px; }',

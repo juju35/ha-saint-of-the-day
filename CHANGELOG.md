@@ -7,6 +7,7 @@
 - Day and night: the sky turns to night when the sun is below the horizon (else with a dark theme); `illustration_theme: day | night` forces it (both cards, visual editor).
 - The round calendar icon shows the status: accent when today's feast is known, grey when the sensor is unavailable, red when no sensor is found; without a feast the scene rests, greyed and still.
 - `illustration: false` keeps a classic header, without the scene (both cards, visual editor).
+- A status pill right after the title (or the feast on the compact mini card), in the round icon's colour: *Today*, *Unavailable* or *Not found* (under the subtitle when the line is too short, only its dot below 200 px), on both cards, with or without the illustration. The mini card's detail button is the small frosted round button in the banner's top right corner.
 
 ## 1.2.0 - 2026-11-17
 
