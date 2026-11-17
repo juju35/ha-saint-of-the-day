@@ -77,3 +77,50 @@ def test_the_card_width_in_intrinsic_and_shared_containers():
                 failures.append((ctx, "in a div" if wrap else "direct", width, out))
         browser.close()
     assert not failures, failures
+
+
+# The status pill (rendered in Chromium): en, fr, de, hu, el and ru from 190 to 500 px, the card's own title and a
+# long one, the full card and the mini card compact and expanded. The pill sits right after the title only beside a
+# whole title, its label is whole or it shows its dot alone (always its dot alone at 200 px or less), and nothing of
+# the title block leaves the banner or reaches its floor strip.
+AUDIT = (Path(__file__).resolve().parent / "pill_audit.js").read_text()
+
+PILL = """async ({audit, width}) => {
+  const pillAudit = new Function(`${audit}; return pillAudit;`)();
+  await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  const el = document.querySelector('#root').firstElementChild;
+  return pillAudit(el.shadowRoot, width, '.banner .trow > .pill', '.name', '.floor');
+}"""
+
+
+def test_the_status_pill_beside_a_whole_title_or_under_the_subtitle():
+    """The pill used to sit beside a title cut down to four letters, or under it below a fixed width: it is now placed
+    by measure, so a long title or a long translated label never ends in an ellipsis next to it."""
+    spec = importlib.util.spec_from_file_location("saint_screenshots", SCRIPT)
+    script = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(script)
+    sync_api = pytest.importorskip("playwright.sync_api")
+    failures = []
+    with sync_api.sync_playwright() as p:
+        try:
+            browser = p.chromium.launch()
+        except Exception as err:  # noqa: BLE001 - no browser installed here
+            pytest.skip(f"no Chromium: {err}")
+        context = browser.new_context()
+        for element, zoom in (
+            ("saint-of-the-day-card", False),
+            ("saint-of-the-day-mini-card", False),
+            ("saint-of-the-day-mini-card", True),
+        ):
+            for lang in ("en", "fr", "de", "hu", "el", "ru"):
+                for width in (190, 245, 300, 400, 460, 500):
+                    for title in (None, "Saint of the day in our family calendar"):
+                        shot = {"file": "x", "theme": "light", "lang": lang, "element": element, "width": width}
+                        shot |= {"zoom": zoom, "config": {"title": title} if title else {}}
+                        page = script.mount(context, shot)
+                        what = f"{element}{' zoomed' if zoom else ''} {lang} {width}px {title or ''}"
+                        issues = page.evaluate(PILL, {"audit": AUDIT, "width": width})
+                        failures.extend(f"{what}: {issue}" for issue in issues)
+                        page.close()
+        browser.close()
+    assert not failures, failures

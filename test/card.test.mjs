@@ -251,16 +251,16 @@ test('both cards have the illustrated banner with the project icon; the compact 
   assert.match(header, /class="arm"/);
   assert.match(header, /<div class="badge"><ha-icon icon="mdi:calendar">/);
   // The status pill right after the title, the date under them.
-  assert.match(header, /<div class="trow"><div class="name">Saint of the day<\/div><span class="pill" title="Today" aria-label="Today"><span class="dot"><\/span><span class="pt">Today<\/span><\/span><\/div><div class="sub">Sunday, July 26/);
+  assert.match(header, /<div class="trow"><div class="name">Saint of the day<\/div><span class="pill" title="Today" aria-label="Today"><span class="dot"><\/span><span class="pt">Today<\/span><\/span><\/div><div class="sub"[^>]*>Sunday, July 26/);
   const mini = render(SaintMiniCard, {}, hassWith({ [TODAY.entity_id]: TODAY }));
   const miniHeader = mini.shadowRoot.children['.header'];
   assert.match(miniHeader.innerHTML, /<div class="banner mini with-detail st-ok">/);
   assert.match(miniHeader.innerHTML, /<div class="badge"><ha-icon icon="mdi:calendar">/);
-  assert.match(miniHeader.innerHTML, /class="titles feast" role="button" tabindex="0"><div class="trow"><div class="name">Sts Anne et Joachim<\/div><span class="pill" title="Today" aria-label="Today"><span class="dot"><\/span><span class="pt">Today<\/span><\/span><\/div><div class="sub">Happy name day/);
+  assert.match(miniHeader.innerHTML, /class="titles feast" role="button" tabindex="0"><div class="trow"><div class="name">Sts Anne et Joachim<\/div><span class="pill" title="Today" aria-label="Today"><span class="dot"><\/span><span class="pt">Today<\/span><\/span><\/div><div class="sub"[^>]*>Happy name day/);
   assert.equal(mini.shadowRoot.children['.body'].innerHTML, '');
   // Without the wish, the date.
   const noWish = render(SaintMiniCard, { show_wish: false }, hassWith({ [TODAY.entity_id]: TODAY }));
-  assert.match(noWish.shadowRoot.children['.header'].innerHTML, /<div class="sub">Sunday, July 26/);
+  assert.match(noWish.shadowRoot.children['.header'].innerHTML, /<div class="sub"[^>]*>Sunday, July 26/);
   // Unfolded, the mini card is the full card.
   mini._toggleDetail({ stopPropagation() {}, detail: 1 });
   assert.match(miniHeader.innerHTML, /<div class="banner with-detail st-ok">/);

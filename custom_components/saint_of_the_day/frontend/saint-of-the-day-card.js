@@ -628,6 +628,13 @@ var SaintI18n = {
 var SAINT_DEFAULTS = { show_title: true, show_wish: true, show_background: true, illustration: true, illustration_theme: 'auto', upcoming_days: 3 };
 var SAINT_MAX_UPCOMING = 7;
 
+// The whole width of an element's text in its own font, an ellipsised one included.
+function saintTextWidth(el) {
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  return range.getBoundingClientRect().width;
+}
+
 function saintEsc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
 }
@@ -864,6 +871,17 @@ class SaintCard extends HTMLElement {
     if (this._root) return;
     this._root = this.attachShadow({ mode: 'open' });
     this._root.innerHTML = `<style>${SaintCard._styles()}</style><ha-card><div class="header"></div><div class="body"></div></ha-card>`;
+    // A new width (or the web font loaded): the status pill is fitted again, in the next frame.
+    if (typeof ResizeObserver === 'function') {
+      new ResizeObserver((entries) => {
+        const w = Math.round(entries.at(-1).contentRect.width);
+        if (w === this._fitWidth) return;
+        this._fitWidth = w;
+        cancelAnimationFrame(this._fitFrame);
+        this._fitFrame = requestAnimationFrame(() => this._fitPill());
+      }).observe(this);
+    }
+    document.fonts?.ready?.then(() => this._fitPill());
     this._root.querySelector('ha-card').addEventListener('click', (ev) => {
       if (ev.target.closest?.('.feast')) this._moreInfo();
     });
@@ -873,6 +891,30 @@ class SaintCard extends HTMLElement {
         this._moreInfo();
       }
     });
+  }
+
+  // The status pill stays right after the title only while the whole title and the pill's whole label fit on that
+  // row; otherwise it takes a line of its own under the subtitle (.below), and when even then the text would leave the
+  // banner or run into its floor strip, it keeps its dot alone (.pill-dot). Measured in the real fonts, so that every
+  // language and title length gets its own answer.
+  _fitPill() {
+    for (const t of this._root?.querySelectorAll?.('.banner .titles') || []) {
+      const row = t.querySelector(':scope > .trow');
+      const pill = row?.querySelector(':scope > .pill');
+      if (!pill?.getBoundingClientRect) continue;
+      t.classList.remove('below', 'pill-dot');
+      const name = row.querySelector(':scope > .name');
+      const gap = parseFloat(getComputedStyle(row).columnGap) || 0;
+      const title = name && getComputedStyle(name).display !== 'none' ? saintTextWidth(name) + gap : 0;
+      const natural = pill.getBoundingClientRect().width;
+      if (title + natural <= row.getBoundingClientRect().width) continue;
+      t.classList.add('below');
+      const banner = t.closest('.banner');
+      const r = t.getBoundingClientRect();
+      const box = banner.getBoundingClientRect();
+      const floor = banner.querySelector('.floor')?.getBoundingClientRect().top ?? box.bottom;
+      if (r.bottom > floor + 0.5 || r.top < box.top - 0.5 || natural > r.width + 0.5) t.classList.add('pill-dot');
+    }
   }
 
   _moreInfo() {
@@ -909,9 +951,9 @@ class SaintCard extends HTMLElement {
     var texts =
       compact && !unavailable
         ? `<div class="titles feast" role="button" tabindex="0"><div class="trow"><div class="name">${saintEsc(st.state)}</div>${pill}</div>` +
-          `<div class="sub">${saintEsc(wish || date)}</div></div>`
+          `<div class="sub" title="${saintEsc(wish || date)}">${saintEsc(wish || date)}</div></div>`
         : `<div class="titles"><div class="trow"><div class="name">${saintEsc(title)}</div>${pill}</div>` +
-          (date ? `<div class="sub">${saintEsc(date)}</div>` : '') +
+          (date ? `<div class="sub" title="${saintEsc(date)}">${saintEsc(date)}</div>` : '') +
           '</div>';
     var detail = this._detailButton(t);
     // illustration: false keeps a classic header (the round icon and the texts, no scene, no floor).
@@ -926,6 +968,7 @@ class SaintCard extends HTMLElement {
       `<div class="banner${cls}">${illustrated ? `${saintScene()}<div class="floor"></div>` : ''}` +
       `<div class="head">${this._iconHtml()}${texts}</div>${detail}</div>`;
     header.querySelector('.detail')?.addEventListener('click', (ev) => this._toggleDetail(ev));
+    this._fitPill();
 
     if (!st) {
       this._shown = null;
@@ -1016,11 +1059,13 @@ class SaintCard extends HTMLElement {
       '.titles { flex: 1 1 0; min-width: 0; overflow: hidden; display: flex; flex-wrap: wrap; align-items: center; column-gap: 8px;' +
         ' container: saint-titles / inline-size; }',
       '.titles > * { flex: 1 0 100%; min-width: 0; }',
-      // The title (or the mini card's feast), then its status pill 8 px after it, centred on it: the title ellipsises
-      // first (down to about 4 characters, 48 px), the pill keeps its whole label.
+      // The title (or the mini card's feast), then its status pill 8 px after it, centred on it, while the whole title
+      // and the pill's whole label fit on that row; otherwise (measured by the card, see _fitPill) the title takes its
+      // whole line and the pill goes under the subtitle (.below), its dot alone (.pill-dot) when even then the text
+      // would leave the banner or run into the floor strip.
       '.trow { display: flex; align-items: center; gap: 8px; min-width: 0; }',
-      '.trow .name { flex: 0 1 auto; min-width: 48px; display: block; white-space: nowrap; text-overflow: ellipsis; }',
-      '.pill { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 4px; max-width: 100%; min-width: 0; box-sizing: border-box; padding: 1px 8px;' +
+      '.trow .name { flex: 0 1 auto; min-width: 0; display: block; white-space: nowrap; text-overflow: ellipsis; }',
+      '.pill { flex: none; display: inline-flex; align-items: center; gap: 4px; max-width: none; min-width: 0; box-sizing: border-box; padding: 1px 8px;' +
         ' border-radius: 12px; font-size: 11px; font-weight: 500; line-height: 16px; white-space: nowrap; overflow: hidden;' +
         ' background: color-mix(in srgb, var(--st) 18%, rgba(255,255,255,.78)); color: color-mix(in srgb, var(--st) 45%, #0d2a45); }',
       '.night .pill { background: color-mix(in srgb, var(--st) 30%, rgba(8,18,38,.55)); color: color-mix(in srgb, var(--st) 35%, #ffffff); }',
@@ -1028,12 +1073,14 @@ class SaintCard extends HTMLElement {
         ' color: color-mix(in srgb, var(--st) 50%, var(--primary-text-color)); }',
       '.pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--st); flex: none; }',
       '.pill .pt { min-width: 0; overflow: hidden; text-overflow: ellipsis; }',
-      // Not enough room beside the title (a narrow card, or the feast laid on the compact mini card): the title takes its
-      // whole line, the pill goes under the subtitle.
-      '@container saint-titles (max-width: 160px) { .trow { display: contents; } .trow .name { flex: 1 0 100%; }' +
-        ' .titles > .sub { order: 1; } .titles .pill { order: 2; margin-top: 2px; } }',
-      // Under 200 px only the pill's dot shows, back on the title line (its text stays its tooltip and accessible name).
-      '@container saint (max-width: 200px) { .trow { display: flex; } .trow .name { flex: 0 1 auto; } .titles .pill { order: 0; margin: 0; padding: 5px; }' +
+      '.titles.below .trow { display: contents; }',
+      '.titles.below .trow .name { flex: 1 0 100%; }',
+      '.titles.below > .sub { order: 1; }',
+      '.titles.below .pill { order: 2; margin-top: 2px; max-width: 100%; }',
+      '.titles.pill-dot .pill { padding: 5px; }',
+      '.titles.pill-dot .pill .pt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }',
+      // Under 200 px only the pill's dot shows (its text stays its tooltip and accessible name).
+      '@container saint (max-width: 200px) { .titles .pill { padding: 5px; }' +
         ' .pill .pt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } }',
       ':host([hide-title]) .banner:not(.mini) .name { display: none; }',
       // The title (or the mini card's feast) may take two lines, the line under it one.
