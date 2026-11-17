@@ -681,14 +681,13 @@ function saintWish(t, names, locale) {
   return names.length ? t.wish.replace('{names}', saintJoin(names, locale)) : '';
 }
 
-// Night picture: forced by illustration_theme, else the sun below the horizon, else Home Assistant's dark mode.
+// Night picture: forced by illustration_theme, else the sun below the horizon or Home Assistant's dark mode (a dark
+// theme takes the night picture even while the sun is up; an unknown sun leaves the dark mode alone to decide).
 function saintIsNight(hass, config) {
   var theme = config?.illustration_theme;
   if (theme === 'night') return true;
   if (theme === 'day') return false;
-  var sun = hass?.states?.['sun.sun'];
-  if (sun && sun.state !== 'unavailable' && sun.state !== 'unknown') return sun.state === 'below_horizon';
-  return !!hass?.themes?.darkMode;
+  return hass?.states?.['sun.sun']?.state === 'below_horizon' || !!hass?.themes?.darkMode;
 }
 
 // The header's status, shown by the colour of the round icon and by the scene: `ok` (today's feast is known),
