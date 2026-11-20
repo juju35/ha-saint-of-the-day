@@ -79,17 +79,17 @@ Add the **Saint of the day** card from the card picker: every option is set in t
 type: custom:saint-of-the-day-card
 ```
 
-| Option | Default | Description |
-|---|---|---|
-| `entity` | detected | The *Saint of the day* sensor |
-| `title` | `Saint of the day` | Card title |
-| `show_title` | `true` | Show the title in the header (the date stays) |
-| `show_wish` | `true` | Show the name day wish under the feast |
-| `show_background` | `true` | Show the sky behind the illustrated header; `false` keeps the scene and its paving on the card's own background |
-| `illustration` | `true` | Animated illustrated header; `false` keeps a classic header (round icon and texts) |
-| `illustration_theme` | `auto` | `auto` (follows the Home Assistant theme: night with a dark theme, day with a light theme), `day` or `night` |
-| `upcoming_days` | `3` | Next days listed under the feast, from `0` (none) to `7` |
-| `language` | Auto | Force language: `en`, `fr`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings) |
+| Option | Card | Default | Description |
+|---|---|---|---|
+| `entity` | both | detected | The *Saint of the day* sensor |
+| `title` | both | `Saint of the day` | Card title |
+| `show_title` | both | `true` | Show the title in the header (the date stays) |
+| `show_wish` | both | `true` | Show the name day wish under the feast |
+| `show_background` | both | `true` | Show the sky behind the illustrated header; `false` keeps the scene and its paving on the card's own background |
+| `illustration` | both | `true` | Animated illustrated header; `false` keeps a classic header (round icon and texts) |
+| `illustration_theme` | both | `auto` | `auto` (follows the Home Assistant theme: night with a dark theme, day with a light theme), `day` or `night` |
+| `upcoming_days` | both | `3` | Next days listed under the feast, from `0` (none) to `7` |
+| `language` | both | Auto | Force language: `en`, `fr`, `de`, `es`, `sr`, `sr-Latn`, `it`, `nl`, `pt`, `pl`, `ro`, `da`, `sv`, `bg`, `ru`, `uk`, `hu`, `sk`, `cs`, `sl`, `lv` or `el` (auto-detects from HA settings) |
 
 Click the feast to open the sensor's details.
 
