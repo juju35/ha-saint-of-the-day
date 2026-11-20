@@ -377,3 +377,18 @@ test('show_background false removes the wall of the banner, on both cards, and i
   // The plain rules come after the dark ones, so that they win in a dark theme.
   assert.ok(css.indexOf('.banner.plain,') > css.indexOf('.banner.night {'));
 });
+
+test('a tap elsewhere folds the mini card back (iOS sends no click), and leaving the page brings it back compact', () => {
+  const card = render(SaintMiniCard, {}, hassWith({ [TODAY.entity_id]: TODAY }));
+  card.connectedCallback();
+  card._toggleDetail({ stopPropagation() {}, detail: 1 });
+  card._miniWatch.tap({ composedPath: () => [card] });
+  assert.match(card.shadowRoot.children['.body'].innerHTML, /Ste Nathalie/);
+  card._miniWatch.tap({ composedPath: () => [{ localName: 'div' }] });
+  assert.doesNotMatch(card.shadowRoot.children['.body'].innerHTML, /Ste Nathalie/);
+  card._toggleDetail({ stopPropagation() {}, detail: 1 });
+  card.disconnectedCallback();
+  card.connectedCallback();
+  assert.match(card.shadowRoot.children['.header'].innerHTML, /arrow-expand/);
+  assert.doesNotMatch(card.shadowRoot.children['.body'].innerHTML, /Ste Nathalie/);
+});

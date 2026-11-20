@@ -1159,6 +1159,42 @@ function saintInDialog(ev) {
   return ev.composedPath().some((n) => ['ha-more-info-dialog', 'ha-dialog', 'dialog'].includes(n.localName));
 }
 
+// « A click elsewhere », caught on the pointer: iOS (Safari and the companion app) sends no click for a tap on
+// something that is not clickable. It counts when the press and the release are both outside the card (a slider
+// dragged out of it does not count, nor a scroll, which cancels the pointer); keyboard clicks (no click count) go
+// through the click event.
+function saintWatchOutside(card, handler) {
+  var downOutside = false;
+  var outside = (ev) => !ev.composedPath().includes(card);
+  var onDown = (ev) => {
+    downOutside = outside(ev);
+  };
+  var onUp = (ev) => {
+    if (downOutside && outside(ev)) handler(ev);
+    downOutside = false;
+  };
+  var onClick = (ev) => {
+    if (ev.detail === 0 && outside(ev)) handler(ev);
+  };
+  return {
+    on() {
+      document.addEventListener('pointerdown', onDown, true);
+      document.addEventListener('pointerup', onUp, true);
+      document.addEventListener('click', onClick, true);
+    },
+    off() {
+      document.removeEventListener('pointerdown', onDown, true);
+      document.removeEventListener('pointerup', onUp, true);
+      document.removeEventListener('click', onClick, true);
+    },
+    // A tap (press and release at the same spot), for the tests.
+    tap(ev) {
+      onDown(ev);
+      onUp(ev);
+    },
+  };
+}
+
 // ── saint-of-the-day-mini-card ────────────────────────────────────────────────
 // Today's feast only. Its detail button (top right) switches to the full card and back; a click outside the card
 // folds it back to the compact view.
@@ -1172,11 +1208,17 @@ class SaintMiniCard extends SaintCard {
   }
 
   connectedCallback() {
-    document.addEventListener('click', this._onOutsideMini, true);
+    (this._miniWatch = this._miniWatch || saintWatchOutside(this, this._onOutsideMini)).on();
+    // Back on the page after leaving it: drawn again, compact.
+    if (this._left && this._hass && this._config) this._render();
+    this._left = false;
   }
 
   disconnectedCallback() {
-    document.removeEventListener('click', this._onOutsideMini, true);
+    this._miniWatch?.off();
+    // Left (another dashboard view, a conditional card hidden): back to the compact view.
+    this._left = true;
+    this._zoomed = false;
   }
 
   setConfig(config) {
