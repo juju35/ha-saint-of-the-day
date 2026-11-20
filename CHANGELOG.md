@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.3.2 - 2026-11-20
+
+### Fixes
+- Mini card: a tap elsewhere on the page folds it back on iOS too (Safari and the companion app send no click for a tap on something that is not clickable), and leaving the page (another dashboard view, a conditional card hidden) brings it back compact.
+- Sensors: the base entity's `async_added_to_hass` is called.
+
+### Maintenance
+- Tests: the coverage of the card is now measured (`node --test --experimental-test-coverage`).
+- README: the options table says which card each option applies to, like the other cards.
+
 ## 1.3.1 - 2026-11-18
 
 ### Fixes
