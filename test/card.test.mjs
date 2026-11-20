@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
+import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 
 // Run west of UTC: a date-only "YYYY-MM-DD" parsed as UTC midnight shows the day before there,
@@ -68,6 +69,8 @@ vm.runInContext(
   `${source}\nthis.saintEditorSchema = saintEditorSchema;
 this.saint = { saintEsc, saintLang, saintLocale, saintParseDate, saintJoin, saintWish, SaintCard, SaintMiniCard, SaintI18n, SAINT_DEFAULTS };`,
   context,
+  // Named after the card file, so that node --experimental-test-coverage reports it.
+  { filename: fileURLToPath(new URL('../custom_components/saint_of_the_day/frontend/saint-of-the-day-card.js', import.meta.url)) },
 );
 const { saintEsc, saintLang, saintLocale, saintParseDate, saintJoin, saintWish, SaintCard, SaintMiniCard, SaintI18n, SAINT_DEFAULTS } = context.saint;
 
