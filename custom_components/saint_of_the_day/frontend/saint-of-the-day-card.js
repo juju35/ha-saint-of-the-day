@@ -1,4 +1,4 @@
-var SAINT_CARD_VERSION = '1.3.1';
+var SAINT_CARD_VERSION = '1.3.2';
 
 // ── Header icon: tinted round icon, the accent of the project on the showcase site (the integration keeps its
 // brand/icon.png). 16 % tint like the generic icons of the other cards.
@@ -635,6 +635,43 @@ function saintTextWidth(el) {
   return range.getBoundingClientRect().width;
 }
 
+// Shadow DOM patching: a new render rewrites the header and the body in place instead of replacing them
+// (innerHTML), so the nodes kept (the illustration's SVG, its running animations, the focused detail button) keep
+// their size and state: nothing shows anew for a frame, the Sections view does not reflow and the page does not
+// jump by itself. Nodes are matched by position; a node of another kind is replaced. A custom element written empty
+// (<ha-icon>) draws its own content: only the attributes the markup gives are updated.
+function saintPatchChildren(cur, next) {
+  const old = [...cur.childNodes];
+  const fresh = [...next.childNodes];
+  fresh.forEach((n, i) => {
+    const o = old[i];
+    if (!o || o.nodeType !== n.nodeType || o.nodeName !== n.nodeName) {
+      if (o) cur.replaceChild(n, o);
+      else cur.appendChild(n);
+      return;
+    }
+    if (n.nodeType !== 1) {
+      if (o.nodeValue !== n.nodeValue) o.nodeValue = n.nodeValue;
+      return;
+    }
+    const own = n.localName.includes('-') && !n.firstChild;
+    if (!own) for (const { name } of [...o.attributes]) if (!n.hasAttribute(name)) o.removeAttribute(name);
+    for (const { name, value } of n.attributes) if (o.getAttribute(name) !== value) o.setAttribute(name, value);
+    if (!own) saintPatchChildren(o, n);
+  });
+  for (let i = old.length - 1; i >= fresh.length; i--) cur.removeChild(old[i]);
+}
+
+function saintMorph(el, html) {
+  const tpl = el.childNodes && document.createElement('template');
+  if (!tpl || !tpl.content) {
+    el.innerHTML = html;
+    return;
+  }
+  tpl.innerHTML = html;
+  saintPatchChildren(el, tpl.content);
+}
+
 function saintEsc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]);
 }
@@ -867,23 +904,41 @@ class SaintCard extends HTMLElement {
     return '<div class="badge"><ha-icon icon="mdi:calendar"></ha-icon></div>';
   }
 
+  // Back on the page: the width is watched again (the shell, and its observer, are kept).
+  connectedCallback() {
+    this._resize?.observe(this);
+  }
+
+  // Left the page: no width observer nor pending pill measurement on a detached card.
+  disconnectedCallback() {
+    this._resize?.disconnect();
+    this._fitWidth = null;
+    if (this._fitFrame) cancelAnimationFrame(this._fitFrame);
+    this._fitFrame = null;
+  }
+
   _ensureShell() {
     if (this._root) return;
     this._root = this.attachShadow({ mode: 'open' });
     this._root.innerHTML = `<style>${SaintCard._styles()}</style><ha-card><div class="header"></div><div class="body"></div></ha-card>`;
     // A new width (or the web font loaded): the status pill is fitted again, in the next frame.
     if (typeof ResizeObserver === 'function') {
-      new ResizeObserver((entries) => {
+      this._resize = new ResizeObserver((entries) => {
         const w = Math.round(entries.at(-1).contentRect.width);
         if (w === this._fitWidth) return;
         this._fitWidth = w;
         cancelAnimationFrame(this._fitFrame);
         this._fitFrame = requestAnimationFrame(() => this._fitPill());
-      }).observe(this);
+      });
+      this._resize.observe(this);
     }
     document.fonts?.ready?.then(() => this._fitPill());
     this._root.querySelector('ha-card').addEventListener('click', (ev) => {
       if (ev.target.closest?.('.feast')) this._moreInfo();
+    });
+    // The mini card's detail button (kept from one render to the next: one listener, on its header).
+    this._root.querySelector('.header').addEventListener('click', (ev) => {
+      if (ev.target.closest?.('.detail')) this._toggleDetail?.(ev);
     });
     this._root.querySelector('ha-card').addEventListener('keydown', (ev) => {
       if ((ev.key === 'Enter' || ev.key === ' ') && ev.target.closest?.('.feast')) {
@@ -964,25 +1019,26 @@ class SaintCard extends HTMLElement {
       (illustrated ? (this._config.show_background === false ? ' plain' : '') : ' classic') +
       (detail ? ' with-detail' : '') +
       ` st-${status}`;
-    header.innerHTML =
+    saintMorph(
+      header,
       `<div class="banner${cls}">${illustrated ? `${saintScene()}<div class="floor"></div>` : ''}` +
-      `<div class="head">${this._iconHtml()}${texts}</div>${detail}</div>`;
-    header.querySelector('.detail')?.addEventListener('click', (ev) => this._toggleDetail(ev));
+        `<div class="head">${this._iconHtml()}${texts}</div>${detail}</div>`,
+    );
     this._fitPill();
 
     if (!st) {
       this._shown = null;
-      body.innerHTML = `<div class="empty">${saintEsc(t.no_entity)}</div>`;
+      saintMorph(body, `<div class="empty">${saintEsc(t.no_entity)}</div>`);
       return;
     }
     if (unavailable) {
       this._shown = null;
-      body.innerHTML = `<div class="empty">${saintEsc(t.unavailable)}</div>`;
+      saintMorph(body, `<div class="empty">${saintEsc(t.unavailable)}</div>`);
       return;
     }
     if (compact) {
       this._shown = `${attrs.date}|${st.state}`;
-      body.innerHTML = '';
+      saintMorph(body, '');
       return;
     }
     var html =
@@ -1001,9 +1057,14 @@ class SaintCard extends HTMLElement {
           .join('') +
         '</ul>';
     }
-    body.innerHTML = html;
+    saintMorph(body, html);
     // The feast fades in when it is new (first draw, a new day), not when the mini card folds or the language changes.
     var shown = `${attrs.date}|${st.state}`;
+    // The nodes are kept: a new feast replays the entrance even when the last one still holds the class.
+    if (shown !== this._shown && body.classList.contains?.('enter')) {
+      body.classList.remove('enter');
+      void body.offsetWidth;
+    }
     body.classList.toggle('enter', shown !== this._shown);
     this._shown = shown;
   }
@@ -1159,6 +1220,42 @@ function saintInDialog(ev) {
   return ev.composedPath().some((n) => ['ha-more-info-dialog', 'ha-dialog', 'dialog'].includes(n.localName));
 }
 
+// « A click elsewhere », caught on the pointer: iOS (Safari and the companion app) sends no click for a tap on
+// something that is not clickable. It counts when the press and the release are both outside the card (a slider
+// dragged out of it does not count, nor a scroll, which cancels the pointer); keyboard clicks (no click count) go
+// through the click event.
+function saintWatchOutside(card, handler) {
+  var downOutside = false;
+  var outside = (ev) => !ev.composedPath().includes(card);
+  var onDown = (ev) => {
+    downOutside = outside(ev);
+  };
+  var onUp = (ev) => {
+    if (downOutside && outside(ev)) handler(ev);
+    downOutside = false;
+  };
+  var onClick = (ev) => {
+    if (ev.detail === 0 && outside(ev)) handler(ev);
+  };
+  return {
+    on() {
+      document.addEventListener('pointerdown', onDown, true);
+      document.addEventListener('pointerup', onUp, true);
+      document.addEventListener('click', onClick, true);
+    },
+    off() {
+      document.removeEventListener('pointerdown', onDown, true);
+      document.removeEventListener('pointerup', onUp, true);
+      document.removeEventListener('click', onClick, true);
+    },
+    // A tap (press and release at the same spot), for the tests.
+    tap(ev) {
+      onDown(ev);
+      onUp(ev);
+    },
+  };
+}
+
 // ── saint-of-the-day-mini-card ────────────────────────────────────────────────
 // Today's feast only. Its detail button (top right) switches to the full card and back; a click outside the card
 // folds it back to the compact view.
@@ -1172,11 +1269,19 @@ class SaintMiniCard extends SaintCard {
   }
 
   connectedCallback() {
-    document.addEventListener('click', this._onOutsideMini, true);
+    super.connectedCallback();
+    (this._miniWatch = this._miniWatch || saintWatchOutside(this, this._onOutsideMini)).on();
+    // Back on the page after leaving it: drawn again, compact.
+    if (this._left && this._hass && this._config) this._render();
+    this._left = false;
   }
 
   disconnectedCallback() {
-    document.removeEventListener('click', this._onOutsideMini, true);
+    super.disconnectedCallback();
+    this._miniWatch?.off();
+    // Left (another dashboard view, a conditional card hidden): back to the compact view.
+    this._left = true;
+    this._zoomed = false;
   }
 
   setConfig(config) {

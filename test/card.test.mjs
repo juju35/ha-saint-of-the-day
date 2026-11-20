@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
+import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 
 // Run west of UTC: a date-only "YYYY-MM-DD" parsed as UTC midnight shows the day before there,
@@ -68,6 +69,8 @@ vm.runInContext(
   `${source}\nthis.saintEditorSchema = saintEditorSchema;
 this.saint = { saintEsc, saintLang, saintLocale, saintParseDate, saintJoin, saintWish, SaintCard, SaintMiniCard, SaintI18n, SAINT_DEFAULTS };`,
   context,
+  // Named after the card file, so that node --experimental-test-coverage reports it.
+  { filename: fileURLToPath(new URL('../custom_components/saint_of_the_day/frontend/saint-of-the-day-card.js', import.meta.url)) },
 );
 const { saintEsc, saintLang, saintLocale, saintParseDate, saintJoin, saintWish, SaintCard, SaintMiniCard, SaintI18n, SAINT_DEFAULTS } = context.saint;
 
@@ -373,4 +376,47 @@ test('show_background false removes the wall of the banner, on both cards, and i
   assert.match(css, /\.banner\.plain, \.banner\.classic \{ background: none;/);
   // The plain rules come after the dark ones, so that they win in a dark theme.
   assert.ok(css.indexOf('.banner.plain,') > css.indexOf('.banner.night {'));
+});
+
+test('a tap elsewhere folds the mini card back (iOS sends no click), and leaving the page brings it back compact', () => {
+  const card = render(SaintMiniCard, {}, hassWith({ [TODAY.entity_id]: TODAY }));
+  card.connectedCallback();
+  card._toggleDetail({ stopPropagation() {}, detail: 1 });
+  card._miniWatch.tap({ composedPath: () => [card] });
+  assert.match(card.shadowRoot.children['.body'].innerHTML, /Ste Nathalie/);
+  card._miniWatch.tap({ composedPath: () => [{ localName: 'div' }] });
+  assert.doesNotMatch(card.shadowRoot.children['.body'].innerHTML, /Ste Nathalie/);
+  card._toggleDetail({ stopPropagation() {}, detail: 1 });
+  card.disconnectedCallback();
+  card.connectedCallback();
+  assert.match(card.shadowRoot.children['.header'].innerHTML, /arrow-expand/);
+  assert.doesNotMatch(card.shadowRoot.children['.body'].innerHTML, /Ste Nathalie/);
+});
+
+test('leaving the page stops watching the width, coming back watches it again', () => {
+  const log = [];
+  context.ResizeObserver = class {
+    observe() {
+      log.push('observe');
+    }
+    disconnect() {
+      log.push('disconnect');
+    }
+  };
+  context.cancelAnimationFrame = () => log.push('cancel');
+  try {
+    for (const Card of [SaintCard, SaintMiniCard]) {
+      log.length = 0;
+      const card = render(Card, {}, hassWith({ [TODAY.entity_id]: TODAY }));
+      card._fitFrame = 7;
+      card.disconnectedCallback();
+      assert.deepEqual(log, ['observe', 'disconnect', 'cancel']);
+      assert.equal(card._fitFrame, null);
+      card.connectedCallback();
+      assert.deepEqual(log, ['observe', 'disconnect', 'cancel', 'observe']);
+    }
+  } finally {
+    delete context.ResizeObserver;
+    delete context.cancelAnimationFrame;
+  }
 });

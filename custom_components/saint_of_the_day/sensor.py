@@ -34,6 +34,7 @@ class SaintSensor(SaintEntity, SensorEntity):
         return dt_util.now().date() + timedelta(days=self._offset)
 
     async def async_added_to_hass(self) -> None:
+        await super().async_added_to_hass()
         # Midnight in the Home Assistant time zone: the day, and so the feast, changes.
         self.async_on_remove(async_track_time_change(self.hass, self._midnight, hour=0, minute=0, second=0))
 
