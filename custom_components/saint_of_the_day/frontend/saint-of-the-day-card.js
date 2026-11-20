@@ -904,19 +904,33 @@ class SaintCard extends HTMLElement {
     return '<div class="badge"><ha-icon icon="mdi:calendar"></ha-icon></div>';
   }
 
+  // Back on the page: the width is watched again (the shell, and its observer, are kept).
+  connectedCallback() {
+    this._resize?.observe(this);
+  }
+
+  // Left the page: no width observer nor pending pill measurement on a detached card.
+  disconnectedCallback() {
+    this._resize?.disconnect();
+    this._fitWidth = null;
+    if (this._fitFrame) cancelAnimationFrame(this._fitFrame);
+    this._fitFrame = null;
+  }
+
   _ensureShell() {
     if (this._root) return;
     this._root = this.attachShadow({ mode: 'open' });
     this._root.innerHTML = `<style>${SaintCard._styles()}</style><ha-card><div class="header"></div><div class="body"></div></ha-card>`;
     // A new width (or the web font loaded): the status pill is fitted again, in the next frame.
     if (typeof ResizeObserver === 'function') {
-      new ResizeObserver((entries) => {
+      this._resize = new ResizeObserver((entries) => {
         const w = Math.round(entries.at(-1).contentRect.width);
         if (w === this._fitWidth) return;
         this._fitWidth = w;
         cancelAnimationFrame(this._fitFrame);
         this._fitFrame = requestAnimationFrame(() => this._fitPill());
-      }).observe(this);
+      });
+      this._resize.observe(this);
     }
     document.fonts?.ready?.then(() => this._fitPill());
     this._root.querySelector('ha-card').addEventListener('click', (ev) => {
@@ -1255,6 +1269,7 @@ class SaintMiniCard extends SaintCard {
   }
 
   connectedCallback() {
+    super.connectedCallback();
     (this._miniWatch = this._miniWatch || saintWatchOutside(this, this._onOutsideMini)).on();
     // Back on the page after leaving it: drawn again, compact.
     if (this._left && this._hass && this._config) this._render();
@@ -1262,6 +1277,7 @@ class SaintMiniCard extends SaintCard {
   }
 
   disconnectedCallback() {
+    super.disconnectedCallback();
     this._miniWatch?.off();
     // Left (another dashboard view, a conditional card hidden): back to the compact view.
     this._left = true;

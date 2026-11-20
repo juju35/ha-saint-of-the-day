@@ -392,3 +392,31 @@ test('a tap elsewhere folds the mini card back (iOS sends no click), and leaving
   assert.match(card.shadowRoot.children['.header'].innerHTML, /arrow-expand/);
   assert.doesNotMatch(card.shadowRoot.children['.body'].innerHTML, /Ste Nathalie/);
 });
+
+test('leaving the page stops watching the width, coming back watches it again', () => {
+  const log = [];
+  context.ResizeObserver = class {
+    observe() {
+      log.push('observe');
+    }
+    disconnect() {
+      log.push('disconnect');
+    }
+  };
+  context.cancelAnimationFrame = () => log.push('cancel');
+  try {
+    for (const Card of [SaintCard, SaintMiniCard]) {
+      log.length = 0;
+      const card = render(Card, {}, hassWith({ [TODAY.entity_id]: TODAY }));
+      card._fitFrame = 7;
+      card.disconnectedCallback();
+      assert.deepEqual(log, ['observe', 'disconnect', 'cancel']);
+      assert.equal(card._fitFrame, null);
+      card.connectedCallback();
+      assert.deepEqual(log, ['observe', 'disconnect', 'cancel', 'observe']);
+    }
+  } finally {
+    delete context.ResizeObserver;
+    delete context.cancelAnimationFrame;
+  }
+});

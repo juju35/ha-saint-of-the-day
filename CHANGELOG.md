@@ -6,6 +6,7 @@
 - Mini card: a tap elsewhere on the page folds it back on iOS too (Safari and the companion app send no click for a tap on something that is not clickable), and leaving the page (another dashboard view, a conditional card hidden) brings it back compact.
 - Sensors: the base entity's `async_added_to_hass` is called.
 - Cards: a new state of the sensor (or day / night) no longer rebuilds the header and the feast (82 nodes replaced on the full card, 70 on the mini card): they are patched in place (0 replaced), so the illustration keeps running and nothing shows anew for a frame, which could make the Sections view reflow and the page jump by itself.
+- Cards: leaving the page stops the width observer and any pending status pill measurement; coming back watches the width again.
 
 ### Maintenance
 - Tests: the coverage of the card is now measured (`node --test --experimental-test-coverage`).
