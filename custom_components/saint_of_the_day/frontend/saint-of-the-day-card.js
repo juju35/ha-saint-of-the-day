@@ -1,4 +1,4 @@
-var SAINT_CARD_VERSION = '1.3.2';
+var SAINT_CARD_VERSION = '1.3.3';
 
 // ── Header icon: tinted round icon, the accent of the project on the showcase site (the integration keeps its
 // brand/icon.png). 16 % tint like the generic icons of the other cards.
@@ -1442,7 +1442,7 @@ if (!customElements.get('saint-of-the-day-card')) {
     type: 'saint-of-the-day-card',
     name: 'Saint of the day',
     description: 'The French name day of today, with a wish and the next days.',
-    preview: true,
+    preview: false,
     documentationURL: 'https://github.com/juju35/ha-saint-of-the-day',
   });
 }
@@ -1454,7 +1454,7 @@ if (!customElements.get('saint-of-the-day-mini-card')) {
     type: 'saint-of-the-day-mini-card',
     name: 'Saint of the day mini',
     description: 'Today’s name day, with a button to show the full Saint of the day card.',
-    preview: true,
+    preview: false,
     documentationURL: 'https://github.com/juju35/ha-saint-of-the-day',
   });
 }
