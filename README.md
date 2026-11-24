@@ -179,6 +179,8 @@ The calendar of name days (the classic French calendar, one feast per day) is st
 ## Development
 
 ```bash
+npm install --no-save --no-package-lock acorn@8.19.0
+node scripts/build-frontend.mjs   # assembles the card from src/ into frontend/ (the tests and screenshots use it)
 pip install -r requirements_test.txt && pytest
 pip install playwright==1.64.1 && playwright install chromium
 python scripts/screenshots.py   # renders the card and mini card stills and GIFs (needs ffmpeg) into screenshots/
@@ -186,9 +188,11 @@ python scripts/screenshots.py   # renders the card and mini card stills and GIFs
 
 Python tests live in `tests/` (pytest); the card's JavaScript tests live in `test/` (`node --test test/*.test.mjs`).
 
+The card is written as ES modules in `src/saint-of-the-day-card/` (entry `index.js`, translations one file per language in `i18n/`); `scripts/build-frontend.mjs` assembles them into the single classic script served from `frontend/`, which is not committed.
+
 ### Releasing
 
-1. Bump the version in `custom_components/saint_of_the_day/manifest.json` and `SAINT_CARD_VERSION` in the card
+1. Bump the version in `custom_components/saint_of_the_day/manifest.json` and `SAINT_CARD_VERSION` in the card (`src/saint-of-the-day-card/card-picker.js`)
 2. Add a `## <version>` section at the top of [CHANGELOG.md](https://github.com/juju35/ha-saint-of-the-day/blob/main/CHANGELOG.md)
 3. Push to `main`: the **Release** workflow creates the tag and the GitHub release with the changelog section as notes
 

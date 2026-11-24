@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.5 - 2026-11-24
+
+### Maintenance
+- The card source is split into ES modules: `src/saint-of-the-day-card/` (entry `index.js`), cut at its sections, with the translations in one file per language (`i18n/<lang>.js`). `scripts/build-frontend.mjs` assembles them, in their original order, into the same `frontend/saint-of-the-day-card.js` as before, which is no longer committed; the release zip is unchanged and the tests run on the assembled card.
+
 ## 1.3.4 - 2026-11-22
 
 ### Performance

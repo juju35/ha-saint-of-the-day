@@ -1,6 +1,6 @@
 // Unit tests for the card logic: the card file is evaluated with stubs, no browser needed.
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { bundle } from '../scripts/bundle.mjs';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
@@ -9,7 +9,8 @@ import vm from 'node:vm';
 // which CI runners (UTC) would never reveal. Node applies a TZ change made at runtime.
 process.env.TZ = 'America/New_York';
 
-const source = readFileSync(new URL('../custom_components/saint_of_the_day/frontend/saint-of-the-day-card.js', import.meta.url), 'utf8');
+// The card assembled from its ES modules (src/saint-of-the-day-card/), as scripts/build-frontend.mjs does.
+const source = bundle('src/saint-of-the-day-card/index.js');
 
 // Minimal DOM: enough for the card's shadow root, innerHTML writes and listeners.
 class FakeNode {
@@ -69,8 +70,8 @@ vm.runInContext(
   `${source}\nthis.saintEditorSchema = saintEditorSchema;
 this.saint = { saintEsc, saintLang, saintLocale, saintParseDate, saintJoin, saintWish, SaintCard, SaintMiniCard, SaintI18n, SAINT_DEFAULTS };`,
   context,
-  // Named after the card file, so that node --experimental-test-coverage reports it.
-  { filename: fileURLToPath(new URL('../custom_components/saint_of_the_day/frontend/saint-of-the-day-card.js', import.meta.url)) },
+  // Named after the card's entry module, so that node --experimental-test-coverage reports it.
+  { filename: fileURLToPath(new URL('../src/saint-of-the-day-card/index.js', import.meta.url)) },
 );
 const { saintEsc, saintLang, saintLocale, saintParseDate, saintJoin, saintWish, SaintCard, SaintMiniCard, SaintI18n, SAINT_DEFAULTS } = context.saint;
 
