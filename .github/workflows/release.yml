@@ -50,7 +50,7 @@ jobs:
         id: version
         run: |
           VERSION="$(jq -r .version custom_components/saint_of_the_day/manifest.json)"
-          grep -q "SAINT_CARD_VERSION = '$VERSION'" custom_components/saint_of_the_day/frontend/saint-of-the-day-card.js
+          grep -q "SAINT_CARD_VERSION = '$VERSION'" src/saint-of-the-day-card/card-picker.js
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           if git rev-parse -q --verify "refs/tags/v$VERSION" >/dev/null; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
@@ -65,12 +65,14 @@ jobs:
         with:
           node-version: "22"
 
-      # Only English stays in the frontend files of the zip; each other language is its own file next to them,
-      # fetched when needed (scripts/split-frontend.mjs). The repository keeps every language in the sources.
-      - name: Split the translations
+      # The card is assembled from its ES modules (src/saint-of-the-day-card/, scripts/build-frontend.mjs). Only
+      # English stays in the frontend files of the zip; each other language is its own file next to them, fetched
+      # when needed (scripts/split-frontend.mjs). The repository keeps every language in the sources.
+      - name: Build the card and split the translations
         if: steps.version.outputs.exists == 'false'
         run: |
           npm install --no-save --no-package-lock acorn@8.19.0
+          node scripts/build-frontend.mjs
           node scripts/split-frontend.mjs
 
       - name: Build zip and notes
