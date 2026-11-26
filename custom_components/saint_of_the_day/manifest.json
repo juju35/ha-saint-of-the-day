@@ -2,6 +2,7 @@
   "domain": "saint_of_the_day",
   "name": "Saint of the day",
   "after_dependencies": ["lovelace"],
+  "categories": ["productivity_information.calendars_todos"],
   "codeowners": ["@juju35"],
   "config_flow": true,
   "dependencies": ["frontend", "http"],
