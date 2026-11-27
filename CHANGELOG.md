@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.6 - 2026-11-27
+
+### Fixes
+- Cards: `illustration: false` no longer draws a 64 px "classic" banner but a plain header of its own height (round icon, title, pill), as on the other ha-* cards.
+
 ## 1.3.5 - 2026-11-24
 
 ### Maintenance

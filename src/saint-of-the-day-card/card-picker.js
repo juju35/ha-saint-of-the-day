@@ -66,4 +66,4 @@ export function pickerDefine(tag, Card, options) {
   return customElements.define(tag, lazy, options);
 }
 
-export var SAINT_CARD_VERSION = '1.3.5';
+export var SAINT_CARD_VERSION = '1.3.6';
