@@ -338,14 +338,15 @@ test('the banner is 90 px on both cards with a 10 px strip of paving stones, day
   assert.match(css, /\.night \.floor \{[^}]*#3a2b48 0 15px, #30233d 15px 30px/);
 });
 
-test('illustration false keeps a classic header, on both cards, and the editor offers both new options', () => {
+test('illustration false drops the banner, on both cards (a plain header, as on the other cards), and the editor offers both new options', () => {
   const states = { [TODAY.entity_id]: TODAY };
   const card = render(SaintCard, { illustration: false }, hassWith(states, 'en', { themes: { darkMode: true } }));
   const html = card.shadowRoot.children['.header'].innerHTML;
-  assert.match(html, /<div class="banner classic st-ok"><div class="head">/);
+  assert.match(html, /<div class="titlebar st-ok"><div class="head">/);
+  assert.doesNotMatch(html, /class="banner/);
   assert.doesNotMatch(html, /class="scene"|class="floor"/);
   const mini = render(SaintMiniCard, { illustration: false }, hassWith(states));
-  assert.match(mini.shadowRoot.children['.header'].innerHTML, /<div class="banner mini classic with-detail st-ok">/);
+  assert.match(mini.shadowRoot.children['.header'].innerHTML, /<div class="titlebar mini with-detail st-ok">/);
   assert.equal(SAINT_DEFAULTS.illustration, true);
   assert.equal(SAINT_DEFAULTS.illustration_theme, 'auto');
   const schema = JSON.stringify(context.saintEditorSchema(SaintI18n.en.editor));
@@ -374,7 +375,7 @@ test('show_background false removes the wall of the banner, on both cards, and i
   assert.match(mini.shadowRoot.children['.header'].innerHTML, /<div class="banner mini night plain with-detail st-ok">/);
   assert.equal(SAINT_DEFAULTS.show_background, true);
   const css = SaintCard._styles();
-  assert.match(css, /\.banner\.plain, \.banner\.classic \{ background: none;/);
+  assert.match(css, /\.banner\.plain, \.titlebar \{ background: none;/);
   // The plain rules come after the dark ones, so that they win in a dark theme.
   assert.ok(css.indexOf('.banner.plain,') > css.indexOf('.banner.night {'));
 });

@@ -140,7 +140,7 @@ export class SaintCard extends HTMLElement {
   // banner or run into its floor strip, it keeps its dot alone (.pill-dot). Measured in the real fonts, so that every
   // language and title length gets its own answer.
   _fitPill() {
-    for (const t of this._root?.querySelectorAll?.('.banner .titles') || []) {
+    for (const t of this._root?.querySelectorAll?.('.banner .titles, .titlebar .titles') || []) {
       const row = t.querySelector(':scope > .trow');
       const pill = row?.querySelector(':scope > .pill');
       if (!pill?.getBoundingClientRect) continue;
@@ -151,7 +151,7 @@ export class SaintCard extends HTMLElement {
       const natural = pill.getBoundingClientRect().width;
       if (title + natural <= row.getBoundingClientRect().width) continue;
       t.classList.add('below');
-      const banner = t.closest('.banner');
+      const banner = t.closest('.banner, .titlebar');
       const r = t.getBoundingClientRect();
       const box = banner.getBoundingClientRect();
       const floor = banner.querySelector('.floor')?.getBoundingClientRect().top ?? box.bottom;
@@ -198,18 +198,19 @@ export class SaintCard extends HTMLElement {
           (date ? `<div class="sub" title="${saintEsc(date)}">${saintEsc(date)}</div>` : '') +
           '</div>';
     var detail = this._detailButton(t);
-    // illustration: false keeps a classic header (the round icon and the texts, no scene, no floor).
+    // illustration: false — no banner at all, as on the other cards: the round icon and the texts in a plain header
+    // of their own height (no scene, no sky, no floor).
     var illustrated = this._config.illustration !== false;
     var cls =
       (compact ? ' mini' : '') +
       (illustrated && saintIsNight(this._hass, this._config) ? ' night' : '') +
-      (illustrated ? (this._config.show_background === false ? ' plain' : '') : ' classic') +
+      (illustrated && this._config.show_background === false ? ' plain' : '') +
       (detail ? ' with-detail' : '') +
       ` st-${status}`;
+    var head = `<div class="head">${this._iconHtml()}${texts}</div>${detail}`;
     saintMorph(
       header,
-      `<div class="banner${cls}">${illustrated ? `${saintScene()}<div class="floor"></div>` : ''}` +
-        `<div class="head">${this._iconHtml()}${texts}</div>${detail}</div>`,
+      illustrated ? `<div class="banner${cls}">${saintScene()}<div class="floor"></div>${head}</div>` : `<div class="titlebar${cls}">${head}</div>`,
     );
     this._fitPill();
 
@@ -287,20 +288,23 @@ export class SaintCard extends HTMLElement {
       '.night .detail { color: #ffffff; background: rgba(255,255,255,.12); box-shadow: inset 0 0 0 1px rgba(255,255,255,.2); }',
       '.night .detail:hover { background: rgba(255,255,255,.22); }',
       // show_background: false — no sky: the scene and the paving sit on the card, the texts and the round icon take the
-      // theme's colours, as on the cards without an illustration. illustration: false — the classic header, no scene.
-      '.banner.plain, .banner.classic { background: none; --wall-text: var(--primary-text-color); --wall-muted: var(--secondary-text-color); }',
-      '.plain .badge, .classic .badge { background: color-mix(in srgb, var(--st) 16%, transparent); box-shadow: none; }',
-      '.banner.classic { --banner-h: 64px; --floor-h: 0px; --scene-max: 0px; }',
-      '.plain .detail, .plain .detail:hover, .classic .detail, .classic .detail:hover { color: var(--secondary-text-color); background: none;' +
+      // theme's colours, as on the cards without an illustration. illustration: false — no banner: the plain header
+      // (.titlebar), of its own height like on the other cards.
+      '.banner.plain, .titlebar { background: none; --wall-text: var(--primary-text-color); --wall-muted: var(--secondary-text-color); }',
+      ':where(.titlebar) { --st: #2f80ed; } .titlebar { position: relative; padding: 12px 14px 8px; }',
+      '.titlebar .head { position: static; padding: 0; }',
+      '.titlebar.with-detail { padding-right: 36px; }',
+      '.plain .badge, .titlebar .badge { background: color-mix(in srgb, var(--st) 16%, transparent); box-shadow: none; }',
+      '.plain .detail, .plain .detail:hover, .titlebar .detail, .titlebar .detail:hover { color: var(--secondary-text-color); background: none;' +
         ' -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: inset 0 0 0 1px var(--divider-color, rgba(127,127,127,.3)); }',
-      '.plain .detail:hover, .classic .detail:hover { color: var(--primary-text-color); background: color-mix(in srgb, var(--secondary-text-color) 12%, transparent); }',
+      '.plain .detail:hover, .titlebar .detail:hover { color: var(--primary-text-color); background: color-mix(in srgb, var(--secondary-text-color) 12%, transparent); }',
       '.banner .scene { position: absolute; right: 0; bottom: var(--floor-h); height: calc(100% - var(--floor-h));' +
         ' width: min(calc((var(--banner-h, 90px) - var(--floor-h)) * 2.5), var(--scene-max, 62%)); }',
       '.head { position: absolute; z-index: 1; left: 0; top: 0; bottom: var(--floor-h); box-sizing: border-box;' +
         ' right: min(calc((var(--banner-h, 90px) - var(--floor-h)) * 2.5), var(--scene-max, 62%));' +
         ' display: flex; align-items: center; gap: 10px; padding: 8px 8px 8px 14px; min-width: 0; color: var(--wall-text); }',
       // The full card's texts may run over the scene's light rays too (its left third), never over the saint.
-      '@container (min-width: 301px) { .banner:not(.mini):not(.classic) .head { right: calc(min(calc((var(--banner-h, 90px) - var(--floor-h)) * 2.5), var(--scene-max, 62%)) * .66); } }',
+      '@container (min-width: 301px) { .banner:not(.mini) .head { right: calc(min(calc((var(--banner-h, 90px) - var(--floor-h)) * 2.5), var(--scene-max, 62%)) * .66); } }',
       '.badge { width: 40px; height: 40px; flex: none; border-radius: 50%; display: grid; place-items: center; color: var(--st);' +
         ' background: rgba(255,255,255,.62); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--st) 18%, transparent); }',
       '.badge ha-icon { --mdc-icon-size: 24px; }',
@@ -317,7 +321,7 @@ export class SaintCard extends HTMLElement {
         ' border-radius: 12px; font-size: 11px; font-weight: 500; line-height: 16px; white-space: nowrap; overflow: hidden;' +
         ' background: color-mix(in srgb, var(--st) 18%, rgba(255,255,255,.78)); color: color-mix(in srgb, var(--st) 45%, #0d2a45); }',
       '.night .pill { background: color-mix(in srgb, var(--st) 30%, rgba(8,18,38,.55)); color: color-mix(in srgb, var(--st) 35%, #ffffff); }',
-      '.plain .pill, .classic .pill { background: color-mix(in srgb, var(--st) 15%, transparent);' +
+      '.plain .pill, .titlebar .pill { background: color-mix(in srgb, var(--st) 15%, transparent);' +
         ' color: color-mix(in srgb, var(--st) 50%, var(--primary-text-color)); }',
       '.pill .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--st); flex: none; }',
       '.pill .pt { min-width: 0; overflow: hidden; text-overflow: ellipsis; }',
@@ -330,13 +334,13 @@ export class SaintCard extends HTMLElement {
       // Under 200 px only the pill's dot shows (its text stays its tooltip and accessible name).
       '@container saint (max-width: 200px) { .titles .pill { padding: 5px; }' +
         ' .pill .pt { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } }',
-      ':host([hide-title]) .banner:not(.mini) .name { display: none; }',
+      ':host([hide-title]) :is(.banner, .titlebar):not(.mini) .name { display: none; }',
       // The title (or the mini card's feast) may take two lines, the line under it one.
       '.name { font-size: 16px; font-weight: 500; line-height: 20px; overflow: hidden; overflow-wrap: anywhere;' +
         ' display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }',
       '.sub { font-size: 13px; line-height: 16px; color: var(--wall-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }',
-      ':host([hide-title]) .banner:not(.mini) .sub { font-size: 14px; color: var(--wall-text); }',
-      '.banner .feast { cursor: pointer; border-radius: 6px; }',
+      ':host([hide-title]) :is(.banner, .titlebar):not(.mini) .sub { font-size: 14px; color: var(--wall-text); }',
+      ':is(.banner, .titlebar) .feast { cursor: pointer; border-radius: 6px; }',
       // ── The scene's animations ──
       '.scene .rose { transform-box: fill-box; transform-origin: center; animation: saint-turn 48s linear infinite; }',
       '.scene .ray { opacity: .2; animation: saint-ray 3s ease-in-out infinite; }',
@@ -379,16 +383,16 @@ export class SaintCard extends HTMLElement {
       ...[1, 2, 3, 4, 5, 6, 7].map((n) => `.enter li:nth-child(${n}) { animation-delay: ${(0.2 + n * 0.07).toFixed(2)}s; }`),
       '@keyframes saint-in { from { opacity: 0; transform: translateY(6px); } }',
       '@media (prefers-reduced-motion: reduce) { .scene *, .enter * { animation: none !important; } }',
-      '@container (max-width: 380px) { .banner:not(.mini):not(.classic) { --scene-max: 50%; } }',
+      '@container (max-width: 380px) { .banner:not(.mini) { --scene-max: 50%; } }',
       // A narrow card keeps the wall and the floor for its texts: no scenery.
       '@container (max-width: 300px) { .banner:not(.mini) .scene { display: none; } .banner:not(.mini) .head { right: 0; } .when { min-width: 0; } .upcoming li { flex-direction: column; gap: 0; } }',
       // ── Mini card: the same 90 px banner, today's feast laid on the sky, the detail button on frosted glass. ──
       ':host([mini])::before { grid-template-columns: minmax(0, 300px); }',
-      '.banner.mini:not(.classic) { --scene-max: 44%; }',
+      '.banner.mini { --scene-max: 44%; }',
       // The feast's texts may run over the scene's light rays (its left part), never over the saint and the window.
-      '.banner.mini:not(.classic) .head { padding-right: 6px; right: calc(min(200px, var(--scene-max)) * .6); }',
+      '.banner.mini .head { padding-right: 6px; right: calc(min(200px, var(--scene-max)) * .6); }',
       '.banner.mini .name { font-size: 16px; line-height: 20px; }',
-      '@container (max-width: 280px) { .banner.mini .scene { display: none; } .banner.mini:not(.classic) .head { right: 0; } .banner.mini .head { padding-right: 40px; } .banner.mini.with-detail .head { padding-right: 6px; } }',
+      '@container (max-width: 280px) { .banner.mini .scene { display: none; } .banner.mini .head { right: 0; } .banner.mini .head { padding-right: 40px; } .banner.mini.with-detail .head { padding-right: 6px; } }',
       // The mini card's detail button gets its own strip of wall on the right, 5 px from the edges: the scene moves
       // aside so that the button never covers it.
       '.with-detail .scene { right: 36px; }',
